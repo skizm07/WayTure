@@ -7,7 +7,7 @@
 }
 
 .logo img{
-  height: 70px;   /* aumenta el tamaño */
+  height: 90px;   /* aumenta el tamaño */
   width: auto;
 }
 body{
@@ -125,6 +125,7 @@ footer{
     background:#2b6cb0;
     color:white;
 }
+
 
 
 
