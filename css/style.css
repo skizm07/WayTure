@@ -1,13 +1,14 @@
 .logo{
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 20px;
+  gap: 12px;
+  font-size: 28px;
   font-weight: bold;
 }
 
 .logo img{
-  height: 40px;
+  height: 70px;   /* aumenta el tamaño */
+  width: auto;
 }
 body{
     margin:0;
@@ -124,5 +125,6 @@ footer{
     background:#2b6cb0;
     color:white;
 }
+
 
 
