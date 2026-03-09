@@ -157,6 +157,21 @@ box-shadow:0 5px 15px rgba(0,0,0,0.1);
 margin-bottom:10px;
 }
 
+.float-section{
+padding:60px;
+}
+
+.float-box{
+float:left;
+width:30%;
+margin:1.5%;
+background:#2b6cb0;
+color:white;
+padding:40px;
+text-align:center;
+border-radius:8px;
+}
+
 
 /* FOOTER */
 
@@ -170,3 +185,4 @@ color:white;
 main{
 flex:1;
 }
+
