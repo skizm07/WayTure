@@ -16,6 +16,10 @@ margin:0;
 font-family:Arial, Helvetica, sans-serif;
 background:#f5f7fb;
 color:#333;
+
+min-height:100vh;
+display:flex;
+flex-direction:column;
 }
 
 
@@ -162,3 +166,4 @@ padding:30px;
 background:#2b6cb0;
 color:white;
 }
+
