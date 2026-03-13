@@ -352,31 +352,20 @@ color:#2b6cb0;
 transform:translateX(5px);
 }
 
-*/ SECCIÓN VIDEO */
-
-.video-section{
-padding:80px 20px;
-background:linear-gradient(180deg,#f7f9fc,#eef2f7);
-text-align:center;
-}
-
-.video-section h2{
-font-size:32px;
-margin-bottom:40px;
-color:#2d3748;
-}
-
-/* CONTENEDOR DEL VIDEO */
-
-.video-container video {
-  width: auto;          
-  max-width: 100%;      
-  max-height: 500px;     
-  display: block;
-  margin: 0 auto;        
+.video-container {
+  max-width: 400px;   /* ancho máximo adecuado para video vertical */
+  margin: 40px auto;  /* centrado horizontal y espacio arriba y abajo */
   border-radius: 12px;
+  overflow: hidden;
   box-shadow: 0 15px 40px rgba(0,0,0,0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-container video {
+  width: 100%;        /* que ocupe todo el ancho del contenedor limitado */
+  height: auto;       /* altura automática para mantener proporción */
+  display: block;
+  border-radius: 12px;
 }
 
 /* EFECTO AL PASAR EL MOUSE */
