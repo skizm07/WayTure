@@ -269,3 +269,50 @@ background:#2b6cb0;
 color:white;
 }
 
+.destinos-columnas{
+padding:60px;
+background:#f7f9fc;
+}
+
+.destinos-columnas h2{
+text-align:center;
+margin-bottom:40px;
+}
+
+#columnas{
+
+column-count:4;
+column-gap:30px;
+column-rule:3px dotted #2b6cb0;
+
+list-style:none;
+font-size:18px;
+
+-webkit-column-count:4;
+-webkit-column-gap:30px;
+-webkit-column-rule:3px dotted #2b6cb0;
+
+-moz-column-count:4;
+-moz-column-gap:30px;
+-moz-column-rule:3px dotted #2b6cb0;
+
+-o-column-count:4;
+-o-column-gap:30px;
+-o-column-rule:3px dotted #2b6cb0;
+
+-ms-column-count:4;
+-ms-column-gap:30px;
+-ms-column-rule:3px dotted #2b6cb0;
+
+}
+
+#columnas li{
+padding:8px 0;
+transition:0.3s;
+}
+
+#columnas li:hover{
+color:#2b6cb0;
+transform:translateX(5px);
+}
+
