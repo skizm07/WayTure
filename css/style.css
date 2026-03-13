@@ -316,3 +316,46 @@ color:#2b6cb0;
 transform:translateX(5px);
 }
 
+*/ SECCIÓN VIDEO */
+
+.video-section{
+padding:80px 20px;
+background:linear-gradient(180deg,#f7f9fc,#eef2f7);
+text-align:center;
+}
+
+.video-section h2{
+font-size:32px;
+margin-bottom:40px;
+color:#2d3748;
+}
+
+/* CONTENEDOR DEL VIDEO */
+
+.video-container{
+max-width:900px;
+margin:auto;
+border-radius:12px;
+overflow:hidden;
+
+box-shadow:0 15px 40px rgba(0,0,0,0.2);
+
+transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* EFECTO AL PASAR EL MOUSE */
+
+.video-container:hover{
+transform:scale(1.02);
+box-shadow:0 20px 50px rgba(0,0,0,0.3);
+}
+
+/* VIDEO */
+
+.video-container video{
+width:100%;
+height:auto;
+display:block;
+}
+
+
