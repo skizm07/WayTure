@@ -358,4 +358,41 @@ height:auto;
 display:block;
 }
 
+/* SECCIÓN AUDIO */
+
+.audio-section{
+padding:70px 20px;
+background:white;
+text-align:center;
+}
+
+.audio-section h2{
+font-size:30px;
+margin-bottom:15px;
+color:#2d3748;
+}
+
+.audio-section p{
+color:#666;
+margin-bottom:25px;
+font-size:17px;
+}
+
+.audio-section audio{
+width:350px;
+max-width:90%;
+
+padding:10px;
+
+border-radius:10px;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+
+transition:0.3s;
+}
+
+.audio-section audio:hover{
+transform:scale(1.05);
+box-shadow:0 15px 35px rgba(0,0,0,0.25);
+}
 
