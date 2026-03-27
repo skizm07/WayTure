@@ -225,11 +225,30 @@ No se requiere instalación de dependencias ni proceso de compilación.
 
 Es importante tener en cuenta que:
 
-- el login y el registro son simulados
-- no existe autenticación real con backend
+- el login y el registro ahora pueden conectarse a Firebase Authentication
+- no existe un backend propio para autenticación personalizada
 - los datos se guardan solo en el navegador del usuario
 - si se limpia el almacenamiento local, se pierde la información guardada
 - algunas funciones están orientadas principalmente a demostración académica y visual
+
+## Configurar Firebase Authentication
+
+Para activar el registro y login reales con Firebase:
+
+1. Crea un proyecto en Firebase Console.
+2. En `Authentication > Sign-in method`, habilita `Email/Password`.
+3. En `Project settings > Your apps`, copia la configuración web de Firebase.
+4. Abre `js/firebase-config.js`.
+5. Reemplaza los valores `REEMPLAZA_CON_TU_...` por los datos de tu proyecto.
+6. Ejecuta el proyecto con Live Server o cualquier servidor local.
+
+Archivos agregados para esta integración:
+
+- `js/firebase-config.js`
+- `js/auth.js`
+- `js/login-page.js`
+- `js/register-page.js`
+- `js/index-auth.js`
 
 ## Posibles mejoras futuras
 
