@@ -187,6 +187,26 @@
       justify-content: center;
     }
 
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-width: 118px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--white);
+      font-weight: 700;
+      box-shadow: var(--shadow-md);
+    }
+
+    .menu-toggle .menu-icon {
+      font-size: 1rem;
+      line-height: 1;
+    }
+
     /* Tema 18: Transiciones (transition) */
     nav a {
       color: #dbe7f8;
@@ -1278,6 +1298,7 @@
 
       .header-wrap {
         gap: 14px;
+        align-items: center;
       }
 
       .logo {
@@ -1289,12 +1310,26 @@
         height: 54px;
       }
 
+      .menu-toggle {
+        display: inline-flex;
+        width: 100%;
+      }
+
       nav {
-        display: flex;
+        display: none;
         flex-direction: column;
         align-items: stretch;
         gap: 8px;
         width: 100%;
+        padding: 12px;
+        border-radius: 24px;
+        background: rgba(8, 17, 32, 0.92);
+        border: 1px solid rgba(255,255,255,0.08);
+        box-shadow: var(--shadow-md);
+      }
+
+      nav.is-open {
+        display: flex;
       }
 
       nav a {
@@ -1351,7 +1386,12 @@
         <span class="logo-word">WayTure</span>
       </a>
 
-      <nav aria-label="Navegación principal">
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menú de navegación">
+        <span class="menu-icon" aria-hidden="true">☰</span>
+        <span>Menú</span>
+      </button>
+
+      <nav id="mainNav" aria-label="Navegación principal">
         <a href="#inicio">Inicio</a>
         <a href="#funciones">Funciones</a>
         <a href="#destinos">Destinos</a>
@@ -1966,6 +2006,8 @@
     const formResponse = document.getElementById('formResponse');
     const floatingOffer = document.getElementById('floatingOffer');
     const closeOfferBtn = document.getElementById('closeOffer');
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
 
     function calculateBudget() {
       const values = budgetInputs.map(input => Number(input.value) || 0);
@@ -2046,6 +2088,32 @@
     closeOfferBtn.addEventListener('click', () => {
       floatingOffer.classList.add('is-hidden');
     });
+
+    if (menuToggle && mainNav) {
+      menuToggle.addEventListener('click', () => {
+        const isOpen = mainNav.classList.toggle('is-open');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+        menuToggle.setAttribute('aria-label', isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+      });
+
+      mainNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 640) {
+            mainNav.classList.remove('is-open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.setAttribute('aria-label', 'Abrir menú de navegación');
+          }
+        });
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 640) {
+          mainNav.classList.remove('is-open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          menuToggle.setAttribute('aria-label', 'Abrir menú de navegación');
+        }
+      });
+    }
 
     editableNote.addEventListener('input', () => {
       noteStatus.textContent = 'Editando...';
