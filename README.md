@@ -256,12 +256,10 @@ El proyecto se encuentra funcional como demostración frontend. La navegación e
 
 ## Autoría
 
-Si deseas, aquí puedes agregar:
-
-- nombre del autor o autores
-- curso o asignatura
-- institución
-- fecha de entrega
+- Juan Rojas
+- Santiago Cardenas
+- Juan Fajardo
+- 2026 ING WEB
 
 ## Licencia
 
