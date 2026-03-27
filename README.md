@@ -263,4 +263,4 @@ El proyecto se encuentra funcional como demostración frontend. La navegación e
 
 ## Licencia
 
-Este proyecto no incluye una licencia definida por el momento. Si se va a publicar o reutilizar formalmente, conviene añadir una licencia como `MIT`.
+Este proyecto no incluye una licencia definida por el momento.
