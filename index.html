@@ -1,295 +1,2147 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WayTure</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="WayTure: planifica viajes reales con itinerarios, mapas, presupuesto, experiencias y organización inteligente." />
+  <meta name="theme-color" content="#0f172a" />
+  <title>WayTure | Planifica tu viaje perfecto</title>
 
-<body>
+  <!-- Tema 6: Creación de un favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
-  <header>
-    <div class="logo">
-      <img src="assets/WayTureNoMAP.png" alt="WayTure Logo">
-    </div>
-
-    <nav>
-      <a href="#">Inicio</a>
-      <a href="#features">Funciones</a>
-      <a href="login.html">Login</a>
-      <a href="register.html" class="btn">Registrarse</a>
-    </nav>
-  </header>
-
-  <main>
-
-    <section class="hero">
-      <div class="hero-text">
-        <h1>Planifica tu viaje perfecto</h1>
-
-        <p>
-          Organiza destinos, actividades, presupuesto y mapas
-          en un solo lugar con WayTure.
-        </p>
-
-        <ul class="hero-list">
-          <li>Planificación sencilla de viajes</li>
-          <li>Creación de itinerarios diarios</li>
-          <li>Mapas con lugares guardados</li>
-          <li>Control de presupuesto del viaje</li>
-        </ul>
-
-        <div class="hero-buttons">
-          <a href="register.html" class="primary">Comenzar</a>
-          <a href="login.html" class="secondary">Iniciar sesión</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="features" id="features">
-      <h2>Todo lo que necesitas para tu viaje</h2>
-
-      <div class="feature-grid">
-        <div class="feature">
-          <h3>✈️ Planificación</h3>
-          <p>Crea y organiza tus viajes fácilmente.</p>
-        </div>
-
-        <div class="feature">
-          <h3>📅 Itinerario</h3>
-          <p>Planifica actividades día por día.</p>
-        </div>
-
-        <div class="feature">
-          <h3>🗺️ Mapas</h3>
-          <p>Guarda lugares y visualízalos en el mapa.</p>
-        </div>
-
-        <div class="feature">
-          <h3>💰 Presupuesto</h3>
-          <p>Controla los gastos de tu viaje.</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="center">
-      <p>Viajar abre la mente y el corazón.</p>
-    </div>
-
-    <section class="float-section">
-      <h2>Destinos populares</h2>
-      <div class="float-container">
-        <div class="float-box">
-          <img src="assets/playa.jpg" alt="Playa">
-          <h3>Playa</h3>
-        </div>
-        <div class="float-box">
-          <img src="assets/montana.jpg" alt="Montaña">
-          <h3>Montaña</h3>
-        </div>
-        <div class="float-box">
-          <img src="assets/ciudad.jpg" alt="Ciudad">
-          <h3>Ciudad</h3>
-        </div>
-      </div>
-    </section>
-
-    <section class="float-real-section">
-      <h2>Ejemplo real de float</h2>
-
-      <div class="float-real-box">
-        <img src="assets/ciudad.jpg" alt="Destino urbano" class="img-float">
-        <p>
-          Este bloque demuestra el uso real de la propiedad float en CSS. La imagen
-          se alinea a la izquierda y el texto fluye a su alrededor, mostrando cómo
-          funcionaban los diseños tradicionales antes de Flexbox.
-        </p>
-        <p>
-          WayTure también puede ayudarte a descubrir ciudades, playas y montañas,
-          organizando experiencias de viaje de forma clara y visual.
-        </p>
-      </div>
-    </section>
-
-    <section class="map">
-      <h2>Encuentra destinos en el mapa</h2>
-
-      <iframe
-        title="Mapa de destinos"
-        src="https://www.google.com/maps?q=paris&output=embed"
-        width="100%"
-        height="400"
-        style="border:0;"
-        loading="lazy">
-      </iframe>
-    </section>
-
-    <section class="video-section">
-      <h2>Descubre el mundo con WayTure</h2>
-
-      <div class="video-container">
-        <video controls poster="assets/viaje.jpg">
-          <source src="assets/viaje.mp4" type="video/mp4">
-          Tu navegador no soporta video HTML5.
-        </video>
-      </div>
-    </section>
-
-    <section class="audio-section">
-      <h2>Escucha sonidos del viaje</h2>
-
-      <p>Relájate con sonidos de destinos mientras planificas tu próxima aventura.</p>
-
-      <audio controls>
-        <source src="assets/viaje.mp3" type="audio/mpeg">
-        <source src="assets/viaje.ogg" type="audio/ogg">
-        Tu navegador no soporta audio HTML5.
-      </audio>
-    </section>
-
-    <section class="animation-section">
-      <h2>Animaciones</h2>
-      <div class="animation-badge">✈️ Viajando</div>
-    </section>
-
-    <section class="svg-section">
-      <h2>SVG (gráfico vectorial)</h2>
-
-      <svg class="svg-map" width="500" height="220" viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
-        <rect x="0" y="0" width="500" height="220" rx="20" fill="#eaf6ff"></rect>
-        <path d="M60 150 C140 40, 260 40, 340 140 S430 180, 460 80" stroke="#2b6cb0" stroke-width="6" fill="none" stroke-linecap="round"></path>
-        <circle cx="60" cy="150" r="10" fill="#e53e3e"></circle>
-        <circle cx="460" cy="80" r="10" fill="#38a169"></circle>
-        <text x="30" y="178" font-size="16" fill="#333">Inicio</text>
-        <text x="418" y="55" font-size="16" fill="#333">Destino</text>
-      </svg>
-    </section>
-
-    <section class="canvas-section">
-      <h2>Canvas</h2>
-      <canvas id="travelCanvas" width="500" height="260"></canvas>
-    </section>
-
-    <section class="contact">
-      <h2>Contáctanos</h2>
-
-      <form action="#">
-        <input type="text" placeholder="Nombre" required>
-        <input type="email" placeholder="Correo" required>
-        <textarea placeholder="Mensaje"></textarea>
-        <button type="submit">Enviar</button>
-      </form>
-    </section>
-
-    <section class="editable-section">
-      <h2>Contenido editable y storage</h2>
-      <p>Escribe una nota de viaje y guárdala en el navegador.</p>
-
-      <div id="notaViaje" class="editable-box" contenteditable="true">
-        Escribe aquí tu checklist de viaje...
-      </div>
-
-      <div class="editable-buttons">
-        <button type="button" onclick="guardarNota()">Guardar nota</button>
-        <button type="button" onclick="borrarNota()">Borrar nota</button>
-      </div>
-    </section>
-
-    <section class="destinos-columnas">
-      <h2>Destinos recomendados por viajeros</h2>
-
-      <ul id="columnas">
-        <li>París 🇫🇷</li>
-        <li>Roma 🇮🇹</li>
-        <li>Barcelona 🇪🇸</li>
-        <li>Tokio 🇯🇵</li>
-        <li>Bangkok 🇹🇭</li>
-        <li>New York 🇺🇸</li>
-        <li>Londres 🇬🇧</li>
-        <li>Sídney 🇦🇺</li>
-        <li>Dubái 🇦🇪</li>
-        <li>Río de Janeiro 🇧🇷</li>
-        <li>Cancún 🇲🇽</li>
-        <li>Cartagena 🇨🇴</li>
-        <li>Estambul 🇹🇷</li>
-        <li>Praga 🇨🇿</li>
-        <li>Amsterdam 🇳🇱</li>
-        <li>Berlín 🇩🇪</li>
-      </ul>
-    </section>
-
-  </main>
-
-  <div class="position-box">
-    Oferta especial
-  </div>
-
-  <footer>
-    <p>© 2026 WayTure - Viajes que inspiran</p>
-  </footer>
-
-  <script>
-    const canvas = document.getElementById("travelCanvas");
-
-    if (canvas) {
-      const ctx = canvas.getContext("2d");
-
-      ctx.fillStyle = "#bfe6ff";
-      ctx.fillRect(0, 0, 500, 260);
-
-      ctx.beginPath();
-      ctx.arc(420, 55, 28, 0, Math.PI * 2);
-      ctx.fillStyle = "#ffd54f";
-      ctx.fill();
-
-      ctx.beginPath();
-      ctx.moveTo(40, 220);
-      ctx.lineTo(140, 100);
-      ctx.lineTo(240, 220);
-      ctx.fillStyle = "#7cb342";
-      ctx.fill();
-
-      ctx.beginPath();
-      ctx.moveTo(180, 220);
-      ctx.lineTo(300, 75);
-      ctx.lineTo(420, 220);
-      ctx.fillStyle = "#558b2f";
-      ctx.fill();
-
-      ctx.beginPath();
-      ctx.moveTo(0, 240);
-      ctx.quadraticCurveTo(250, 180, 500, 240);
-      ctx.lineWidth = 18;
-      ctx.strokeStyle = "#616161";
-      ctx.stroke();
-
-      ctx.font = "20px Arial";
-      ctx.fillStyle = "#2b6cb0";
-      ctx.fillText("WayTure", 20, 35);
+  <style>
+    /* Tema 4: Introducción a CSS */
+    :root {
+      --bg: #081120;
+      --bg-soft: #0f172a;
+      --panel: rgba(15, 23, 42, 0.75);
+      --panel-solid: #111c31;
+      --card: rgba(255,255,255,0.08);
+      --text: #e5eefc;
+      --muted: #b8c6dd;
+      --brand: #38bdf8;
+      --brand-2: #22c55e;
+      --accent: #f59e0b;
+      --danger: #ef4444;
+      --white: #ffffff;
+      --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 15px 35px rgba(0, 0, 0, 0.22);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+      --max: 1520px;
+      --header-height: 86px;
+      --transition: 0.35s ease;
     }
 
-    const nota = document.getElementById("notaViaje");
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    if (nota) {
-      const guardada = localStorage.getItem("notaWayTure");
-      if (guardada) {
-        nota.innerHTML = guardada;
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Tema 10: Tipografías */
+    /* Tema 22: Transparencias y degradados */
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(34, 197, 94, 0.14), transparent 18%),
+        linear-gradient(180deg, #091221 0%, #081120 36%, #0b1730 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img,
+    video,
+    iframe,
+    canvas,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      width: min(100% - 48px, var(--max));
+      margin-inline: auto;
+    }
+
+    /* Tema 8: Sombras */
+    .glass {
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .section {
+      padding: 88px 0;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 18px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 54px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #d9f3ff;
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
+
+    /* Tema 14: Posición de los elementos (position) */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      height: var(--header-height);
+      background: rgba(8, 17, 32, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* Tema 13: Flex, sin dolor */
+    .header-wrap {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 0;
+    }
+
+    /* Tema 7: Bordes redondeados */
+    .logo-badge {
+      width: 190px;
+      height: 58px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: rgb(255, 255, 255);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.16);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .logo-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center 100%;
+      transform: translateY(-25px);
+    }
+
+    .logo-word {
+      display: none;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Tema 18: Transiciones (transition) */
+    nav a {
+      color: #dbe7f8;
+      padding: 10px 14px;
+      border-radius: 999px;
+      transition: background var(--transition), transform var(--transition), color var(--transition);
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-2px);
+      color: var(--white);
+    }
+
+    .btn,
+    button,
+    .chip {
+      border: none;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition), border-color var(--transition);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand), #2563eb);
+      color: var(--white);
+    }
+
+    .btn-secondary {
+      color: var(--white);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .btn-accent {
+      background: linear-gradient(135deg, #f59e0b, #fb7185);
+      color: #fff;
+    }
+
+    /* Tema 15: Transformaciones (transform) */
+    .btn:hover,
+    button:hover,
+    .chip:hover {
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 18px 42px rgba(0,0,0,0.28);
+    }
+
+    .hero {
+      padding: 62px 0 32px;
+      min-height: calc(100vh - var(--header-height));
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Tema 9: Imágenes de fondo */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(7,12,26,0.55), rgba(7,12,26,0.7)),
+        url('assets/fondo.jpg') center/cover no-repeat;
+      z-index: -2;
+      transform: scale(1.03);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 170px;
+      background: linear-gradient(to top, #081120 10%, transparent 100%);
+      z-index: -1;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(2.7rem, 6vw, 5rem);
+      line-height: 0.98;
+      margin-bottom: 18px;
+      text-wrap: balance;
+      text-shadow: 0 10px 28px rgba(0,0,0,0.28);
+    }
+
+    .hero-copy p {
+      max-width: 660px;
+      color: #dbe7f8;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      margin-bottom: 22px;
+    }
+
+    @media (min-width: 1600px) {
+      .container {
+        width: min(100% - 72px, var(--max));
+      }
+
+      .logo-badge {
+        width: 220px;
+        height: 66px;
+      }
+
+      nav a {
+        padding: 12px 16px;
+        font-size: 1rem;
+      }
+
+      .hero {
+        padding: 76px 0 48px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1.08fr 0.92fr;
+        gap: 56px;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(3.8rem, 4.8vw, 6rem);
+        max-width: 780px;
+      }
+
+      .hero-copy p {
+        max-width: 760px;
+        font-size: 1.18rem;
+      }
+
+      .hero-list li,
+      .stat-card {
+        padding: 18px 20px;
+      }
+
+      .hero-panel {
+        padding: 28px;
       }
     }
 
-    function guardarNota() {
-      localStorage.setItem("notaWayTure", nota.innerHTML);
-      alert("Nota guardada correctamente");
+    .hero-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 24px 0 28px;
     }
 
-    function borrarNota() {
-      localStorage.removeItem("notaWayTure");
-      nota.innerHTML = "Escribe aquí tu checklist de viaje...";
+    .hero-list li {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      color: #ecf5ff;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
     }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .session-greeting {
+      display: none;
+      margin: 0 0 22px;
+      padding: 14px 18px;
+      max-width: 520px;
+      border-radius: 18px;
+      background: rgba(34, 197, 94, 0.14);
+      border: 1px solid rgba(34, 197, 94, 0.34);
+      color: #e7fff0;
+      font-weight: 700;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+    }
+
+    .session-greeting.show {
+      display: block;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .stat-card {
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 1.6rem;
+      color: #fff;
+    }
+
+    /* Tema 23: Animaciones (animation) */
+    .hero-panel {
+      padding: 22px;
+      border-radius: 30px;
+      transform: perspective(1200px) rotateY(-7deg) rotateX(2deg);
+      transition: transform 0.5s ease;
+      animation: floatCard 5s ease-in-out infinite;
+    }
+
+    .hero-panel:hover {
+      transform: perspective(1200px) rotateY(-2deg) rotateX(0deg) translateY(-8px);
+    }
+
+    .panel-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .panel-bullets {
+      display: flex;
+      gap: 8px;
+    }
+
+    .panel-bullets span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+      opacity: 0.9;
+    }
+
+    .panel-bullets span:nth-child(1) { background: #fb7185; }
+    .panel-bullets span:nth-child(2) { background: #f59e0b; }
+    .panel-bullets span:nth-child(3) { background: #22c55e; }
+
+    .trip-preview {
+      border-radius: 24px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .trip-image {
+      position: relative;
+      min-height: 220px;
+      background:
+        linear-gradient(to top, rgba(15, 23, 42, 0.85), transparent 60%),
+        url('assets/fondo.jpg') center/cover no-repeat;
+    }
+
+    .trip-image .tag {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.16);
+      padding: 8px 12px;
+      border-radius: 999px;
+      backdrop-filter: blur(6px);
+    }
+
+    .trip-content {
+      padding: 20px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .trip-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .progress {
+      height: 10px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress span {
+      display: block;
+      width: 74%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--brand), var(--brand-2));
+      border-radius: inherit;
+      animation: pulseBar 3s ease-in-out infinite;
+    }
+
+    .features-grid,
+    .destinations-grid,
+    .planner-grid,
+    .media-grid,
+    .community-grid,
+    .footer-grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .features-grid {
+      grid-template-columns: repeat(4, minmax(220px, 1fr));
+    }
+
+    /* Tema 7: Bordes redondeados */
+    /* Tema 8: Sombras */
+    .feature-card,
+    .destination-card,
+    .planner-card,
+    .community-card,
+    .testimonial-card,
+    .timeline-item,
+    .budget-widget,
+    .editable-card,
+    .canvas-card,
+    .svg-card,
+    .contact-card,
+    .map-card,
+    .media-card,
+    .column-card,
+    .floating-offer,
+    .newsletter {
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before,
+    .destination-card::before,
+    .planner-card::before,
+    .community-card::before,
+    .testimonial-card::before,
+    .timeline-item::before,
+    .budget-widget::before,
+    .editable-card::before,
+    .canvas-card::before,
+    .svg-card::before,
+    .contact-card::before,
+    .map-card::before,
+    .media-card::before,
+    .column-card::before,
+    .newsletter::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+    }
+
+    .feature-card {
+      text-align: left;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      min-height: 240px;
+    }
+
+    .feature-card:hover,
+    .destination-card:hover,
+    .community-card:hover,
+    .testimonial-card:hover,
+    .planner-card:hover,
+    .column-card:hover,
+    .media-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .icon {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, rgba(56,189,248,0.22), rgba(34,197,94,0.16));
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 1.5rem;
+    }
+
+    .feature-card h3,
+    .destination-info h3,
+    .planner-card h3,
+    .community-card h3,
+    .budget-widget h3,
+    .editable-card h3,
+    .canvas-card h3,
+    .svg-card h3,
+    .media-card h3,
+    .contact-card h3,
+    .map-card h3,
+    .column-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.25rem;
+    }
+
+    .feature-card p,
+    .destination-info p,
+    .planner-card p,
+    .community-card p,
+    .budget-widget p,
+    .editable-card p,
+    .canvas-card p,
+    .svg-card p,
+    .media-card p,
+    .contact-card p,
+    .map-card p,
+    .column-card p,
+    .testimonial-card p,
+    .timeline-item p {
+      color: var(--muted);
+    }
+
+    /* Tema 12: Centrar el contenido */
+    .center-message {
+      padding: 44px 22px;
+      text-align: center;
+      width: min(900px, calc(100% - 32px));
+      margin: 20px auto 0;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(34, 197, 94, 0.08));
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: var(--shadow-md);
+    }
+
+    .center-message p {
+      font-size: clamp(1.15rem, 2vw, 1.6rem);
+      color: #ecf7ff;
+      font-style: italic;
+      letter-spacing: 0.2px;
+    }
+
+    .float-section .intro {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 44px;
+      color: var(--muted);
+    }
+
+    .float-container {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    /* Tema 11: Cajas flotantes (float) */
+    .float-box {
+      float: left;
+      width: calc(33.333% - 18px);
+      margin-right: 27px;
+      margin-bottom: 26px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: transform var(--transition), box-shadow var(--transition);
+      transform-origin: center;
+    }
+
+    .float-box:nth-child(3n) {
+      margin-right: 0;
+    }
+
+    .float-box:hover {
+      transform: translateY(-8px) rotate(-0.3deg) scale(1.01);
+    }
+
+    .float-box img {
+      height: 240px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .float-box .content {
+      padding: 20px;
+    }
+
+    .clearfix::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .destination-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .destinations-grid {
+      grid-template-columns: repeat(3, minmax(260px, 1fr));
+    }
+
+    .destination-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+
+    .destination-info {
+      padding: 22px;
+    }
+
+    .destination-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: #dbe7f8;
+      margin-top: 12px;
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+    }
+
+    .planner-grid {
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: start;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .timeline-hour {
+      min-width: 78px;
+      text-align: center;
+      padding: 12px 10px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(56,189,248,0.16), rgba(34,197,94,0.12));
+      color: var(--white);
+      font-weight: 800;
+    }
+
+    .budget-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .budget-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      color: #edf5ff;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .budget-controls {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    /* Tema 16: Formularios */
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #edf5ff;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.07);
+      color: var(--white);
+      border-radius: 16px;
+      padding: 14px 16px;
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+      font: inherit;
+    }
+
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      color: #f8fafc;
+      background-image: linear-gradient(45deg, transparent 50%, #94a3b8 50%), linear-gradient(135deg, #94a3b8 50%, transparent 50%);
+      background-position: calc(100% - 22px) calc(50% - 3px), calc(100% - 16px) calc(50% - 3px);
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+      padding-right: 44px;
+    }
+
+    select option {
+      color: #0f172a;
+      background: #f8fafc;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #b9cae1;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: rgba(56, 189, 248, 0.6);
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15);
+      transform: translateY(-1px);
+    }
+
+    textarea {
+      min-height: 120px;
+      background: rgba(255,255,255,0.07);
+      resize: none;
+    }
+
+    .map-grid,
+    .contact-grid,
+    .extras-grid,
+    .media-grid,
+    .community-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    /* Tema 17: iframe */
+    .map-card iframe {
+      width: 100%;
+      height: 420px;
+      border: 0;
+      border-radius: 22px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .map-search {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    /* Tema 20: Vídeo */
+    .video-shell,
+    .audio-shell {
+      border-radius: 26px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow-lg);
+      padding: 12px;
+    }
+
+    .video-shell video {
+      width: 100%;
+      max-height: 560px;
+      object-fit: cover;
+      border-radius: 18px;
+      transition: transform var(--transition);
+    }
+
+    .video-shell:hover video {
+      transform: scale(1.015);
+    }
+
+    /* Tema 21: Audio */
+    .audio-shell audio {
+      width: 100%;
+      margin-top: 18px;
+      filter: drop-shadow(0 10px 22px rgba(0,0,0,0.25));
+    }
+
+    .extras-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    /* Tema 19: Columnas de texto */
+    .column-list {
+      margin-top: 18px;
+      column-count: 3;
+      column-gap: 24px;
+      column-rule: 1px solid rgba(255,255,255,0.14);
+      -webkit-column-count: 3;
+      -webkit-column-gap: 24px;
+      -webkit-column-rule: 1px solid rgba(255,255,255,0.14);
+      -moz-column-count: 3;
+      -moz-column-gap: 24px;
+      -moz-column-rule: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .column-list li {
+      break-inside: avoid;
+      padding: 10px 0;
+      color: #e8f3ff;
+      transition: transform var(--transition), color var(--transition);
+    }
+
+    .column-list li:hover {
+      color: var(--brand);
+      transform: translateX(6px);
+    }
+
+    .editable-box {
+      min-height: 220px;
+      margin-top: 18px;
+      border-radius: 18px;
+      padding: 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px dashed rgba(255,255,255,0.24);
+      color: #f4f8ff;
+      outline: none;
+    }
+
+    .editable-box:focus {
+      border-color: rgba(56, 189, 248, 0.6);
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.14);
+    }
+
+    .editable-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .canvas-wrap {
+      margin-top: 18px;
+      border-radius: 22px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(14, 24, 44, 0.9), rgba(7, 13, 27, 0.96));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    #travelCanvas {
+      width: 100%;
+      height: auto;
+      min-height: 300px;
+    }
+
+    .svg-wrap {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .community-grid {
+      grid-template-columns: repeat(3, minmax(260px, 1fr));
+    }
+
+    .testimonial-card {
+      display: grid;
+      gap: 14px;
+    }
+
+    .user-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      flex: none;
+      border: 1px solid rgba(255,255,255,0.14);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #ffffff;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), 0 10px 22px rgba(0,0,0,0.2);
+    }
+
+    .avatar-laura {
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+    }
+
+    .avatar-camilo {
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+    }
+
+    .avatar-andrea {
+      background: linear-gradient(135deg, #22c55e, #14b8a6);
+    }
+
+    .stars {
+      color: #fbbf24;
+      letter-spacing: 1px;
+    }
+
+    .contact-grid form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .newsletter {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(56,189,248,0.16), rgba(34,197,94,0.12));
+    }
+
+    .newsletter form {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .newsletter input {
+      flex: 1 1 260px;
+    }
+
+    /* Tema 14: Posición de los elementos (position) */
+    .floating-offer {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 995;
+      width: min(330px, calc(100% - 32px));
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.92), rgba(239, 68, 68, 0.92));
+      color: white;
+      border: 1px solid rgba(255,255,255,0.18);
+      animation: offerPulse 3.2s ease-in-out infinite;
+    }
+
+    .floating-offer.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(18px);
+      transition: opacity 0.28s ease, transform 0.28s ease, visibility 0.28s ease;
+    }
+
+    .offer-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.14);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1;
+      box-shadow: none;
+    }
+
+    .offer-close:hover,
+    .offer-close:focus-visible {
+      background: rgba(255,255,255,0.24);
+      transform: scale(1.05);
+    }
+
+    .floating-offer .mini {
+      font-size: 0.88rem;
+      opacity: 0.92;
+      margin-bottom: 8px;
+    }
+
+    .floating-offer .offer-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.16);
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 26px 0 42px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(5, 10, 20, 0.9);
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr auto;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--muted);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @keyframes floatCard {
+      0%, 100% { transform: perspective(1200px) rotateY(-7deg) rotateX(2deg) translateY(0); }
+      50% { transform: perspective(1200px) rotateY(-7deg) rotateX(2deg) translateY(-8px); }
+    }
+
+    @keyframes pulseBar {
+      0%, 100% { width: 74%; }
+      50% { width: 82%; }
+    }
+
+    @keyframes offerPulse {
+      0%, 100% { transform: translateY(0); box-shadow: 0 18px 38px rgba(0,0,0,0.25); }
+      50% { transform: translateY(-6px); box-shadow: 0 26px 54px rgba(0,0,0,0.32); }
+    }
+
+    /* Tema 26: Adaptación a móviles (mediaqueries) */
+    @media (max-width: 1280px) {
+      .header-wrap {
+        gap: 12px;
+      }
+
+      nav {
+        gap: 8px;
+      }
+
+      nav a {
+        padding: 9px 12px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-panel {
+        max-width: 100%;
+      }
+
+      .features-grid,
+      .destinations-grid,
+      .community-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .features-grid,
+      .community-grid,
+      .extras-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-grid,
+      .planner-grid,
+      .newsletter,
+      .map-grid,
+      .contact-grid,
+      .media-grid,
+      .destinations-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel {
+        transform: none;
+        animation: none;
+      }
+
+      .header-wrap {
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+
+      nav {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .float-box {
+        width: 100%;
+        margin-right: 0;
+      }
+
+      .hero-list,
+      .hero-stats,
+      .form-row,
+      .features-grid,
+      .community-grid,
+      .extras-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .column-list {
+        column-count: 2;
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+      }
+
+      header {
+        height: auto;
+        padding: 12px 0;
+      }
+
+      .header-wrap {
+        align-items: stretch;
+      }
+
+      nav {
+        justify-content: center;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 38px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section {
+        padding: 70px 0;
+      }
+
+      .container {
+        width: min(100% - 22px, var(--max));
+      }
+
+      .logo-badge {
+        width: 168px;
+        height: 54px;
+      }
+
+      nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+      }
+
+      nav a {
+        text-align: center;
+      }
+
+      .column-list {
+        column-count: 1;
+        -webkit-column-count: 1;
+        -moz-column-count: 1;
+      }
+
+      .hero-copy h1 {
+        font-size: 2.45rem;
+      }
+
+      .hero-actions,
+      .map-search,
+      .editable-actions,
+      .floating-offer .offer-actions,
+      .newsletter form {
+        flex-direction: column;
+      }
+
+      .btn,
+      .chip,
+      .newsletter button {
+        width: 100%;
+      }
+
+      .destinations-grid,
+      .community-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Tema 1: Estructura semántica de HTML5 -->
+  <!-- Tema 2: Etiquetas básicas -->
+  <header>
+    <!-- Tema 3: Imágenes, listas y enlaces -->
+    <div class="container header-wrap">
+      <a class="logo" href="#inicio" aria-label="WayTure Inicio">
+        <span class="logo-badge" aria-hidden="true">
+          <img src="assets/WayTureNoMAP.png" alt="Logo WayTure" />
+        </span>
+        <span class="logo-word">WayTure</span>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#funciones">Funciones</a>
+        <a href="#destinos">Destinos</a>
+        <a href="#planificador">Planificador</a>
+        <a href="#multimedia">Multimedia</a>
+        <a href="login.html">Login</a>
+        <a href="registro.html" class="btn btn-secondary">Registrarse</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Tema 3: Imágenes, listas y enlaces -->
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">🌍 Plataforma de viaje inteligente</span>
+          <h1>Planifica tu viaje perfecto con una experiencia realista y completa</h1>
+          <p>
+            Organiza destinos, actividades, presupuesto, mapas, notas personales y experiencias multimedia en un solo lugar.
+            WayTure transforma una idea de viaje en un itinerario visual, funcional y emocionante.
+          </p>
+
+          <p id="sessionGreeting" class="session-greeting"></p>
+
+          <ul class="hero-list">
+            <li>✈️ Planificación de viajes sencilla</li>
+            <li>🗓️ Itinerarios diarios organizados</li>
+            <li>🗺️ Mapas interactivos y lugares guardados</li>
+            <li>💰 Presupuesto del viaje con cálculo automático</li>
+          </ul>
+
+          <div class="hero-actions">
+            <a href="registro.html" class="btn btn-primary">Crear cuenta</a>
+            <a href="login.html" class="btn btn-secondary">Iniciar sesi&oacute;n</a>
+          </div>
+
+          <div class="hero-stats">
+            <article class="stat-card glass">
+              <strong>+18k</strong>
+              <span>viajes creados</span>
+            </article>
+            <article class="stat-card glass">
+              <strong>4.9/5</strong>
+              <span>valoración media</span>
+            </article>
+            <article class="stat-card glass">
+              <strong>62</strong>
+              <span>países soñados</span>
+            </article>
+          </div>
+        </div>
+
+        <aside class="hero-panel glass reveal" aria-label="Vista previa de viaje">
+          <div class="panel-top">
+            <div>
+              <p style="font-size:0.9rem;color:var(--muted);">Viaje destacado</p>
+              <strong style="font-size:1.2rem;">París + Roma + Barcelona</strong>
+            </div>
+            <div class="panel-bullets" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+
+          <div class="trip-preview">
+            <div class="trip-image">
+              <span class="tag">12 días · Primavera</span>
+            </div>
+            <div class="trip-content">
+              <div>
+                <h2 style="font-size:1.35rem;margin-bottom:6px;">Ruta europea inolvidable</h2>
+                <p style="color:var(--muted);">Combina cultura, gastronomía, historia y vistas icónicas en una sola aventura.</p>
+              </div>
+              <div class="trip-row">
+                <span>Presupuesto usado</span>
+                <strong>$2.150 / $2.900</strong>
+              </div>
+              <div class="progress" aria-label="Progreso del presupuesto">
+                <span></span>
+              </div>
+              <div class="trip-row">
+                <span>Hospedaje reservado</span>
+                <strong>8 de 12 noches</strong>
+              </div>
+              <div class="trip-row">
+                <span>Lugares guardados</span>
+                <strong>31 sitios</strong>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Tema 5: Las propiedades CSS más utilizadas -->
+    <section class="section" id="funciones">
+      <div class="container">
+        <h2 class="section-title reveal">Todo lo que necesitas para viajar mejor</h2>
+        <p class="section-subtitle reveal">
+          Esta versión mejora tu página original con una estructura semántica moderna, diseño visual realista, formularios funcionales,
+          multimedia, efectos, almacenamiento local y una experiencia adaptable a móviles.
+        </p>
+
+        <div class="features-grid">
+          <article class="feature-card reveal">
+            <div class="icon">✈️</div>
+            <h3>Planificación inteligente</h3>
+            <p>Crea viajes, define destinos y organiza cada detalle en una interfaz visual y profesional.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="icon">🗓️</div>
+            <h3>Itinerario diario</h3>
+            <p>Distribuye actividades por horas para tener control total de tu experiencia de viaje.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="icon">🗺️</div>
+            <h3>Mapas y lugares</h3>
+            <p>Ubica destinos con iframe, consulta zonas turísticas y visualiza rutas inspiradoras.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="icon">💰</div>
+            <h3>Presupuesto real</h3>
+            <p>Controla gastos aproximados de transporte, comida y actividades con cálculo automático.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tema 12: Centrar el contenido -->
+    <div class="center-message reveal">
+      <p>Viajar abre la mente y el corazón, pero planificar bien convierte los sueños en recuerdos inolvidables.</p>
+    </div>
+
+    <!-- Tema 11: Cajas flotantes (float) -->
+    <section class="section float-section" id="destinos">
+      <div class="container">
+        <h2 class="section-title reveal">Destinos populares</h2>
+        <p class="intro reveal">
+          Aquí se conserva el concepto de cajas flotantes, pero con un acabado visual más inmersivo, realista y elegante.
+        </p>
+
+        <div class="float-container clearfix">
+          <article class="float-box reveal">
+            <img src="assets/playa.jpg" alt="Playa tropical con agua turquesa" />
+            <div class="content">
+              <h3>Playa</h3>
+              <p>Perfecta para descanso, paisajes naturales, fotografía, buceo y amaneceres inolvidables.</p>
+            </div>
+          </article>
+
+          <article class="float-box reveal">
+            <img src="assets/montana.jpg" alt="Montaña nevada y senderos naturales" />
+            <div class="content">
+              <h3>Montaña</h3>
+              <p>Ideal para aventura, senderismo, clima fresco y experiencias conectadas con la naturaleza.</p>
+            </div>
+          </article>
+
+          <article class="float-box reveal">
+            <img src="assets/ciudad.jpg" alt="Ciudad moderna iluminada de noche" />
+            <div class="content">
+              <h3>Ciudad</h3>
+              <p>La mejor opción para cultura, gastronomía, museos, compras y experiencias urbanas vibrantes.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tema 3: Imágenes, listas y enlaces -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title reveal">Experiencias recomendadas</h2>
+        <p class="section-subtitle reveal">Tarjetas modernas con imágenes, textos, enlaces y jerarquía visual para reforzar el realismo del sitio.</p>
+
+        <div class="destinations-grid">
+          <article class="destination-card reveal">
+            <img src="assets/paris-destination.jpg" alt="Vista destacada de París" />
+            <div class="destination-info">
+              <h3>París 🇫🇷</h3>
+              <p>Arte, cafés, arquitectura clásica y una atmósfera romántica que nunca pasa de moda.</p>
+              <div class="destination-meta">
+                <span>⭐ 4.9</span>
+                <a href="#mapa" style="color:var(--brand);font-weight:700;">Ver en mapa</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="destination-card reveal">
+            <img src="assets/amsterdam-destination.jpg" alt="Destino destacado de Ámsterdam" />
+            <div class="destination-info">
+              <h3>Ámsterdam 🇳🇱</h3>
+              <p>Canales, bicicletas, museos y un entorno visual perfecto para viajes tranquilos y fotogénicos.</p>
+              <div class="destination-meta">
+                <span>⭐ 4.8</span>
+                <a href="#mapa" style="color:var(--brand);font-weight:700;">Explorar ruta</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="destination-card reveal">
+            <img src="assets/tokyo-destination.jpg" alt="Destino destacado de Tokio" />
+            <div class="destination-info">
+              <h3>Tokio 🇯🇵</h3>
+              <p>Tradición y tecnología en una sola ciudad, con barrios únicos, comida memorable y ritmo futurista.</p>
+              <div class="destination-meta">
+                <span>⭐ 4.9</span>
+                <a href="#mapa" style="color:var(--brand);font-weight:700;">Planear visita</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tema 13: Flex, sin dolor -->
+    <section class="section" id="planificador">
+      <div class="container planner-grid">
+        <article class="planner-card reveal">
+          <span class="eyebrow">🗓️ Itinerario del día</span>
+          <h2 style="font-size:2rem; margin-bottom:10px;">Organiza tu aventura paso a paso</h2>
+          <p style="margin-bottom:22px;">Una sección realista para mostrar cómo se vería un plan diario dentro de una aplicación de viajes moderna.</p>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-hour">08:00</div>
+              <div>
+                <h3>Desayuno con vista</h3>
+                <p>Empieza el día en un café local con terraza y productos típicos de la ciudad.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-hour">10:30</div>
+              <div>
+                <h3>Recorrido cultural</h3>
+                <p>Visita museos, monumentos o barrios históricos incluidos dentro del plan de viaje.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-hour">14:00</div>
+              <div>
+                <h3>Almuerzo típico</h3>
+                <p>Reserva un espacio para probar gastronomía local y agregar observaciones personales.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-hour">18:30</div>
+              <div>
+                <h3>Atardecer y fotos</h3>
+                <p>Guarda ubicaciones ideales para cerrar el día con paisajes y experiencias memorables.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <aside class="budget-widget reveal">
+          <span class="eyebrow">💰 Presupuesto interactivo</span>
+          <h3>Calcula tu gasto estimado</h3>
+          <p>Este bloque usa JavaScript y storage para que el valor se guarde aunque cierres la página.</p>
+
+          <div class="budget-controls">
+            <div>
+              <label for="transport">Transporte</label>
+              <input type="number" id="transport" placeholder="Ej. 220" min="0" />
+            </div>
+            <div>
+              <label for="hotel">Hospedaje</label>
+              <input type="number" id="hotel" placeholder="Ej. 650" min="0" />
+            </div>
+            <div>
+              <label for="food">Comida</label>
+              <input type="number" id="food" placeholder="Ej. 180" min="0" />
+            </div>
+            <div>
+              <label for="activities">Actividades</label>
+              <input type="number" id="activities" placeholder="Ej. 140" min="0" />
+            </div>
+            <button class="btn btn-primary" id="saveBudget" type="button">Guardar presupuesto</button>
+          </div>
+
+          <div class="budget-list">
+            <div class="budget-item"><span>Total estimado</span><strong id="budgetTotal">$0</strong></div>
+            <div class="budget-item"><span>Estado</span><strong id="budgetState">Pendiente</strong></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Tema 17: iframe -->
+    <section class="section" id="mapa">
+      <div class="container map-grid">
+        <article class="map-card reveal">
+          <span class="eyebrow">🗺️ Mapa integrado</span>
+          <h3>Encuentra destinos en el mapa</h3>
+          <p>El iframe se mantiene, pero ahora se presenta como parte de una interfaz premium con contexto visual.</p>
+          <div class="map-search">
+            <a class="btn btn-secondary" href="https://maps.google.com" target="_blank" rel="noopener noreferrer">Abrir Google Maps</a>
+            <a class="btn btn-primary" href="#contacto">Solicitar asesoría</a>
+          </div>
+        </article>
+
+        <article class="map-card reveal">
+          <iframe title="Mapa de París" src="https://www.google.com/maps?q=paris&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </article>
+      </div>
+    </section>
+
+    <!-- Tema 20: Vídeo -->
+    <!-- Tema 21: Audio -->
+    <section class="section" id="multimedia">
+      <div class="container">
+        <h2 class="section-title reveal">Descubre el mundo con WayTure</h2>
+        <p class="section-subtitle reveal">Vídeo y audio se integran con una estética moderna, sombras suaves y contenedores elegantes.</p>
+
+        <div class="media-grid">
+          <article class="media-card reveal">
+            <h3>Vídeo de inspiración</h3>
+            <p>Una presentación audiovisual eleva la experiencia y hace que el sitio se sienta mucho más profesional y realista.</p>
+            <div class="video-shell">
+              <video controls poster="assets/fondo.jpg">
+                <source src="assets/viaje.mp4" type="video/mp4" />
+                Tu navegador no soporta video HTML5.
+              </video>
+            </div>
+          </article>
+
+          <article class="media-card reveal">
+            <h3>Ambiente sonoro de viaje</h3>
+            <p>Escucha audio ambiental mientras diseñas tu próxima aventura. Esto refuerza el realismo y la inmersión.</p>
+            <div class="audio-shell">
+              <audio controls>
+                <source src="assets/viaje.mp3" type="audio/mpeg" />
+                Tu navegador no soporta audio HTML5.
+              </audio>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tema 19: Columnas de texto -->
+    <!-- Tema 27: Contenido editable -->
+    <!-- Tema 24: SVG (gráficos vectoriales) -->
+    <section class="section">
+      <div class="container extras-grid">
+        <article class="column-card reveal">
+          <span class="eyebrow">🌐 Columnas de texto</span>
+          <h3>Destinos recomendados por viajeros</h3>
+          <p>Se conserva la idea original, pero ahora con mejor jerarquía y lectura multicolumna.</p>
+          <ul class="column-list">
+            <li>París 🇫🇷</li>
+            <li>Roma 🇮🇹</li>
+            <li>Barcelona 🇪🇸</li>
+            <li>Tokio 🇯🇵</li>
+            <li>Bangkok 🇹🇭</li>
+            <li>New York 🇺🇸</li>
+            <li>Londres 🇬🇧</li>
+            <li>Sídney 🇦🇺</li>
+            <li>Dubái 🇦🇪</li>
+            <li>Río de Janeiro 🇧🇷</li>
+            <li>Cancún 🇲🇽</li>
+            <li>Cartagena 🇨🇴</li>
+            <li>Estambul 🇹🇷</li>
+            <li>Praga 🇨🇿</li>
+            <li>Ámsterdam 🇳🇱</li>
+            <li>Berlín 🇩🇪</li>
+          </ul>
+        </article>
+
+        <!-- Tema 27: Contenido editable -->
+        <article class="editable-card reveal">
+          <span class="eyebrow">✍️ Contenido editable</span>
+          <h3>Tu nota personal del viaje</h3>
+          <p>Escribe ideas, lugares, recuerdos o pendientes. El texto se guarda automáticamente con localStorage.</p>
+          <div id="editableNote" class="editable-box" contenteditable="true" spellcheck="true">
+            Escribe aquí tu lista de sueños de viaje, recomendaciones, restaurantes o actividades favoritas...
+          </div>
+          <div class="editable-actions">
+            <button class="btn btn-primary" id="saveNote" type="button">Guardar nota</button>
+            <button class="btn btn-secondary" id="clearNote" type="button">Limpiar nota</button>
+          </div>
+        </article>
+
+        <!-- Tema 24: SVG (gráficos vectoriales) -->
+        <article class="svg-card reveal">
+          <span class="eyebrow">🧭 SVG vectorial</span>
+          <h3>Ruta aérea ilustrada</h3>
+          <p>Un gráfico SVG mantiene nitidez, aporta personalidad visual y mejora la presentación del proyecto.</p>
+          <div class="svg-wrap">
+            <svg viewBox="0 0 600 240" role="img" aria-label="Ruta de vuelo entre ciudades">
+              <defs>
+                <linearGradient id="routeGradient" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#38bdf8" />
+                  <stop offset="100%" stop-color="#22c55e" />
+                </linearGradient>
+              </defs>
+              <circle cx="80" cy="160" r="16" fill="#38bdf8" />
+              <circle cx="300" cy="80" r="16" fill="#22c55e" />
+              <circle cx="520" cy="150" r="16" fill="#f59e0b" />
+              <path d="M80 160 C170 60, 210 210, 300 80 S450 70, 520 150" fill="none" stroke="url(#routeGradient)" stroke-width="7" stroke-linecap="round" stroke-dasharray="14 12">
+                <animate attributeName="stroke-dashoffset" values="0;-52" dur="4s" repeatCount="indefinite" />
+              </path>
+              <text x="58" y="195" fill="#e5eefc" font-size="18">Bogotá</text>
+              <text x="280" y="50" fill="#e5eefc" font-size="18">Madrid</text>
+              <text x="498" y="185" fill="#e5eefc" font-size="18">París</text>
+            </svg>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Tema 25: Canvas -->
+    <!-- Tema 28: Storage -->
+    <!-- Tema 15: Transformaciones (transform) -->
+    <!-- Tema 18: Transiciones (transition) -->
+    <!-- Tema 23: Animaciones (animation) -->
+    <section class="section">
+      <div class="container extras-grid">
+        <!-- Tema 25: Canvas -->
+        <article class="canvas-card reveal">
+          <span class="eyebrow">🎨 Canvas</span>
+          <h3>Visual del clima y el horizonte</h3>
+          <p>Canvas añade un toque dinámico y moderno dibujando una escena de viaje directamente desde JavaScript.</p>
+          <div class="canvas-wrap">
+            <canvas id="travelCanvas" width="700" height="320"></canvas>
+          </div>
+        </article>
+
+        <article class="community-card reveal">
+          <span class="eyebrow">🔒 Storage</span>
+          <h3>Datos persistentes</h3>
+          <p>Presupuesto, nota editable y destino favorito se guardan en tu navegador para continuar más tarde.</p>
+          <div class="budget-list">
+            <div class="budget-item"><span>Destino favorito</span><strong id="favoriteDestination">Sin elegir</strong></div>
+            <div class="budget-item"><span>Última nota guardada</span><strong id="noteStatus">Pendiente</strong></div>
+          </div>
+          <div class="editable-actions">
+            <button class="btn btn-accent" id="setFavorite" type="button">Guardar "Tokio" como favorito</button>
+          </div>
+        </article>
+
+        <article class="community-card reveal">
+          <span class="eyebrow">⚡ Interacción</span>
+          <h3>Microanimaciones y transiciones</h3>
+          <p>Hover, transformaciones, sombras, gradientes y animaciones mejoran la experiencia sin perder realismo.</p>
+          <div class="editable-actions">
+            <button class="chip" type="button">Hover suave</button>
+            <button class="chip" type="button">Sombras reales</button>
+            <button class="chip" type="button">Transform</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title reveal">Lo que dicen los viajeros</h2>
+        <p class="section-subtitle reveal">La prueba social añade credibilidad y hace que la página parezca una marca real.</p>
+
+        <div class="community-grid">
+          <article class="testimonial-card reveal">
+            <div class="user-row">
+              <div class="avatar avatar-laura" aria-hidden="true">LM</div>
+              <div>
+                <strong>Laura Méndez</strong>
+                <p class="stars">★★★★★</p>
+              </div>
+            </div>
+            <p>"Lo que más me gustó fue poder tener mapa, presupuesto y notas personales en un solo lugar."</p>
+          </article>
+
+          <article class="testimonial-card reveal">
+            <div class="user-row">
+              <div class="avatar avatar-camilo" aria-hidden="true">CR</div>
+              <div>
+                <strong>Camilo Rojas</strong>
+                <p class="stars">★★★★★</p>
+              </div>
+            </div>
+            <p>"Se siente como una app real. La parte visual del itinerario y el presupuesto está excelente."</p>
+          </article>
+
+          <article class="testimonial-card reveal">
+            <div class="user-row">
+              <div class="avatar avatar-andrea" aria-hidden="true">AC</div>
+              <div>
+                <strong>Andrea Castillo</strong>
+                <p class="stars">★★★★★</p>
+              </div>
+            </div>
+            <p>"La usaría para planear un viaje de verdad. Tiene una estética limpia, moderna y muy convincente."</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tema 16: Formularios -->
+    <section class="section" id="contacto">
+      <div class="container contact-grid">
+        <article class="contact-card reveal">
+          <span class="eyebrow">📝 Formulario</span>
+          <h3>Contáctanos</h3>
+          <p>Un formulario bien diseñado mejora la usabilidad y demuestra dominio de campos, validación y presentación.</p>
+
+          <form id="contactForm">
+            <div class="form-row">
+              <div>
+                <label for="name">Nombre</label>
+                <input id="name" name="name" type="text" placeholder="Tu nombre" required />
+              </div>
+              <div>
+                <label for="email">Correo</label>
+                <input id="email" name="email" type="email" placeholder="tu@correo.com" required />
+              </div>
+            </div>
+
+            <div>
+              <label for="destination">Destino soñado</label>
+              <select id="destination" name="destination">
+                <option value="">Selecciona una opción</option>
+                <option>París</option>
+                <option>Roma</option>
+                <option>Tokio</option>
+                <option>Cartagena</option>
+                <option>Dubái</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="message">Mensaje</label>
+              <textarea id="message" name="message" placeholder="Cuéntanos qué tipo de viaje quieres planificar..."></textarea>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Enviar solicitud</button>
+            <p id="formResponse" style="color:#c7f9d4;font-weight:700;"></p>
+          </form>
+        </article>
+
+        <aside class="contact-card reveal">
+          <span class="eyebrow">💌 Comunidad</span>
+          <h3>Recibe ideas para tu próximo viaje</h3>
+          <p>Suscríbete para obtener rutas, consejos, presupuestos y destinos recomendados con inspiración semanal.</p>
+
+          <div class="newsletter">
+            <div>
+              <h4 style="font-size:1.5rem; margin-bottom:8px;">Newsletter WayTure</h4>
+              <p style="color:var(--muted);">Consejos prácticos, ofertas y destinos reales para viajeros curiosos.</p>
+            </div>
+            <form>
+              <label class="sr-only" for="newsletterEmail">Correo</label>
+              <input id="newsletterEmail" type="email" placeholder="Ingresa tu correo" />
+              <button class="btn btn-accent" type="button">Suscribirme</button>
+            </form>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <aside class="floating-offer" id="floatingOffer" aria-label="Oferta especial">
+    <button class="offer-close" id="closeOffer" type="button" aria-label="Cerrar oferta">&times;</button>
+    <p class="mini">Oferta especial</p>
+    <h3 style="font-size:1.35rem; margin-bottom:8px;">Hasta 30% de descuento en tu próximo itinerario premium</h3>
+    <p style="opacity:0.95;">Diseña tu viaje, guarda tus notas y accede a recomendaciones visuales en una experiencia de nivel profesional.</p>
+    <div class="offer-actions">
+      <a class="chip" href="#planificador">Probar ahora</a>
+      <a class="chip" href="#contacto">Más info</a>
+    </div>
+  </aside>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <strong style="display:block; margin-bottom:6px;">© 2026 WayTure - Viajes que inspiran</strong>
+        <p style="color:var(--muted);">Diseño web hiperrealista con HTML5, CSS3 y JavaScript.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#inicio">Inicio</a>
+        <a href="#funciones">Funciones</a>
+        <a href="#multimedia">Multimedia</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Tema 28: Storage
+    const moneyFormatter = new Intl.NumberFormat('es-CO', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 0
+    });
+
+    const budgetInputs = ['transport', 'hotel', 'food', 'activities'].map(id => document.getElementById(id));
+    const budgetTotal = document.getElementById('budgetTotal');
+    const budgetState = document.getElementById('budgetState');
+    const saveBudgetBtn = document.getElementById('saveBudget');
+    const editableNote = document.getElementById('editableNote');
+    const noteStatus = document.getElementById('noteStatus');
+    const saveNoteBtn = document.getElementById('saveNote');
+    const clearNoteBtn = document.getElementById('clearNote');
+    const favoriteDestination = document.getElementById('favoriteDestination');
+    const setFavoriteBtn = document.getElementById('setFavorite');
+    const sessionGreeting = document.getElementById('sessionGreeting');
+    const contactForm = document.getElementById('contactForm');
+    const formResponse = document.getElementById('formResponse');
+    const floatingOffer = document.getElementById('floatingOffer');
+    const closeOfferBtn = document.getElementById('closeOffer');
+
+    function calculateBudget() {
+      const values = budgetInputs.map(input => Number(input.value) || 0);
+      const total = values.reduce((acc, val) => acc + val, 0);
+      budgetTotal.textContent = moneyFormatter.format(total);
+      budgetState.textContent = total > 0 ? 'Actualizado' : 'Pendiente';
+      return total;
+    }
+
+    function saveBudget() {
+      const data = {};
+      budgetInputs.forEach(input => {
+        data[input.id] = input.value;
+      });
+      localStorage.setItem('wayture_budget', JSON.stringify(data));
+      calculateBudget();
+      budgetState.textContent = 'Guardado';
+    }
+
+    function loadBudget() {
+      const saved = localStorage.getItem('wayture_budget');
+      if (!saved) return;
+      try {
+        const data = JSON.parse(saved);
+        budgetInputs.forEach(input => {
+          input.value = data[input.id] || '';
+        });
+        calculateBudget();
+        budgetState.textContent = 'Recuperado';
+      } catch (error) {
+        console.error('No se pudo cargar el presupuesto', error);
+      }
+    }
+
+    function saveNote() {
+      localStorage.setItem('wayture_note', editableNote.innerHTML);
+      noteStatus.textContent = 'Guardada';
+    }
+
+    function loadNote() {
+      const saved = localStorage.getItem('wayture_note');
+      if (saved) {
+        editableNote.innerHTML = saved;
+        noteStatus.textContent = 'Recuperada';
+      }
+    }
+
+    function clearNote() {
+      editableNote.innerHTML = 'Escribe aquí tu lista de sueños de viaje, recomendaciones, restaurantes o actividades favoritas...';
+      localStorage.removeItem('wayture_note');
+      noteStatus.textContent = 'Eliminada';
+    }
+
+    function loadFavorite() {
+      const savedFavorite = localStorage.getItem('wayture_favorite_destination');
+      if (savedFavorite) {
+        favoriteDestination.textContent = savedFavorite;
+      }
+    }
+
+    function loadSessionGreeting() {
+      const savedName = localStorage.getItem('wayture_logged_user') || localStorage.getItem('wayture_registered_name');
+      if (!savedName) return;
+      sessionGreeting.textContent = `Bienvenido, ${savedName}. Tu experiencia en WayTure está lista.`;
+      sessionGreeting.classList.add('show');
+    }
+
+    function saveFavorite() {
+      localStorage.setItem('wayture_favorite_destination', 'Tokio 🇯🇵');
+      favoriteDestination.textContent = 'Tokio 🇯🇵';
+    }
+
+    budgetInputs.forEach(input => input.addEventListener('input', calculateBudget));
+    saveBudgetBtn.addEventListener('click', saveBudget);
+    saveNoteBtn.addEventListener('click', saveNote);
+    clearNoteBtn.addEventListener('click', clearNote);
+    setFavoriteBtn.addEventListener('click', saveFavorite);
+    closeOfferBtn.addEventListener('click', () => {
+      floatingOffer.classList.add('is-hidden');
+    });
+
+    editableNote.addEventListener('input', () => {
+      noteStatus.textContent = 'Editando...';
+    });
+
+    contactForm.addEventListener('submit', event => {
+      event.preventDefault();
+      const formData = new FormData(contactForm);
+      const name = formData.get('name') || 'viajero';
+      const destination = formData.get('destination') || 'tu destino favorito';
+      formResponse.textContent = `Gracias, ${name}. Hemos recibido tu interés por ${destination} y pronto te contactaremos.`;
+      contactForm.reset();
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Tema 25: Canvas
+    function drawCanvas() {
+      const canvas = document.getElementById('travelCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+
+      const sky = ctx.createLinearGradient(0, 0, 0, h);
+      sky.addColorStop(0, '#0ea5e9');
+      sky.addColorStop(0.55, '#2563eb');
+      sky.addColorStop(1, '#081120');
+      ctx.fillStyle = sky;
+      ctx.fillRect(0, 0, w, h);
+
+      const sun = ctx.createRadialGradient(540, 85, 12, 540, 85, 78);
+      sun.addColorStop(0, 'rgba(255, 244, 182, 0.95)');
+      sun.addColorStop(1, 'rgba(255, 244, 182, 0)');
+      ctx.fillStyle = sun;
+      ctx.beginPath();
+      ctx.arc(540, 85, 78, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = 'rgba(255,255,255,0.82)';
+      [[110, 75], [250, 48], [420, 95]].forEach(([x, y]) => {
+        ctx.beginPath();
+        ctx.arc(x, y, 20, Math.PI * 0.5, Math.PI * 1.5);
+        ctx.arc(x + 26, y - 12, 24, Math.PI, Math.PI * 2);
+        ctx.arc(x + 56, y, 18, Math.PI * 1.5, Math.PI * 0.5);
+        ctx.closePath();
+        ctx.fill();
+      });
+
+      const sea = ctx.createLinearGradient(0, 180, 0, h);
+      sea.addColorStop(0, 'rgba(56, 189, 248, 0.78)');
+      sea.addColorStop(1, 'rgba(8, 17, 32, 1)');
+      ctx.fillStyle = sea;
+      ctx.fillRect(0, 185, w, h - 185);
+
+      ctx.fillStyle = '#0f172a';
+      ctx.beginPath();
+      ctx.moveTo(0, 230);
+      ctx.lineTo(120, 170);
+      ctx.lineTo(200, 205);
+      ctx.lineTo(340, 128);
+      ctx.lineTo(430, 210);
+      ctx.lineTo(560, 150);
+      ctx.lineTo(700, 220);
+      ctx.lineTo(700, 320);
+      ctx.lineTo(0, 320);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      ctx.beginPath();
+      ctx.moveTo(88, 136);
+      ctx.quadraticCurveTo(118, 122, 146, 132);
+      ctx.quadraticCurveTo(132, 136, 122, 148);
+      ctx.quadraticCurveTo(106, 156, 88, 136);
+      ctx.fill();
+
+      ctx.strokeStyle = '#f8fafc';
+      ctx.lineWidth = 3;
+      ctx.setLineDash([10, 10]);
+      ctx.beginPath();
+      ctx.moveTo(90, 140);
+      ctx.quadraticCurveTo(210, 100, 320, 125);
+      ctx.quadraticCurveTo(430, 145, 540, 100);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = '#f59e0b';
+      ctx.beginPath();
+      ctx.arc(540, 100, 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#e2e8f0';
+      ctx.font = 'bold 24px Inter, sans-serif';
+      ctx.fillText('Visual de viaje creado con Canvas', 24, 42);
+      ctx.font = '16px Inter, sans-serif';
+      ctx.fillText('Cielo, montaña, mar y trayectoria aérea con JavaScript', 24, 68);
+    }
+
+    loadBudget();
+    loadNote();
+    loadFavorite();
+    loadSessionGreeting();
+    calculateBudget();
+    drawCanvas();
+    window.addEventListener('resize', drawCanvas);
   </script>
-
 </body>
 </html>
+
+
