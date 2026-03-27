@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro | WayTure</title>
+  <!-- Tema 6: Creación de un favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <style>
+    /* Tema 4: Introducción a CSS */
+    :root {
+      --bg: #081120;
+      --panel: rgba(15, 23, 42, 0.84);
+      --line: rgba(255,255,255,0.12);
+      --text: #ecf4ff;
+      --muted: #bfd0e6;
+      --brand: #38bdf8;
+      --brand-2: #2563eb;
+      --accent: #22c55e;
+      --shadow: 0 24px 60px rgba(0,0,0,0.32);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Tema 10: Tipografías */
+    /* Tema 9: Imágenes de fondo */
+    /* Tema 22: Transparencias y degradados */
+    body {
+      min-height: 100vh;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.18), transparent 26%),
+        radial-gradient(circle at left center, rgba(34, 197, 94, 0.16), transparent 22%),
+        linear-gradient(rgba(8, 17, 32, 0.74), rgba(8, 17, 32, 0.9)),
+        url("assets/ciudad.jpg") center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Tema 14: Posición de los elementos (position) */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(16px);
+      background: rgba(8, 17, 32, 0.74);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    /* Tema 13: Flex, sin dolor */
+    .header-wrap {
+      min-height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    /* Tema 12: Centrar el contenido */
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 0;
+    }
+
+    /* Tema 7: Bordes redondeados */
+    /* Tema 8: Sombras */
+    .logo-badge {
+      width: 190px;
+      height: 58px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: rgb(255, 255, 255);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.16);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .logo-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center 100%;
+      transform: translateY(-25px);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Tema 3: Imágenes, listas y enlaces */
+    /* Tema 18: Transiciones (transition) */
+    nav a {
+      padding: 10px 15px;
+      border-radius: 999px;
+      color: #dbe7f8;
+      transition: 0.25s ease;
+    }
+
+    nav a:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-1px);
+    }
+
+    /* Tema 22: Transparencias y degradados */
+    .btn {
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.28);
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      padding: 42px 16px;
+    }
+
+    .auth-layout {
+      width: min(1120px, 100%);
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    /* Tema 7: Bordes redondeados */
+    /* Tema 8: Sombras */
+    .auth-card,
+    .info-panel {
+      border-radius: var(--radius-xl);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+    }
+
+    .auth-card {
+      padding: 30px;
+      display: grid;
+      align-content: center;
+      gap: 20px;
+    }
+
+    .info-panel {
+      display: flex;
+      align-items: flex-end;
+      min-height: 640px;
+      background:
+        linear-gradient(to top, rgba(8, 17, 32, 0.92), rgba(8, 17, 32, 0.18)),
+        url("assets/montana.jpg") center/cover no-repeat;
+    }
+
+    .info-content {
+      padding: 36px;
+      max-width: 560px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #dff5ff;
+      margin-bottom: 18px;
+      font-size: 0.95rem;
+    }
+
+    h1, h2 {
+      line-height: 1.02;
+    }
+
+    .auth-card h2 {
+      font-size: 2rem;
+    }
+
+    .auth-card p,
+    .info-content p {
+      color: var(--muted);
+    }
+
+    .info-content h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      margin-bottom: 16px;
+    }
+
+    .info-list {
+      margin-top: 22px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .info-list li {
+      list-style: none;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+    }
+
+    /* Tema 16: Formularios */
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    /* Tema 13: Flex, sin dolor */
+    .double-field {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #eff6ff;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+      color: white;
+      outline: none;
+      font: inherit;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+
+    input::placeholder {
+      color: #b6c7dd;
+    }
+
+    /* Tema 18: Transiciones (transition) */
+    input:focus {
+      border-color: rgba(56, 189, 248, 0.65);
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.14);
+      transform: translateY(-1px);
+    }
+
+    .submit-btn {
+      padding: 15px 18px;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), #16a34a);
+      color: white;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.25s ease;
+      box-shadow: 0 16px 34px rgba(34, 197, 94, 0.26);
+    }
+
+    /* Tema 15: Transformaciones (transform) */
+    .submit-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .response-box {
+      display: none;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(34, 197, 94, 0.14);
+      border: 1px solid rgba(34, 197, 94, 0.36);
+      color: #ddffe9;
+      font-weight: 700;
+    }
+
+    .response-box.show {
+      display: block;
+    }
+
+    .switch-link {
+      color: #8fdcff;
+      font-weight: 700;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      background: rgba(8, 17, 32, 0.8);
+      padding: 22px 16px;
+      text-align: center;
+      color: #d5e1f0;
+    }
+
+    /* Tema 26: Adaptación a móviles (mediaqueries) */
+    @media (max-width: 980px) {
+      .auth-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .info-panel {
+        min-height: 360px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .double-field {
+        grid-template-columns: 1fr;
+      }
+
+      .header-wrap,
+      nav {
+        justify-content: center;
+      }
+
+      .auth-card {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Tema 1: Estructura semántica de HTML5 -->
+  <!-- Tema 2: Etiquetas básicas -->
+  <header>
+    <!-- Tema 3: Imágenes, listas y enlaces -->
+    <div class="container header-wrap">
+      <a class="logo" href="index.html" aria-label="Volver al inicio">
+        <span class="logo-badge" aria-hidden="true">
+          <img src="assets/WayTureNoMAP.png" alt="WayTure">
+        </span>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <a href="index.html">Inicio</a>
+        <a href="index.html#funciones">Funciones</a>
+        <a href="login.html">Login</a>
+        <a href="registro.html" class="btn">Registro</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Tema 13: Flex, sin dolor -->
+    <div class="auth-layout">
+      <!-- Tema 16: Formularios -->
+      <section class="auth-card">
+        <div>
+          <span class="eyebrow">Cuenta nueva</span>
+          <h2>Crear cuenta</h2>
+          <p>Regístrate para guardar tus destinos favoritos, tus notas y tu próximo itinerario en WayTure.</p>
+        </div>
+
+        <form id="registerForm">
+          <div class="double-field">
+            <div>
+              <label for="registerName">Nombre</label>
+              <input id="registerName" name="registerName" type="text" placeholder="Tu nombre" required>
+            </div>
+            <div>
+              <label for="registerAlias">Usuario</label>
+              <input id="registerAlias" name="registerAlias" type="text" placeholder="Tu alias" required>
+            </div>
+          </div>
+
+          <div>
+            <label for="registerEmail">Correo</label>
+            <input id="registerEmail" name="registerEmail" type="email" placeholder="tu@correo.com" required>
+          </div>
+
+          <div class="double-field">
+            <div>
+              <label for="registerPassword">Contraseña</label>
+              <input id="registerPassword" name="registerPassword" type="password" placeholder="Crea una contraseña" required>
+            </div>
+            <div>
+              <label for="registerPasswordConfirm">Confirmar contraseña</label>
+              <input id="registerPasswordConfirm" name="registerPasswordConfirm" type="password" placeholder="Repítela" required>
+            </div>
+          </div>
+
+          <button class="submit-btn" type="submit">Crear cuenta WayTure</button>
+        </form>
+
+        <div id="registerResponse" class="response-box" aria-live="polite"></div>
+
+        <p>¿Ya tienes cuenta? <a class="switch-link" href="login.html">Inicia sesión aquí</a></p>
+      </section>
+
+      <section class="info-panel">
+        <div class="info-content">
+          <h1>Empieza a diseñar viajes que sí provocan salir ya</h1>
+          <p>Crea tu acceso en segundos y guarda experiencias, presupuesto, destinos soñados y rutas personalizadas en un solo lugar.</p>
+
+          
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 WayTure - Viajes que inspiran</p>
+  </footer>
+
+  <script>
+    // Tema 28: Storage
+    const registerForm = document.getElementById('registerForm');
+    const registerName = document.getElementById('registerName');
+    const registerPassword = document.getElementById('registerPassword');
+    const registerPasswordConfirm = document.getElementById('registerPasswordConfirm');
+    const registerResponse = document.getElementById('registerResponse');
+
+    // Tema 16: Formularios
+    registerForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const userName = registerName.value.trim() || 'viajero';
+      const password = registerPassword.value;
+      const confirmPassword = registerPasswordConfirm.value;
+
+      if (password !== confirmPassword) {
+        registerResponse.textContent = 'Las contraseñas no coinciden. Revisa e inténtalo otra vez.';
+        registerResponse.classList.add('show');
+        return;
+      }
+
+      localStorage.setItem('wayture_registered_name', userName);
+      localStorage.setItem('wayture_logged_user', userName);
+      registerResponse.textContent = 'Cuenta creada con éxito para ' + userName + '. Redirigiendo a WayTure...';
+      registerResponse.classList.add('show');
+      registerForm.reset();
+      setTimeout(function () {
+        window.location.href = 'index.html#inicio';
+      }, 900);
+    });
+  </script>
+</body>
+</html>
