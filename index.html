@@ -1264,6 +1264,10 @@
     }
 
     @media (max-width: 640px) {
+      header {
+        padding: 14px 0 16px;
+      }
+
       .section {
         padding: 70px 0;
       }
@@ -1272,19 +1276,35 @@
         width: min(100% - 22px, var(--max));
       }
 
+      .header-wrap {
+        gap: 14px;
+      }
+
+      .logo {
+        padding: 4px 0;
+      }
+
       .logo-badge {
         width: 168px;
         height: 54px;
       }
 
       nav {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
         width: 100%;
       }
 
       nav a {
         text-align: center;
+        width: 100%;
+        padding: 12px 14px;
+      }
+
+      nav a.btn {
+        margin-top: 4px;
       }
 
       .column-list {
