@@ -1397,8 +1397,9 @@
         <a href="#destinos">Destinos</a>
         <a href="#planificador">Planificador</a>
         <a href="#multimedia">Multimedia</a>
-        <a href="login.html">Login</a>
-        <a href="registro.html" class="btn btn-secondary">Registrarse</a>
+        <a id="navLoginLink" href="login.html">Login</a>
+        <a id="navRegisterLink" href="registro.html" class="btn btn-secondary">Registrarse</a>
+        <button id="navLogoutButton" class="btn btn-secondary" type="button" hidden>Cerrar sesi&oacute;n</button>
       </nav>
     </div>
   </header>
@@ -1425,8 +1426,9 @@
           </ul>
 
           <div class="hero-actions">
-            <a href="registro.html" class="btn btn-primary">Crear cuenta</a>
-            <a href="login.html" class="btn btn-secondary">Iniciar sesi&oacute;n</a>
+            <a id="heroRegisterLink" href="registro.html" class="btn btn-primary">Crear cuenta</a>
+            <a id="heroLoginLink" href="login.html" class="btn btn-secondary">Iniciar sesi&oacute;n</a>
+            <button id="heroLogoutButton" class="btn btn-secondary" type="button" hidden>Cerrar sesi&oacute;n</button>
           </div>
 
           <div class="hero-stats">
@@ -2229,6 +2231,7 @@
     drawCanvas();
     window.addEventListener('resize', drawCanvas);
   </script>
+  <script type="module" src="js/index-auth.js"></script>
 </body>
 </html>
 
