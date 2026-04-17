@@ -283,3 +283,5 @@ El proyecto se encuentra funcional como demostración frontend. La navegación e
 ## Licencia
 
 Este proyecto no incluye una licencia definida por el momento.
+
+
