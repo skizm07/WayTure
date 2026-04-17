@@ -1410,7 +1410,7 @@
       <div class="container hero-grid">
         <div class="hero-copy reveal">
           <span class="eyebrow"> Plataforma de viaje inteligente</span>
-          <h1>Planifica tu viaje perfecto con una experiencia realista y completa</h1>
+          <h1 id="tituloPrincipal">Fundamentos de Programación</h1>
           <p>
             Organiza destinos, actividades, presupuesto, mapas, notas personales y experiencias multimedia en un solo lugar.
             WayTure transforma una idea de viaje en un itinerario visual, funcional y emocionante.
@@ -2231,6 +2231,61 @@
     drawCanvas();
     window.addEventListener('resize', drawCanvas);
   </script>
+  <script>
+  let condicion1_cumplida = false;
+  let condicion2_cumplida = false;
+  let condicion3_cumplida = false;
+  let misionActivada = false;
+
+  const botonPresupuesto = document.getElementById("saveBudget");
+  const botonNota = document.getElementById("saveNote");
+  const botonFavorito = document.getElementById("setFavorite");
+  const tituloPrincipal = document.getElementById("tituloPrincipal") || document.querySelector(".hero h1");
+
+  function verificarMision() {
+    if (misionActivada) return;
+
+    if (condicion1_cumplida && condicion2_cumplida && condicion3_cumplida) {
+      misionActivada = true;
+
+      tituloPrincipal.style.backgroundColor = "#FFD700";
+      tituloPrincipal.style.color = "#000000";
+      tituloPrincipal.style.display = "inline-block";
+      tituloPrincipal.style.padding = "10px 16px";
+      tituloPrincipal.style.borderRadius = "8px";
+
+      const mensaje = document.createElement("p");
+      mensaje.textContent = "Misión Cumplida: Agente DOM activado.";
+      mensaje.style.fontWeight = "bold";
+      mensaje.style.color = "#15803d";
+      mensaje.style.marginTop = "10px";
+      mensaje.id = "mensaje-mision";
+
+      tituloPrincipal.parentNode.insertBefore(mensaje, tituloPrincipal.nextSibling);
+    }
+  }
+
+  if (botonPresupuesto) {
+    botonPresupuesto.addEventListener("click", function () {
+      condicion1_cumplida = true;
+      verificarMision();
+    });
+  }
+
+  if (botonNota) {
+    botonNota.addEventListener("click", function () {
+      condicion2_cumplida = true;
+      verificarMision();
+    });
+  }
+
+  if (botonFavorito) {
+    botonFavorito.addEventListener("click", function () {
+      condicion3_cumplida = true;
+      verificarMision();
+    });
+  }
+</script>
   <script type="module" src="js/index-auth.js"></script>
 </body>
 </html>
