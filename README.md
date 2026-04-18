@@ -2,6 +2,31 @@
 
 WayTure es un proyecto web frontend orientado a la planificación de viajes. Su propuesta combina una landing page visualmente inmersiva con pequeñas funcionalidades interactivas para simular la experiencia de una plataforma turística moderna. El sitio fue desarrollado con **HTML5, CSS3 y JavaScript**, sin frameworks, para demostrar de forma práctica distintos fundamentos del desarrollo web.
 
+## Manipulación del DOM
+
+Uno de los aspectos más importantes del proyecto es el uso de la manipulación del DOM (Document Object Model) con JavaScript. Gracias a esto, WayTure no se comporta como una página estática, sino como una interfaz interactiva capaz de responder a las acciones del usuario en tiempo real.
+
+Dentro de `index.html`, JavaScript selecciona elementos de la página, escucha eventos y actualiza la interfaz de manera dinámica. Por ejemplo:
+
+- calcula y actualiza el presupuesto en pantalla
+- cambia mensajes de estado como "Guardado", "Recuperado" o "Editando"
+- muestra una bienvenida personalizada al usuario
+- abre y cierra el menú móvil
+- oculta el banner flotante de oferta
+- revela elementos al hacer scroll
+- modifica contenido visible dentro de la página sin recargarla
+- crea e inserta mensajes nuevos en el documento cuando se cumplen ciertas condiciones
+
+Además, el proyecto incluye una pequeña interacción tipo reto: cuando el usuario guarda el presupuesto, guarda la nota y selecciona un destino favorito, el sistema activa una condición especial que modifica el estilo del título principal y agrega un nuevo mensaje al documento indicando: **"Misión Cumplida: Agente DOM activado."**
+
+Esto demuestra de forma práctica cómo el DOM permite:
+
+- seleccionar nodos HTML
+- escuchar eventos del usuario
+- modificar estilos y contenido
+- añadir nuevos elementos al documento
+- generar experiencias interactivas directamente desde JavaScript
+
 ## Demo del proyecto
 
 Puedes ver la versión publicada en GitHub Pages aquí:
