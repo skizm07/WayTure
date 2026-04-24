@@ -643,6 +643,7 @@
       color: var(--muted);
     }
 
+
     /* Tema 12: Centrar el contenido */
     .center-message {
       padding: 44px 22px;
@@ -1394,6 +1395,8 @@
       <nav id="mainNav" aria-label="Navegación principal">
         <a href="#inicio">Inicio</a>
         <a href="#funciones">Funciones</a>
+        <a href="admin-viajes.html">Panel Admin</a>
+        <a href="rastreo-viaje.html">Rastreo</a>
         <a href="#destinos">Destinos</a>
         <a href="#planificador">Planificador</a>
         <a href="#multimedia">Multimedia</a>
@@ -1524,6 +1527,7 @@
         </div>
       </div>
     </section>
+
 
     <!-- Tema 12: Centrar el contenido -->
     <div class="center-message reveal">
@@ -1979,6 +1983,8 @@
       <div class="footer-links">
         <a href="#inicio">Inicio</a>
         <a href="#funciones">Funciones</a>
+        <a href="admin-viajes.html">Panel Admin</a>
+        <a href="rastreo-viaje.html">Rastreo</a>
         <a href="#multimedia">Multimedia</a>
         <a href="#contacto">Contacto</a>
       </div>
@@ -2010,7 +2016,6 @@
     const closeOfferBtn = document.getElementById('closeOffer');
     const menuToggle = document.getElementById('menuToggle');
     const mainNav = document.getElementById('mainNav');
-
     function calculateBudget() {
       const values = budgetInputs.map(input => Number(input.value) || 0);
       const total = values.reduce((acc, val) => acc + val, 0);
@@ -2087,6 +2092,7 @@
     saveNoteBtn.addEventListener('click', saveNote);
     clearNoteBtn.addEventListener('click', clearNote);
     setFavoriteBtn.addEventListener('click', saveFavorite);
+
     closeOfferBtn.addEventListener('click', () => {
       floatingOffer.classList.add('is-hidden');
     });
