@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Panel privado WayTure para gestionar viajes, itinerarios, destinos, mapas, presupuesto y notas." />
+  <meta name="theme-color" content="#0f172a" />
+  <title>WayTure | Panel privado de viajes</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <style>
+    :root {
+      --bg: #081120;
+      --panel: rgba(15, 23, 42, 0.75);
+      --text: #e5eefc;
+      --muted: #b8c6dd;
+      --brand: #38bdf8;
+      --brand-2: #22c55e;
+      --accent: #f59e0b;
+      --danger: #ef4444;
+      --white: #ffffff;
+      --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 15px 35px rgba(0, 0, 0, 0.22);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max: 1520px;
+      --header-height: 86px;
+      --transition: 0.35s ease;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 28%), radial-gradient(circle at top right, rgba(34, 197, 94, 0.14), transparent 18%), linear-gradient(180deg, #091221 0%, #081120 36%, #0b1730 100%);
+      color: var(--text); min-height: 100vh; line-height: 1.6; overflow-x: hidden;
+    }
+    img, iframe, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    .container { width: min(100% - 48px, var(--max)); margin-inline: auto; }
+    header { position: sticky; top: 0; z-index: 999; min-height: var(--header-height); background: rgba(8, 17, 32, 0.72); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .header-wrap { min-height: var(--header-height); display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .logo { display: flex; align-items: center; justify-content: center; padding: 8px 0; }
+    .logo-badge { width: 190px; height: 58px; border-radius: 18px; display: grid; place-items: center; background: #fff; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 10px 22px rgba(0,0,0,0.16); overflow: hidden; flex-shrink: 0; }
+    .logo-badge img { width: 100%; height: 100%; object-fit: contain; object-position: center 100%; transform: translateY(-25px); }
+    .logo-word { display: none; }
+    nav { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
+    nav a { color: #dbe7f8; padding: 10px 14px; border-radius: 999px; transition: background var(--transition), transform var(--transition), color var(--transition); }
+    nav a:hover, nav a:focus-visible { background: rgba(255,255,255,0.08); transform: translateY(-2px); color: var(--white); }
+    .menu-toggle { display: none; align-items: center; justify-content: center; gap: 8px; min-width: 118px; padding: 12px 18px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: var(--white); font-weight: 700; box-shadow: var(--shadow-md); }
+    .btn, button, .chip { border: none; cursor: pointer; transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition), border-color var(--transition); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 22px; border-radius: 999px; font-weight: 800; box-shadow: var(--shadow-md); }
+    .btn-primary { background: linear-gradient(135deg, var(--brand), #2563eb); color: var(--white); }
+    .btn-secondary { color: var(--white); background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); }
+    .btn-accent { background: linear-gradient(135deg, #f59e0b, #fb7185); color: #fff; }
+    .btn:hover, button:hover, .chip:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 18px 42px rgba(0,0,0,0.28); }
+    .module-hero { padding: 76px 0 46px; position: relative; overflow: hidden; background: linear-gradient(rgba(7,12,26,0.62), rgba(7,12,26,0.82)), url('assets/fondo.jpg') center/cover no-repeat; }
+    .module-hero::after { content: ""; position: absolute; inset: auto 0 0; height: 140px; background: linear-gradient(to top, #081120 10%, transparent 100%); }
+    .module-hero .container { position: relative; z-index: 1; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: #d9f3ff; font-size: 0.92rem; margin-bottom: 18px; }
+    .module-title { font-size: clamp(2.3rem, 5vw, 4.8rem); line-height: 1; max-width: 950px; margin-bottom: 18px; text-shadow: 0 10px 28px rgba(0,0,0,0.3); }
+    .module-lead { max-width: 900px; color: #dbe7f8; font-size: clamp(1rem, 2vw, 1.18rem); margin-bottom: 24px; }
+    .module-actions, .compact-actions, .inline-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .inline-row { justify-content: space-between; }
+    .dashboard-shell { padding: 74px 0 90px; }
+    .card, .access-card, .metric-card, .trip-card, .activity-item, .map-card, .destination-card, .empty-state { border-radius: var(--radius-xl); padding: 24px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); box-shadow: var(--shadow-md); position: relative; overflow: hidden; }
+    .card::before, .access-card::before, .metric-card::before, .trip-card::before, .activity-item::before, .map-card::before, .destination-card::before { content: ""; position: absolute; inset: 0 0 auto; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent); }
+    .private-gate { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 24px; align-items: stretch; }
+    .private-gate.is-hidden { display: none; }
+    .dashboard { display: none; }
+    .dashboard.is-visible { display: block; }
+    .feature-list { display: grid; gap: 12px; margin-top: 18px; }
+    .feature-list li { display: grid; grid-template-columns: 42px 1fr; gap: 12px; padding: 14px; border-radius: 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); }
+    .feature-number { width: 42px; height: 42px; border-radius: 16px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(56,189,248,0.24), rgba(34,197,94,0.18)); font-weight: 900; color: #fff; }
+    .dashboard-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+    .metrics-grid { display: grid; grid-template-columns: repeat(4, minmax(160px, 1fr)); gap: 14px; margin-bottom: 24px; }
+    .metric-card strong { display: block; font-size: 1.65rem; color: #fff; }
+    .dashboard-grid { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 24px; align-items: start; }
+    .stack, .section-stack, .tab-panel.active, .activity-list, .destination-grid, .trip-list { display: grid; gap: 14px; }
+    .section-stack { gap: 24px; }
+    label { display: block; margin-bottom: 8px; font-weight: 700; color: #edf5ff; }
+    input, textarea, select { width: 100%; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.07); color: var(--white); border-radius: 16px; padding: 14px 16px; outline: none; transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition); font: inherit; }
+    select { color: #f8fafc; background-image: linear-gradient(45deg, transparent 50%, #94a3b8 50%), linear-gradient(135deg, #94a3b8 50%, transparent 50%); background-position: calc(100% - 22px) calc(50% - 3px), calc(100% - 16px) calc(50% - 3px); background-size: 6px 6px, 6px 6px; background-repeat: no-repeat; padding-right: 44px; appearance: none; }
+    select option { color: #0f172a; background: #f8fafc; }
+    textarea { min-height: 120px; resize: vertical; }
+    input:focus, textarea:focus, select:focus { border-color: rgba(56, 189, 248, 0.6); box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15); transform: translateY(-1px); }
+    .form-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .form-grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .trip-list { max-height: 540px; overflow: auto; padding-right: 4px; }
+    .trip-card { display: grid; gap: 12px; }
+    .trip-card.selected { border-color: rgba(56,189,248,0.55); box-shadow: 0 18px 46px rgba(56,189,248,0.18); }
+    .muted { color: var(--muted); }
+    .success { color: #c7f9d4; font-weight: 800; }
+    .warning { color: #fde68a; font-weight: 800; }
+    .small-btn { padding: 10px 13px; border-radius: 999px; background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.12); font-weight: 800; }
+    .small-btn.danger { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.35); }
+    .status-pill, .code-pill, .category-pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 11px; border-radius: 999px; font-weight: 800; font-size: 0.84rem; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.08); color: #e8f6ff; }
+    .status-pill.planear { background: rgba(148,163,184,0.17); }
+    .status-pill.organizacion { background: rgba(56,189,248,0.16); border-color: rgba(56,189,248,0.28); }
+    .status-pill.reservado { background: rgba(245,158,11,0.17); border-color: rgba(245,158,11,0.28); }
+    .status-pill.curso { background: rgba(34,197,94,0.16); border-color: rgba(34,197,94,0.28); }
+    .status-pill.finalizado { background: rgba(168,85,247,0.17); border-color: rgba(168,85,247,0.28); }
+    .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0; }
+    .tab-btn { padding: 10px 14px; border-radius: 999px; background: rgba(255,255,255,0.07); color: #dbe7f8; border: 1px solid rgba(255,255,255,0.1); font-weight: 800; }
+    .tab-btn.active { background: linear-gradient(135deg, var(--brand), #2563eb); color: #fff; }
+    .tab-panel { display: none; }
+    .map-card iframe { width: 100%; height: 360px; border: 0; border-radius: 22px; box-shadow: var(--shadow-md); margin-top: 16px; }
+    .activity-item { display: grid; grid-template-columns: 92px 1fr auto; gap: 14px; align-items: start; }
+    .activity-time { text-align: center; padding: 10px 8px; border-radius: 16px; background: linear-gradient(135deg, rgba(56,189,248,0.16), rgba(34,197,94,0.12)); color: #fff; font-weight: 900; }
+    .destination-grid { grid-template-columns: repeat(3, minmax(220px, 1fr)); }
+    .destination-card { padding: 0; }
+    .destination-card img { width: 100%; height: 160px; object-fit: cover; }
+    .destination-card .inner { padding: 18px; }
+    .budget-output { display: grid; grid-template-columns: repeat(4, minmax(120px, 1fr)); gap: 12px; margin-top: 16px; }
+    .budget-output article { padding: 14px; border-radius: 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); }
+    .budget-output strong { display: block; font-size: 1.25rem; }
+    footer { padding: 26px 0 42px; border-top: 1px solid rgba(255,255,255,0.08); background: rgba(5, 10, 20, 0.9); }
+    .footer-grid { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
+    .footer-links { display: flex; gap: 16px; flex-wrap: wrap; color: var(--muted); }
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    @media (max-width: 1180px) { .private-gate, .dashboard-grid { grid-template-columns: 1fr; } .metrics-grid, .destination-grid, .budget-output { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 760px) { .container { width: min(100% - 22px, var(--max)); } .header-wrap { flex-direction: column; padding: 12px 0; } .menu-toggle { display: inline-flex; width: 100%; } nav { display: none; flex-direction: column; align-items: stretch; width: 100%; padding: 12px; border-radius: 24px; background: rgba(8, 17, 32, 0.92); border: 1px solid rgba(255,255,255,0.08); box-shadow: var(--shadow-md); } nav.is-open { display: flex; } nav a, nav .btn { width: 100%; text-align: center; } .metrics-grid, .destination-grid, .budget-output, .form-grid-2, .form-grid-3 { grid-template-columns: 1fr; } .activity-item { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: 1fr; } .btn, .small-btn { width: 100%; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-wrap">
+      <a class="logo" href="index.html#inicio" aria-label="WayTure Inicio"><span class="logo-badge" aria-hidden="true"><img src="assets/WayTureNoMAP.png" alt="Logo WayTure" /></span><span class="logo-word">WayTure</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menu"><span>Menu</span></button>
+      <nav id="mainNav" aria-label="Navegacion principal">
+        <a href="index.html#inicio">Inicio</a><a href="index.html#funciones">Funciones</a><a href="admin-viajes.html">Panel privado</a><a href="rastreo-viaje.html">Rastreo</a><a href="index.html#destinos">Destinos</a><a href="index.html#planificador">Planificador</a><a href="index.html#contacto" class="btn btn-secondary">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="module-hero">
+    <div class="container reveal">
+      <span class="eyebrow">Interfaz privada WayTure</span>
+      <h1 class="module-title">Panel de Administraci&oacute;n / Gesti&oacute;n de Viajes</h1>
+      <p class="module-lead">Gestiona viajes completos con destinos, fechas, itinerarios, mapas, estados, presupuesto y notas personales. Esta p&aacute;gina es independiente del index y conserva la misma identidad visual.</p>
+      <div class="module-actions"><a class="btn btn-primary" href="#panel">Entrar al panel</a><a class="btn btn-secondary" href="rastreo-viaje.html">Ir al rastreo p&uacute;blico</a></div>
+    </div>
+  </section>
+
+  <section class="dashboard-shell" id="panel">
+    <div class="container">
+      <div class="private-gate reveal" id="privateGate">
+        <article class="access-card">
+          <span class="eyebrow">Acceso privado</span>
+          <h2>Iniciar sesi&oacute;n administrativa</h2>
+          <p class="muted">Simulaci&oacute;n de acceso privado con localStorage. Permite separar el panel de administraci&oacute;n de la p&aacute;gina p&uacute;blica sin usar servidor.</p>
+          <form class="stack" id="privateLoginForm" style="margin-top:20px;">
+            <div><label for="adminName">Nombre del usuario</label><input id="adminName" name="adminName" type="text" placeholder="Ej. Carlos Prieto" required /></div>
+            <div><label for="adminEmail">Correo</label><input id="adminEmail" name="adminEmail" type="email" placeholder="admin@wayture.com" required /></div>
+            <div><label for="adminRole">Rol</label><select id="adminRole" name="adminRole"><option>Administrador</option><option>Empleado</option><option>Usuario registrado</option></select></div>
+            <button class="btn btn-primary" type="submit">Acceder al panel</button><p class="success" id="loginMessage"></p>
+          </form>
+        </article>
+        <aside class="card">
+          <span class="eyebrow">Funcionalidades completas</span><h2>Este m&oacute;dulo permite</h2>
+          <ul class="feature-list">
+            <li><span class="feature-number">1</span><span><strong>Registrar viajes</strong><br><span class="muted">Destino, salida, regreso, viajeros y experiencia.</span></span></li>
+            <li><span class="feature-number">2</span><span><strong>Crear itinerarios</strong><br><span class="muted">Hora, lugar, descripci&oacute;n y categor&iacute;a por actividad.</span></span></li>
+            <li><span class="feature-number">3</span><span><strong>Gestionar destinos</strong><br><span class="muted">Imagen, valoraci&oacute;n, descripci&oacute;n y enlace a mapa.</span></span></li>
+            <li><span class="feature-number">4</span><span><strong>Controlar estado y presupuesto</strong><br><span class="muted">Estados, gastos, notas y mapa del viaje.</span></span></li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="dashboard" id="adminDashboard">
+        <div class="dashboard-top reveal"><div><span class="eyebrow">Panel activo</span><h2 style="font-size:2.2rem;">Gesti&oacute;n integral de WayTure</h2><p class="muted" id="sessionInfo">Sesi&oacute;n privada activa.</p></div><div class="compact-actions"><a class="btn btn-secondary" href="rastreo-viaje.html">Ver rastreo</a><button class="btn btn-accent" id="exportTripsBtn" type="button">Exportar datos</button><button class="btn btn-secondary" id="logoutBtn" type="button">Cerrar sesi&oacute;n</button></div></div>
+        <div class="metrics-grid reveal"><article class="metric-card"><strong id="metricTrips">0</strong><span>viajes registrados</span></article><article class="metric-card"><strong id="metricActive">0</strong><span>viajes activos</span></article><article class="metric-card"><strong id="metricActivities">0</strong><span>actividades</span></article><article class="metric-card"><strong id="metricBudget">$0</strong><span>presupuesto total</span></article></div>
+        <div class="dashboard-grid">
+          <div class="section-stack">
+            <article class="card reveal"><span class="eyebrow">Registro de viajes</span><h3>Crear nuevo viaje</h3><p class="muted">Al registrar un viaje se genera un c&oacute;digo p&uacute;blico para consultarlo desde la p&aacute;gina de rastreo.</p>
+              <form class="stack" id="tripForm" style="margin-top:18px;">
+                <div><label for="destination">Destino principal</label><input id="destination" name="destination" type="text" placeholder="Ej. Paris, Francia" required /></div>
+                <div class="form-grid-2"><div><label for="startDate">Fecha de salida</label><input id="startDate" name="startDate" type="date" required /></div><div><label for="endDate">Fecha de regreso</label><input id="endDate" name="endDate" type="date" required /></div></div>
+                <div class="form-grid-2"><div><label for="travelers">N&uacute;mero de viajeros</label><input id="travelers" name="travelers" type="number" min="1" placeholder="Ej. 2" required /></div><div><label for="experience">Tipo de experiencia</label><select id="experience" name="experience"><option>Cultural</option><option>Aventura</option><option>Descanso</option><option>Gastronomica</option><option>Familiar</option><option>Tecnologia y compras</option></select></div></div>
+                <div><label for="tripStatus">Estado de planificaci&oacute;n</label><select id="tripStatus" name="tripStatus"><option>Por planear</option><option>En organizacion</option><option>Reservado</option><option>En curso</option><option>Finalizado</option></select></div>
+                <div class="form-grid-2"><div><label for="lastLocation">&Uacute;ltima ubicaci&oacute;n guardada</label><input id="lastLocation" name="lastLocation" type="text" placeholder="Ej. Torre Eiffel" /></div><div><label for="mapQuery">B&uacute;squeda del mapa</label><input id="mapQuery" name="mapQuery" type="text" placeholder="Ej. Eiffel Tower Paris" /></div></div>
+                <button class="btn btn-primary" type="submit">Registrar viaje</button><p class="success" id="tripFormMessage"></p>
+              </form>
+            </article>
+            <article class="card reveal"><span class="eyebrow">Viajes guardados</span><div class="inline-row"><h3>Lista de viajes</h3><button class="small-btn danger" id="clearTripsBtn" type="button">Borrar todos</button></div><div class="trip-list" id="tripList" style="margin-top:16px;"></div></article>
+          </div>
+          <div class="section-stack">
+            <article class="card reveal"><span class="eyebrow">Detalle del viaje</span><div class="inline-row"><h3 id="selectedTripTitle">Selecciona un viaje</h3><span class="code-pill" id="selectedTripCode">Sin codigo</span></div><p class="muted" id="selectedTripMeta">Elige un viaje para editar estado, itinerario, presupuesto, mapa y notas.</p>
+              <div class="tabs"><button class="tab-btn active" data-tab="estado" type="button">Estado y mapa</button><button class="tab-btn" data-tab="itinerario" type="button">Itinerario</button><button class="tab-btn" data-tab="presupuesto" type="button">Presupuesto</button><button class="tab-btn" data-tab="notas" type="button">Notas</button><button class="tab-btn" data-tab="destinos" type="button">Destinos recomendados</button></div>
+              <section class="tab-panel active" id="tab-estado"><form class="stack" id="statusForm"><div class="form-grid-3"><div><label for="editStatus">Estado</label><select id="editStatus" name="editStatus"><option>Por planear</option><option>En organizacion</option><option>Reservado</option><option>En curso</option><option>Finalizado</option></select></div><div><label for="editLastLocation">&Uacute;ltima ubicaci&oacute;n</label><input id="editLastLocation" name="editLastLocation" type="text" /></div><div><label for="editMapQuery">Mapa</label><input id="editMapQuery" name="editMapQuery" type="text" /></div></div><button class="btn btn-primary" type="submit">Actualizar estado y ubicaci&oacute;n</button></form><article class="map-card"><h3>Mapa del destino principal</h3><p class="muted" id="mapCaption">Selecciona un viaje para ver su mapa.</p><iframe id="adminMap" title="Mapa del viaje" src="https://www.google.com/maps?q=Europa%20turismo&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></article></section>
+              <section class="tab-panel" id="tab-itinerario"><form class="stack" id="activityForm"><div class="form-grid-3"><div><label for="activityDate">Fecha</label><input id="activityDate" name="activityDate" type="date" /></div><div><label for="activityTime">Hora</label><input id="activityTime" name="activityTime" type="time" required /></div><div><label for="activityCategory">Categor&iacute;a</label><select id="activityCategory" name="activityCategory"><option>Cultura</option><option>Comida</option><option>Aventura</option><option>Descanso</option><option>Transporte</option><option>Fotografia</option></select></div></div><div><label for="activityPlace">Lugar</label><input id="activityPlace" name="activityPlace" type="text" required /></div><div><label for="activityDescription">Descripci&oacute;n</label><textarea id="activityDescription" name="activityDescription"></textarea></div><button class="btn btn-primary" type="submit">Agregar actividad</button></form><div class="activity-list" id="activityList"></div></section>
+              <section class="tab-panel" id="tab-presupuesto"><form class="stack" id="budgetForm"><div class="form-grid-2"><div><label for="transportBudget">Transporte</label><input id="transportBudget" name="transportBudget" type="number" min="0" /></div><div><label for="hotelBudget">Hospedaje</label><input id="hotelBudget" name="hotelBudget" type="number" min="0" /></div><div><label for="foodBudget">Comida</label><input id="foodBudget" name="foodBudget" type="number" min="0" /></div><div><label for="activitiesBudget">Actividades</label><input id="activitiesBudget" name="activitiesBudget" type="number" min="0" /></div></div><button class="btn btn-primary" type="submit">Guardar presupuesto</button></form><div class="budget-output"><article><span class="muted">Transporte</span><strong id="outTransport">$0</strong></article><article><span class="muted">Hospedaje</span><strong id="outHotel">$0</strong></article><article><span class="muted">Comida + actividades</span><strong id="outFoodActivities">$0</strong></article><article><span class="muted">Total</span><strong id="outBudgetTotal">$0</strong></article></div></section>
+              <section class="tab-panel" id="tab-notas"><form class="stack" id="notesForm"><div><label for="personalNotes">Notas personales</label><textarea id="personalNotes" name="personalNotes" placeholder="Restaurantes, lugares pendientes, recomendaciones o recuerdos del viaje..."></textarea></div><button class="btn btn-primary" type="submit">Guardar notas</button></form></section>
+              <section class="tab-panel" id="tab-destinos"><form class="stack" id="destinationForm"><div class="form-grid-2"><div><label for="recName">Nombre del destino</label><input id="recName" name="recName" type="text" required /></div><div><label for="recRating">Valoraci&oacute;n</label><input id="recRating" name="recRating" type="number" min="1" max="5" step="0.1" required /></div></div><div><label for="recImage">Imagen</label><input id="recImage" name="recImage" type="text" placeholder="assets/paris.jpg o URL" /></div><div><label for="recMapLink">Enlace al mapa</label><input id="recMapLink" name="recMapLink" type="url" /></div><div><label for="recDescription">Descripci&oacute;n</label><textarea id="recDescription" name="recDescription"></textarea></div><button class="btn btn-primary" type="submit">Agregar destino recomendado</button></form><div class="destination-grid" id="recommendationGrid"></div></section>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer><div class="container footer-grid"><div><strong style="display:block; margin-bottom:6px;">&copy; 2026 WayTure - Panel privado</strong><p class="muted">M&oacute;dulo independiente para gesti&oacute;n de viajes con HTML5, CSS3, JavaScript y localStorage.</p></div><div class="footer-links"><a href="index.html#inicio">Inicio</a><a href="admin-viajes.html">Panel privado</a><a href="rastreo-viaje.html">Rastreo</a><a href="index.html#contacto">Contacto</a></div></div></footer>
+
+  <script>
+    const STORAGE_TRIPS = 'wayture_trips_v3';
+    const STORAGE_SESSION = 'wayture_private_session_v1';
+    const STORAGE_RECOMMENDED = 'wayture_recommended_destinations_v1';
+    const moneyFormatter = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    let selectedCode = null;
+    function id(){ return (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + '-' + Math.random().toString(16).slice(2)); }
+    const demoTrips = [{code:'WT-2026',destination:'Paris, Francia',startDate:'2026-06-12',endDate:'2026-06-24',travelers:2,experience:'Cultural',status:'En organizacion',mapQuery:'Eiffel Tower Paris',lastLocation:'Torre Eiffel, Paris',lastUpdate:new Date().toISOString(),transport:850,hotel:1200,food:420,activitiesCost:310,notes:'Reservar museo del Louvre, guardar cafeterias cerca de Montmartre y revisar pase de transporte.',itinerary:[{id:id(),date:'2026-06-13',time:'09:00',place:'Museo del Louvre',category:'Cultura',description:'Recorrido por salas principales y fotografia exterior.'},{id:id(),date:'2026-06-14',time:'18:30',place:'Torre Eiffel',category:'Fotografia',description:'Atardecer y vista panoramica.'}],createdAt:new Date().toISOString()},{code:'WT-TOKIO',destination:'Tokio, Japon',startDate:'2026-09-03',endDate:'2026-09-16',travelers:1,experience:'Tecnologia y compras',status:'Reservado',mapQuery:'Shibuya Tokyo Japan',lastLocation:'Shibuya, Tokio',lastUpdate:new Date().toISOString(),transport:1300,hotel:980,food:520,activitiesCost:260,notes:'Comprar tarjeta Suica, revisar barrios Akihabara, Shinjuku y Asakusa.',itinerary:[{id:id(),date:'2026-09-04',time:'10:00',place:'Asakusa',category:'Cultura',description:'Templo Senso-ji y calles tradicionales.'}],createdAt:new Date().toISOString()}];
+    const demoRecommended = [{id:id(),name:'Paris',image:'assets/paris.jpg',rating:'4.9',description:'Arte, cafes, arquitectura clasica y vistas iconicas.',mapLink:'https://maps.google.com/?q=Paris%20France'},{id:id(),name:'Tokio',image:'assets/tokyo.jpg',rating:'4.9',description:'Tradicion, tecnologia, gastronomia y barrios futuristas.',mapLink:'https://maps.google.com/?q=Tokyo%20Japan'},{id:id(),name:'Amsterdam',image:'assets/amsterdam.jpg',rating:'4.8',description:'Canales, bicicletas, museos y planes tranquilos.',mapLink:'https://maps.google.com/?q=Amsterdam%20Netherlands'}];
+    function safeParse(value, fallback){ try { return value ? JSON.parse(value) : fallback; } catch(e){ return fallback; } }
+    function getTrips(){ return safeParse(localStorage.getItem(STORAGE_TRIPS), []); }
+    function saveTrips(trips){ localStorage.setItem(STORAGE_TRIPS, JSON.stringify(trips)); }
+    function getRecommended(){ return safeParse(localStorage.getItem(STORAGE_RECOMMENDED), []); }
+    function saveRecommended(items){ localStorage.setItem(STORAGE_RECOMMENDED, JSON.stringify(items)); }
+    function seed(){ if(!localStorage.getItem(STORAGE_TRIPS)) saveTrips(demoTrips); if(!localStorage.getItem(STORAGE_RECOMMENDED)) saveRecommended(demoRecommended); }
+    function esc(text){ return String(text || '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
+    function clean(text){ return String(text || '').trim(); }
+    function makeCode(dest){ const p = clean(dest).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z]/g,'').slice(0,3).toUpperCase() || 'WT'; return 'WT-' + p + '-' + Math.floor(1000 + Math.random()*9000); }
+    function mapUrl(q){ return 'https://www.google.com/maps?q=' + encodeURIComponent(q || 'Europa turismo') + '&output=embed'; }
+    function budget(t){ return Number(t.transport || 0) + Number(t.hotel || 0) + Number(t.food || 0) + Number(t.activitiesCost || 0); }
+    function fmtDate(d){ if(!d) return 'Sin fecha'; const date = new Date(d + 'T00:00:00'); return isNaN(date) ? d : date.toLocaleDateString('es-CO', {year:'numeric', month:'short', day:'numeric'}); }
+    function statusClass(s){ s = String(s || '').toLowerCase(); if(s.includes('organ')) return 'organizacion'; if(s.includes('reserv')) return 'reservado'; if(s.includes('curso')) return 'curso'; if(s.includes('final')) return 'finalizado'; return 'planear'; }
+    function selectedTrip(){ return getTrips().find(t => t.code === selectedCode) || null; }
+    function updateTrip(code, fn){ const trips = getTrips(); const i = trips.findIndex(t => t.code === code); if(i < 0) return; trips[i] = fn({...trips[i]}); saveTrips(trips); }
+    function showDashboard(){ const session = safeParse(localStorage.getItem(STORAGE_SESSION), null); privateGate.classList.toggle('is-hidden', !!session); adminDashboard.classList.toggle('is-visible', !!session); if(session) sessionInfo.textContent = session.role + ': ' + session.name + ' - ' + session.email; }
+    function renderMetrics(){ const trips = getTrips(); metricTrips.textContent = trips.length; metricActive.textContent = trips.filter(t => ['En organizacion','Reservado','En curso'].includes(t.status)).length; metricActivities.textContent = trips.reduce((s,t) => s + (t.itinerary || []).length, 0); metricBudget.textContent = moneyFormatter.format(trips.reduce((s,t) => s + budget(t), 0)); }
+    function renderTrips(){ const trips = getTrips(); if(!trips.length){ tripList.innerHTML = '<div class="empty-state">No hay viajes registrados. Crea el primero desde el formulario.</div>'; return; } tripList.innerHTML = trips.map(t => '<article class="trip-card '+(t.code===selectedCode?'selected':'')+'"><div class="inline-row"><div><strong>'+esc(t.destination)+'</strong><p class="muted">'+fmtDate(t.startDate)+' - '+fmtDate(t.endDate)+' &middot; '+esc(t.travelers)+' viajero(s) &middot; '+esc(t.experience)+'</p></div><span class="status-pill '+statusClass(t.status)+'">'+esc(t.status)+'</span></div><div class="inline-row"><span class="code-pill">'+esc(t.code)+'</span><span class="muted">Total: '+moneyFormatter.format(budget(t))+'</span></div><div class="compact-actions"><button class="small-btn" data-action="select" data-code="'+esc(t.code)+'">Seleccionar</button><button class="small-btn" data-action="copy" data-code="'+esc(t.code)+'">Copiar codigo</button><button class="small-btn" data-action="track" data-code="'+esc(t.code)+'">Abrir rastreo</button><button class="small-btn danger" data-action="delete" data-code="'+esc(t.code)+'">Eliminar</button></div></article>').join(''); }
+    function renderSelected(){ const t = selectedTrip(); if(!t){ selectedTripTitle.textContent = 'Selecciona un viaje'; selectedTripCode.textContent = 'Sin codigo'; selectedTripMeta.textContent = 'Elige un viaje para editar estado, itinerario, presupuesto, mapa y notas.'; adminMap.src = mapUrl('Europa turismo'); mapCaption.textContent = 'Selecciona un viaje para ver su mapa.'; activityList.innerHTML = '<div class="empty-state">Sin viaje seleccionado.</div>'; return; } selectedTripTitle.textContent = t.destination; selectedTripCode.textContent = t.code; selectedTripMeta.textContent = fmtDate(t.startDate)+' - '+fmtDate(t.endDate)+' - '+t.travelers+' viajero(s) - '+t.experience; editStatus.value = t.status || 'Por planear'; editLastLocation.value = t.lastLocation || ''; editMapQuery.value = t.mapQuery || t.destination || ''; transportBudget.value = t.transport || ''; hotelBudget.value = t.hotel || ''; foodBudget.value = t.food || ''; activitiesBudget.value = t.activitiesCost || ''; personalNotes.value = t.notes || ''; adminMap.src = mapUrl(t.mapQuery || t.destination); mapCaption.textContent = 'Mapa de ' + (t.lastLocation || t.destination); renderActivities(t); renderBudget(t); }
+    function renderActivities(t){ const items = [...(t.itinerary || [])].sort((a,b) => (a.date+a.time).localeCompare(b.date+b.time)); if(!items.length){ activityList.innerHTML = '<div class="empty-state">Este viaje aun no tiene actividades.</div>'; return; } activityList.innerHTML = items.map(a => '<article class="activity-item"><div class="activity-time">'+esc(a.time || '--:--')+'</div><div><strong>'+esc(a.place)+'</strong><p class="muted">'+fmtDate(a.date)+' &middot; <span class="category-pill">'+esc(a.category)+'</span></p><p class="muted">'+esc(a.description || 'Sin descripcion.')+'</p></div><button class="small-btn danger" data-action="delete-activity" data-id="'+esc(a.id)+'">Eliminar</button></article>').join(''); }
+    function renderBudget(t){ outTransport.textContent = moneyFormatter.format(Number(t.transport || 0)); outHotel.textContent = moneyFormatter.format(Number(t.hotel || 0)); outFoodActivities.textContent = moneyFormatter.format(Number(t.food || 0) + Number(t.activitiesCost || 0)); outBudgetTotal.textContent = moneyFormatter.format(budget(t)); }
+    function renderRecommended(){ const items = getRecommended(); if(!items.length){ recommendationGrid.innerHTML = '<div class="empty-state">No hay destinos recomendados.</div>'; return; } recommendationGrid.innerHTML = items.map(i => '<article class="destination-card"><img src="'+esc(i.image || 'assets/fondo.jpg')+'" alt="'+esc(i.name)+'" onerror="this.src=\'assets/fondo.jpg\'"><div class="inner"><div class="inline-row"><strong>'+esc(i.name)+'</strong><span>Estrella '+esc(i.rating)+'</span></div><p class="muted">'+esc(i.description || 'Sin descripcion.')+'</p><div class="compact-actions" style="margin-top:12px;"><a class="small-btn" href="'+esc(i.mapLink || ('https://maps.google.com/?q=' + encodeURIComponent(i.name)))+'" target="_blank" rel="noopener noreferrer">Ver mapa</a><button class="small-btn danger" data-action="delete-rec" data-id="'+esc(i.id)+'">Eliminar</button></div></div></article>').join(''); }
+    function refresh(){ renderMetrics(); renderTrips(); renderSelected(); renderRecommended(); }
+    privateLoginForm.addEventListener('submit', e => { e.preventDefault(); const d = new FormData(privateLoginForm); localStorage.setItem(STORAGE_SESSION, JSON.stringify({name:d.get('adminName'), email:d.get('adminEmail'), role:d.get('adminRole'), startedAt:new Date().toISOString()})); loginMessage.textContent = 'Acceso concedido. Panel cargado.'; showDashboard(); refresh(); });
+    logoutBtn.addEventListener('click', () => { localStorage.removeItem(STORAGE_SESSION); selectedCode = null; showDashboard(); });
+    tripForm.addEventListener('submit', e => { e.preventDefault(); const d = new FormData(tripForm); const dest = clean(d.get('destination')); const t = {code:makeCode(dest), destination:dest, startDate:d.get('startDate'), endDate:d.get('endDate'), travelers:Number(d.get('travelers'))||1, experience:d.get('experience'), status:d.get('tripStatus'), mapQuery:clean(d.get('mapQuery'))||dest, lastLocation:clean(d.get('lastLocation'))||dest, lastUpdate:new Date().toISOString(), transport:0, hotel:0, food:0, activitiesCost:0, notes:'', itinerary:[], createdAt:new Date().toISOString()}; const trips = getTrips(); trips.unshift(t); saveTrips(trips); selectedCode = t.code; tripForm.reset(); tripFormMessage.textContent = 'Viaje registrado. Codigo publico: ' + t.code; refresh(); });
+    tripList.addEventListener('click', e => { const b = e.target.closest('button[data-action]'); if(!b) return; const c = b.dataset.code; if(b.dataset.action === 'select') selectedCode = c; if(b.dataset.action === 'copy'){ navigator.clipboard && navigator.clipboard.writeText(c); b.textContent = 'Copiado'; } if(b.dataset.action === 'track') location.href = 'rastreo-viaje.html?codigo=' + encodeURIComponent(c); if(b.dataset.action === 'delete'){ saveTrips(getTrips().filter(t => t.code !== c)); if(selectedCode === c) selectedCode = null; } refresh(); });
+    clearTripsBtn.addEventListener('click', () => { if(confirm('Seguro que quieres borrar todos los viajes?')){ saveTrips([]); selectedCode = null; refresh(); } });
+    exportTripsBtn.addEventListener('click', () => { const blob = new Blob([JSON.stringify({trips:getTrips(), recommended:getRecommended()}, null, 2)], {type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'wayture-datos.json'; a.click(); URL.revokeObjectURL(url); });
+    statusForm.addEventListener('submit', e => { e.preventDefault(); if(!selectedCode) return alert('Selecciona un viaje primero.'); const d = new FormData(statusForm); updateTrip(selectedCode, t => ({...t, status:d.get('editStatus'), lastLocation:clean(d.get('editLastLocation'))||t.destination, mapQuery:clean(d.get('editMapQuery'))||t.destination, lastUpdate:new Date().toISOString()})); refresh(); });
+    activityForm.addEventListener('submit', e => { e.preventDefault(); if(!selectedCode) return alert('Selecciona un viaje primero.'); const d = new FormData(activityForm); updateTrip(selectedCode, t => { t.itinerary = t.itinerary || []; t.itinerary.push({id:id(), date:d.get('activityDate')||t.startDate, time:d.get('activityTime'), place:clean(d.get('activityPlace')), category:d.get('activityCategory'), description:clean(d.get('activityDescription'))}); t.lastUpdate = new Date().toISOString(); return t; }); activityForm.reset(); refresh(); });
+    activityList.addEventListener('click', e => { const b = e.target.closest('button[data-action="delete-activity"]'); if(!b || !selectedCode) return; updateTrip(selectedCode, t => { t.itinerary = (t.itinerary || []).filter(a => a.id !== b.dataset.id); t.lastUpdate = new Date().toISOString(); return t; }); refresh(); });
+    budgetForm.addEventListener('submit', e => { e.preventDefault(); if(!selectedCode) return alert('Selecciona un viaje primero.'); const d = new FormData(budgetForm); updateTrip(selectedCode, t => ({...t, transport:Number(d.get('transportBudget'))||0, hotel:Number(d.get('hotelBudget'))||0, food:Number(d.get('foodBudget'))||0, activitiesCost:Number(d.get('activitiesBudget'))||0, lastUpdate:new Date().toISOString()})); refresh(); });
+    notesForm.addEventListener('submit', e => { e.preventDefault(); if(!selectedCode) return alert('Selecciona un viaje primero.'); const d = new FormData(notesForm); updateTrip(selectedCode, t => ({...t, notes:clean(d.get('personalNotes')), lastUpdate:new Date().toISOString()})); refresh(); });
+    destinationForm.addEventListener('submit', e => { e.preventDefault(); const d = new FormData(destinationForm); const name = clean(d.get('recName')); const items = getRecommended(); items.unshift({id:id(), name:name, image:clean(d.get('recImage'))||'assets/fondo.jpg', rating:d.get('recRating')||'4.8', description:clean(d.get('recDescription')), mapLink:clean(d.get('recMapLink'))||('https://maps.google.com/?q=' + encodeURIComponent(name))}); saveRecommended(items); destinationForm.reset(); renderRecommended(); });
+    recommendationGrid.addEventListener('click', e => { const b = e.target.closest('button[data-action="delete-rec"]'); if(!b) return; saveRecommended(getRecommended().filter(i => i.id !== b.dataset.id)); renderRecommended(); });
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => { document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active')); document.querySelectorAll('.tab-panel').forEach(x => x.classList.remove('active')); btn.classList.add('active'); document.getElementById('tab-' + btn.dataset.tab).classList.add('active'); }));
+    function setupMenu(){ menuToggle.addEventListener('click', () => { const open = mainNav.classList.toggle('is-open'); menuToggle.setAttribute('aria-expanded', String(open)); }); }
+    function setupReveal(){ const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:0.15}); document.querySelectorAll('.reveal').forEach(el => obs.observe(el)); }
+    seed(); setupMenu(); setupReveal(); showDashboard(); selectedCode = getTrips()[0] && getTrips()[0].code; refresh();
+  </script>
+</body>
+</html>
