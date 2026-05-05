@@ -1,103 +1,86 @@
 # WayTure
 
-WayTure es un proyecto web frontend orientado a la planificación de viajes. Su propuesta combina una landing page visualmente inmersiva con pequeñas funcionalidades interactivas para simular la experiencia de una plataforma turística moderna. El sitio fue desarrollado con **HTML5, CSS3 y JavaScript**, sin frameworks, para demostrar de forma práctica distintos fundamentos del desarrollo web.
+WayTure es una aplicación web para planificación, gestión y rastreo de viajes. El proyecto combina una página principal visual con autenticación real, panel de usuario, panel administrativo, rastreo público por código y almacenamiento de datos en Firebase.
 
-## Manipulación del DOM
+Está construido con **HTML5, CSS3, JavaScript modular, Firebase Authentication y Cloud Firestore**, sin frameworks frontend.
 
-Uno de los aspectos más importantes del proyecto es el uso de la manipulación del DOM (Document Object Model) con JavaScript. Gracias a esto, WayTure no se comporta como una página estática, sino como una interfaz interactiva capaz de responder a las acciones del usuario en tiempo real.
+## Demo
 
-Dentro de `index.html`, JavaScript selecciona elementos de la página, escucha eventos y actualiza la interfaz de manera dinámica. Por ejemplo:
+Versión publicada:
 
-- calcula y actualiza el presupuesto en pantalla
-- cambia mensajes de estado como "Guardado", "Recuperado" o "Editando"
-- muestra una bienvenida personalizada al usuario
-- abre y cierra el menú móvil
-- oculta el banner flotante de oferta
-- revela elementos al hacer scroll
-- modifica contenido visible dentro de la página sin recargarla
-- crea e inserta mensajes nuevos en el documento cuando se cumplen ciertas condiciones
-
-Además, el proyecto incluye una pequeña interacción tipo reto: cuando el usuario guarda el presupuesto, guarda la nota y selecciona un destino favorito, el sistema activa una condición especial que modifica el estilo del título principal y agrega un nuevo mensaje al documento indicando: **"Misión Cumplida: Agente DOM activado."**
-
-Esto demuestra de forma práctica cómo el DOM permite:
-
-- seleccionar nodos HTML
-- escuchar eventos del usuario
-- modificar estilos y contenido
-- añadir nuevos elementos al documento
-- generar experiencias interactivas directamente desde JavaScript
-
-## Demo del proyecto
-
-Puedes ver la versión publicada en GitHub Pages aquí:
-
-**Sitio en línea:**  
 https://skizm07.github.io/WayTure/
 
-## Descripción general
+## Funcionalidades principales
 
-La aplicación presenta una experiencia centrada en el usuario, con una página principal rica en contenido visual, formularios de autenticación externos, elementos multimedia y almacenamiento local. Aunque no trabaja con backend ni base de datos real, sí simula interacciones frecuentes de una app web:
+- Landing page con secciones de destinos, planificación, mapa, multimedia, testimonios y contacto.
+- Registro e inicio de sesión con Firebase Authentication.
+- Roles de cuenta: `usuario` y `admin`.
+- Menú de usuario con acceso a panel, gestión de cuenta y cierre de sesión.
+- Panel de usuario para crear viajes, consultar viajes asignados y editar datos básicos.
+- Rastreo público de viajes mediante código.
+- Panel administrativo para gestionar todos los viajes.
+- Gestión de itinerario, estado, ubicación, mapa, presupuesto, notas y destinos recomendados.
+- Gestión administrativa de formularios de contacto y suscripciones de comunidad.
+- Persistencia local para presupuesto, nota editable y destino favorito de la landing.
 
-- registro e inicio de sesión de demostración
-- saludo personalizado al usuario
-- cálculo de presupuesto de viaje
-- notas personales editables
-- selección y guardado de destino favorito
-- formulario de contacto
-- mapa incrustado
-- integración de audio, video, SVG y Canvas
+## Flujo por rol
 
-El objetivo principal es mostrar cómo varios temas vistos en clase pueden integrarse dentro de un solo producto web con una presentación más cercana a un sitio real.
+### Usuario
 
-## Objetivos del proyecto
+Después de iniciar sesión o registrarse, el usuario entra a:
 
-WayTure fue construido para:
+```text
+rastreo-viaje.html?mis=1
+```
 
-- practicar la estructura semántica de una aplicación web
-- aplicar estilos modernos y composición visual con CSS
-- trabajar formularios e interacciones con JavaScript
-- utilizar `localStorage` para persistencia básica en el navegador
-- incorporar recursos multimedia y gráficos
-- demostrar una navegación simple entre varias páginas HTML
-- presentar un proyecto académico con una estética más profesional
+Desde su panel puede:
 
-## Qué puede hacer el usuario
+- crear viajes propios
+- consultar viajes por código
+- ver viajes asignados a su correo o usuario
+- editar datos básicos de sus viajes
+- ver estado, presupuesto, itinerario y mapa
+- gestionar datos de cuenta
+- solicitar cambio de contraseña por correo
 
-Dentro de WayTure, el usuario puede:
+### Administrador
 
-- navegar entre la página principal, login y registro
-- crear una cuenta de demostración
-- iniciar sesión con un nombre visible dentro de la experiencia
-- recibir una bienvenida personalizada en la portada
-- diligenciar un formulario de contacto
-- calcular un presupuesto estimado del viaje
-- guardar ese presupuesto localmente
-- escribir y editar notas personales del viaje
-- limpiar o recuperar su nota guardada
-- establecer un destino favorito
-- visualizar contenido multimedia de apoyo
-- explorar secciones visuales con tarjetas, testimonios, mapa, SVG y Canvas
+El administrador también tiene panel de usuario, pero además puede entrar al panel privado:
 
-## Flujo de uso
+```text
+admin-viajes.html
+```
 
-1. El usuario entra a `index.html`.
-2. Desde la navegación puede ir a `registro.html` o `login.html`.
-3. Al registrarse o iniciar sesión, el nombre se guarda en `localStorage`.
-4. La aplicación redirige nuevamente al inicio.
-5. En la página principal aparece un mensaje de bienvenida con el nombre del usuario.
-6. Desde allí puede seguir interactuando con presupuesto, notas, favoritos y formulario.
+Desde allí puede:
 
-## Persistencia de datos
+- ver todos los viajes
+- crear viajes y asignarlos a usuarios por correo
+- editar estado, ubicación y mapa
+- agregar actividades al itinerario
+- gestionar presupuesto y notas
+- agregar destinos recomendados
+- eliminar viajes, actividades y destinos
+- exportar datos en JSON
+- ver y gestionar formularios enviados desde la landing
 
-El proyecto usa `localStorage` para conservar información entre recargas del navegador. Actualmente se manejan claves como:
+## Formularios de contacto y comunidad
 
-- `wayture_registered_name`
-- `wayture_logged_user`
-- `wayture_budget`
-- `wayture_note`
-- `wayture_favorite_destination`
+Los formularios del `index.html` no envían correos directamente. Para evitar servicios pagos o credenciales inseguras en frontend, guardan los datos en Firestore:
 
-Esto permite que parte de la experiencia se mantenga activa aunque el usuario cierre o recargue la página.
+- `contactos`: solicitudes del formulario de contacto
+- `suscripciones`: correos del formulario de comunidad/newsletter
+
+El administrador puede gestionarlos desde `admin-viajes.html` en la sección **Gestión de contacto y comunidad**.
+
+Acciones disponibles:
+
+- ver contactos recibidos
+- ver suscripciones
+- marcar contacto como `en gestion` o `gestionado`
+- guardar nota administrativa
+- archivar suscripciones
+- eliminar registros
+- abrir respuesta manual por correo con `mailto:`
 
 ## Estructura del proyecto
 
@@ -106,197 +89,343 @@ WayTure-main/
 ├── index.html
 ├── login.html
 ├── registro.html
+├── rastreo-viaje.html
+├── admin-viajes.html
 ├── README.md
-├── css/
-│   └── style.css
+├── .gitignore
 ├── assets/
 │   ├── favicon.ico
 │   ├── WayTureNoMAP.png
 │   ├── LogoWayTure.png
+│   ├── LaWture.png
 │   ├── fondo.jpg
+│   ├── login.jpg
+│   ├── registro.jpg
 │   ├── playa.jpg
 │   ├── montana.jpg
 │   ├── ciudad.jpg
-│   ├── paris-destination.jpg
-│   ├── tokyo-destination.jpg
-│   ├── amsterdam-destination.jpg
+│   ├── paris.jpg
+│   ├── amsterdam.jpg
+│   ├── tokyo.jpg
+│   ├── rutaeuropa.jpg
 │   ├── viaje.mp4
 │   └── viaje.mp3
-├── docs/
+├── css/
+│   ├── index.css
+│   ├── login.css
+│   ├── registro.css
+│   ├── rastreo-viaje.css
+│   └── admin-viajes.css
 └── js/
+    ├── firebase-config.js
+    ├── auth-state.js
+    ├── index-page.js
+    ├── login-page.js
+    ├── register-page.js
+    ├── tracking-page.js
+    └── admin-page.js
 ```
 
-## Descripción de archivos principales
+## Archivos principales
 
 ### `index.html`
 
-Es la página principal y el núcleo del proyecto. Aquí se concentra la mayoría de la experiencia de usuario y también la mayor parte de los temas aplicados. Incluye:
+Página principal del sitio. Incluye:
 
-- hero principal con imagen de fondo
-- navegación interna
-- tarjetas de funciones
-- destinos destacados
-- planeador y presupuesto
-- sección de mapa
-- contenido en columnas
-- nota editable
-- gráfico SVG
-- ilustración dinámica en Canvas
-- testimonios
+- hero principal
+- navegación y menú de usuario
+- secciones de funciones, destinos, planificación, mapa y multimedia
+- presupuesto local
+- nota editable con `localStorage`
+- SVG y Canvas
 - formulario de contacto
-- banner flotante de oferta
+- formulario de comunidad/newsletter
+
+Lógica asociada: `js/index-page.js`  
+Estilos asociados: `css/index.css`
 
 ### `login.html`
 
-Página externa de inicio de sesión. Permite ingresar un nombre, correo y contraseña de demostración. Al enviar el formulario:
+Pantalla de inicio de sesión con Firebase Authentication.
 
-- guarda el nombre del usuario en `localStorage`
-- muestra un mensaje de bienvenida
-- redirige al inicio
+Lógica asociada: `js/login-page.js`  
+Estilos asociados: `css/login.css`
 
 ### `registro.html`
 
-Página externa de registro de usuario. Incluye validación básica de confirmación de contraseña y luego:
+Pantalla de registro. Crea usuario en Firebase Auth y guarda el perfil en Firestore.
 
-- guarda el nombre registrado en `localStorage`
-- inicia la sesión de forma simulada
-- redirige al `index`
+Lógica asociada: `js/register-page.js`  
+Estilos asociados: `css/registro.css`
 
-### `css/style.css`
+### `rastreo-viaje.html`
 
-Contiene estilos base de una versión más tradicional del sitio. Aunque gran parte del diseño actual está integrado directamente dentro de las páginas HTML mediante estilos embebidos, este archivo sigue formando parte de la estructura del proyecto y muestra estilos complementarios trabajados durante el desarrollo.
+Pantalla de rastreo y panel de usuario.
 
-### `assets/`
+Permite:
 
-Contiene todos los recursos visuales y multimedia del proyecto:
+- consultar un viaje por código
+- ver progreso, mapa, presupuesto, notas e itinerario
+- crear viajes propios si hay sesión iniciada
+- editar datos básicos de viajes asignados
+- gestionar datos de cuenta
 
-- imágenes de portada y destinos
-- logotipos
-- favicon
-- audio
-- video
+Lógica asociada: `js/tracking-page.js`  
+Estilos asociados: `css/rastreo-viaje.css`
 
-## Tecnologías utilizadas
+### `admin-viajes.html`
 
-- **HTML5** para la estructura semántica
-- **CSS3** para estilos, layout, animaciones y responsive design
-- **JavaScript** para interacciones y persistencia local
-- **localStorage** para almacenar datos del usuario en el navegador
-- **Google Maps Embed** para el mapa incrustado
-- **GitHub Pages** para el despliegue del proyecto
+Panel privado para administradores.
 
-## Temas y conceptos aplicados
+Permite:
 
-El proyecto reúne varios temas fundamentales del desarrollo web frontend, entre ellos:
+- gestionar viajes
+- gestionar itinerarios
+- administrar presupuestos y notas
+- agregar destinos recomendados
+- gestionar solicitudes de contacto
+- gestionar suscripciones
+- exportar datos
 
-- estructura semántica de HTML5
-- etiquetas básicas
-- listas, enlaces e imágenes
-- favicon
-- bordes redondeados
-- sombras
-- imágenes de fondo
-- tipografías
-- centrado de contenido
-- `float`
-- `flexbox`
-- `position`
-- transformaciones con `transform`
-- formularios
-- `iframe`
-- transiciones con `transition`
-- columnas de texto
-- video
-- audio
-- transparencias y degradados
-- animaciones con `animation`
-- gráficos SVG
-- gráficos con Canvas
-- media queries
-- contenido editable
-- almacenamiento con `localStorage`
+Lógica asociada: `js/admin-page.js`  
+Estilos asociados: `css/admin-viajes.css`
 
-## Diseño e interfaz
+## JavaScript
 
-WayTure busca una apariencia moderna y atractiva mediante:
+### `js/firebase-config.js`
 
-- fondos con gradientes e imágenes inmersivas
-- tarjetas con efecto glassmorphism
-- botones con transiciones y sombras
-- animaciones de entrada y microinteracciones
-- composición visual basada en bloques y paneles
-- secciones informativas con jerarquía clara
+Inicializa Firebase y exporta:
 
-Esto hace que el proyecto se acerque más a una landing page real de producto digital que a una maqueta básica de clase.
+- `auth`
+- `db`
 
-## Cómo ejecutar el proyecto en local
+### `js/auth-state.js`
 
-No se requiere instalación de dependencias ni proceso de compilación.
+Controla el estado global de sesión:
 
-### Opción 1: abrir directamente el archivo
+- detecta usuario autenticado
+- muestra u oculta login, registro y menú de usuario
+- muestra enlaces de admin solo si el rol es `admin`
+- maneja cierre de sesión
+- sincroniza nombre e iniciales del usuario en la interfaz
 
-1. Descarga o clona este repositorio.
-2. Entra a la carpeta del proyecto.
-3. Abre `index.html` en tu navegador.
+### `js/index-page.js`
 
-### Opción 2: usar Live Server en VS Code
+Controla interacciones de la landing:
 
-1. Abre la carpeta del proyecto en Visual Studio Code.
-2. Instala la extensión **Live Server** si aún no la tienes.
+- presupuesto local
+- nota editable
+- destino favorito
+- banner flotante
+- menú móvil
+- formulario de contacto hacia Firestore
+- newsletter hacia Firestore
+- animaciones de entrada
+- Canvas
+- reto DOM de “Misión Cumplida”
+
+### `js/tracking-page.js`
+
+Controla rastreo y panel de usuario:
+
+- consulta por código de viaje
+- renderiza resultado público
+- carga viajes del usuario autenticado
+- crea viajes propios
+- edita datos básicos
+- gestiona perfil
+- envía correo de recuperación de contraseña mediante Firebase Auth
+
+### `js/admin-page.js`
+
+Controla el panel administrativo:
+
+- valida rol `admin`
+- carga viajes, destinos, contactos y suscripciones
+- crea y edita viajes
+- actualiza estado, mapa, itinerario, presupuesto y notas
+- gestiona destinos recomendados
+- gestiona solicitudes de contacto y comunidad
+- exporta datos en JSON
+
+## Colecciones de Firestore
+
+El proyecto usa estas colecciones:
+
+### `usuarios`
+
+Guarda datos del perfil:
+
+- `uid`
+- `nombre`
+- `alias`
+- `email`
+- `rol`
+- `creadoEn`
+- `actualizadoEn`
+
+### `viajes`
+
+Guarda viajes creados por usuarios o administradores:
+
+- `code`
+- `destination`
+- `startDate`
+- `endDate`
+- `travelers`
+- `experience`
+- `status`
+- `lastLocation`
+- `mapQuery`
+- `transport`
+- `hotel`
+- `food`
+- `activitiesCost`
+- `notes`
+- `itinerary`
+- `userId`
+- `userEmail`
+- `createdBy`
+- `createdByRole`
+- `createdAt`
+- `updatedAt`
+
+### `destinosRecomendados`
+
+Guarda destinos creados desde el panel admin:
+
+- `name`
+- `image`
+- `rating`
+- `description`
+- `mapLink`
+- `createdAt`
+- `createdBy`
+
+### `contactos`
+
+Guarda solicitudes del formulario de contacto:
+
+- `name`
+- `email`
+- `destination`
+- `message`
+- `status`
+- `adminNote`
+- `source`
+- `createdAt`
+- `updatedAt`
+- `managedBy`
+
+### `suscripciones`
+
+Guarda suscripciones de comunidad:
+
+- `email`
+- `status`
+- `source`
+- `createdAt`
+- `updatedAt`
+- `managedBy`
+
+## Persistencia local
+
+Además de Firebase, la landing usa `localStorage` para datos de experiencia local:
+
+- `wayture_logged_user`
+- `wayture_user_role`
+- `wayture_budget`
+- `wayture_note`
+- `wayture_favorite_destination`
+
+## Configuración de Firebase
+
+El archivo de configuración está en:
+
+```text
+js/firebase-config.js
+```
+
+Debe tener la configuración web del proyecto Firebase:
+
+- `apiKey`
+- `authDomain`
+- `projectId`
+- `storageBucket`
+- `messagingSenderId`
+- `appId`
+- `measurementId`
+
+En Firebase Console se debe habilitar:
+
+1. **Authentication > Sign-in method > Email/Password**
+2. **Firestore Database**
+
+## Reglas de Firestore
+
+Las reglas exactas dependen del entorno, pero la app necesita:
+
+- permitir crear perfiles de usuario al registrarse
+- permitir que cada usuario lea/actualice su perfil
+- permitir que usuarios autenticados creen viajes propios
+- permitir que usuarios consulten o editen viajes asignados a ellos
+- permitir que admins lean y gestionen todos los viajes
+- permitir crear `contactos` y `suscripciones` desde la landing
+- permitir que admins lean, actualicen y eliminen `contactos` y `suscripciones`
+
+## Cómo ejecutar en local
+
+No hay instalación de dependencias ni build.
+
+### Opción recomendada: Live Server
+
+1. Abre el proyecto en Visual Studio Code.
+2. Instala la extensión **Live Server**.
 3. Haz clic derecho sobre `index.html`.
 4. Selecciona **Open with Live Server**.
 
-## Consideraciones del proyecto
+### Opción alternativa
 
-Es importante tener en cuenta que:
+Abrir `index.html` directamente puede funcionar para partes visuales, pero Firebase y módulos ES pueden requerir servidor local según el navegador. Por eso se recomienda Live Server.
 
-- el login y el registro ahora pueden conectarse a Firebase Authentication
-- no existe un backend propio para autenticación personalizada
-- los datos se guardan solo en el navegador del usuario
-- si se limpia el almacenamiento local, se pierde la información guardada
-- algunas funciones están orientadas principalmente a demostración académica y visual
+## Tecnologías utilizadas
 
-## Configurar Firebase Authentication
+- HTML5
+- CSS3
+- JavaScript ES Modules
+- Firebase Authentication
+- Cloud Firestore
+- Google Maps Embed
+- localStorage
+- SVG
+- Canvas
+- Audio y video HTML5
 
-Para activar el registro y login reales con Firebase:
+## Buenas prácticas aplicadas
 
-1. Crea un proyecto en Firebase Console.
-2. En `Authentication > Sign-in method`, habilita `Email/Password`.
-3. En `Project settings > Your apps`, copia la configuración web de Firebase.
-4. Abre `js/firebase-config.js`.
-5. Reemplaza los valores `REEMPLAZA_CON_TU_...` por los datos de tu proyecto.
-6. Ejecuta el proyecto con Live Server o cualquier servidor local.
+- Separación de HTML, CSS y JavaScript.
+- Un CSS por pantalla para evitar conflictos de cascada.
+- JavaScript modular por página.
+- Navegación según estado de autenticación.
+- Roles diferenciados entre usuario y administrador.
+- Datos persistentes en Firestore.
+- `.gitignore` para evitar archivos innecesarios como `.DS_Store`.
 
-Archivos agregados para esta integración:
+## Consideraciones
 
-- `js/firebase-config.js`
-- `js/auth.js`
-- `js/login-page.js`
-- `js/register-page.js`
-- `js/index-auth.js`
+- El proyecto no usa backend propio.
+- Los formularios se gestionan desde el panel admin mediante Firestore.
+- Las funciones dependen de una configuración correcta de Firebase y reglas de seguridad.
 
 ## Posibles mejoras futuras
 
-Si se quisiera evolucionar WayTure a una versión más completa, se podrían añadir:
-
-- backend para autenticación real
-- base de datos para usuarios y viajes
-- panel de administración
-- creación de itinerarios por fechas
-- favoritos dinámicos elegidos desde la interfaz
-- validaciones más completas en formularios
-- consumo de APIs de clima, vuelos o destinos
-- perfil de usuario
-- modo oscuro o personalización de tema
-- modularización del CSS y del JavaScript en archivos separados
-
-## Valor académico del proyecto
-
-WayTure funciona bien como proyecto integrador porque no se limita a una sola página estática. En cambio, reúne navegación, formularios, multimedia, persistencia local y elementos gráficos dentro de una misma experiencia. Eso lo convierte en una buena muestra de aprendizaje progresivo en frontend y en una evidencia sólida de práctica sobre conceptos vistos en clase.
-
-## Estado actual
-
-El proyecto se encuentra funcional como demostración frontend. La navegación entre páginas, el guardado local de datos, la personalización básica y los componentes visuales principales están operativos.
+- Crear reglas de Firestore más estrictas para producción.
+- Añadir filtros y búsqueda en el panel admin.
+- Añadir notificaciones internas para nuevos contactos.
+- Añadir historial de cambios por viaje.
+- Añadir exportación CSV además de JSON.
+- Crear dashboard estadístico para destinos y solicitudes.
+- Agregar pruebas automatizadas.
 
 ## Autoría
 
@@ -304,9 +433,3 @@ El proyecto se encuentra funcional como demostración frontend. La navegación e
 - Santiago Cardenas
 - Juan Fajardo
 - 2026 ING WEB
-
-## Licencia
-
-Este proyecto no incluye una licencia definida por el momento.
-
-
