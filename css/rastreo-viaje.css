@@ -107,6 +107,7 @@
     .status-pill.organizacion { background:rgba(56,189,248,0.16); border-color:rgba(56,189,248,0.28); }
     .status-pill.reservado { background:rgba(245,158,11,0.17); border-color:rgba(245,158,11,0.28); }
     .status-pill.curso { background:rgba(34,197,94,0.16); border-color:rgba(34,197,94,0.28); }
+    .status-pill.reprogramado { background:rgba(251,113,133,0.18); border-color:rgba(251,113,133,0.32); }
     .status-pill.finalizado { background:rgba(168,85,247,0.17); border-color:rgba(168,85,247,0.28); }
     .progress-track { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:8px; }
     .step-item { text-align:center; color:var(--muted); font-weight:800; }
@@ -161,11 +162,18 @@
     .tracking-message { margin-top:16px; }
     .footer-brand { display:block; margin-bottom:6px; }
     .user-trips-panel { margin-top:18px; }
+    .user-account-shell { padding:0 0 90px; }
+    .user-account-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
+    .user-panel-card { display:grid; gap:14px; }
+    .user-panel-card.full-width { grid-column:1 / -1; }
     .compact-actions-spaced { margin-top:12px; }
     .user-trip-form-card { margin-top:14px; }
     .user-form-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
     .user-budget-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
     .user-trips-title { margin-top:8px; }
+    .history-entry { display:grid; gap:6px; padding:14px; border-radius:18px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); }
+    .history-entry strong { color:#fff; }
+    .private-note { color:#c7f9d4; font-weight:800; }
     .user-menu { position:relative; }
     .user-menu-button { display:inline-flex; align-items:center; gap:10px; padding:8px 12px 8px 8px; border-radius:999px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); color:var(--white); font-weight:800; box-shadow:var(--shadow-md); }
     .user-avatar { width:38px; height:38px; border-radius:50%; display:grid; place-items:center; background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:var(--white); font-size:0.92rem; font-weight:900; }
@@ -179,6 +187,14 @@
       .user-form-grid,
       .user-budget-grid {
         grid-template-columns:1fr;
+      }
+
+      .user-account-grid {
+        grid-template-columns:1fr;
+      }
+
+      .user-panel-card.full-width {
+        grid-column:auto;
       }
 
       .user-menu,
