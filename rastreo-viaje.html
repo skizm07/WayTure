@@ -15,7 +15,7 @@
       <a class="logo" href="index.html#inicio" aria-label="WayTure Inicio"><span class="logo-badge" aria-hidden="true"><img src="assets/WayTureNoMAP.png" alt="Logo WayTure" /></span><span class="logo-word">WayTure</span></a>
       <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menu"><span>Menu</span></button>
       <nav id="mainNav" aria-label="Navegacion principal">
-        <a href="index.html#inicio">Inicio</a><a href="index.html#funciones">Funciones</a><a href="rastreo-viaje.html" data-auth-public-link>Rastreo</a><a href="index.html#destinos">Destinos</a><a href="index.html#planificador">Planificador</a><a href="login.html" data-login-link>Login</a><a href="registro.html" data-register-link>Registro</a><a href="index.html#contacto" class="btn btn-secondary">Contacto</a><div class="user-menu" data-user-menu hidden><button class="user-menu-button" type="button" data-user-menu-button aria-expanded="false" aria-label="Abrir menú de usuario"><span class="user-avatar" data-user-initials>U</span><span class="user-menu-name" data-user-name>Usuario</span></button><div class="user-menu-dropdown" data-user-menu-dropdown><p class="user-menu-greeting" data-user-greeting></p><a href="rastreo-viaje.html?mis=1" data-user-link>Mi panel</a><a href="rastreo-viaje.html?mis=1&perfil=1" data-user-link>Gestionar cuenta</a><a href="admin-viajes.html" data-admin-link hidden>Panel privado</a><button type="button" data-logout-button>Cerrar sesión</button></div></div>
+        <a href="index.html#inicio">Inicio</a><a href="index.html#funciones">Funciones</a><a href="rastreo-viaje.html" data-auth-public-link>Rastreo</a><a href="index.html#destinos">Destinos</a><a href="index.html#planificador">Planificador</a><a href="login.html" data-login-link>Login</a><a href="registro.html" data-register-link>Registro</a><a href="index.html#contacto" class="btn btn-secondary">Contacto</a><div class="user-menu" data-user-menu hidden><button class="user-menu-button" type="button" data-user-menu-button aria-expanded="false" aria-label="Abrir menú de usuario"><span class="user-avatar" data-user-initials>U</span><span class="user-menu-name" data-user-name>Usuario</span></button><div class="user-menu-dropdown" data-user-menu-dropdown><p class="user-menu-greeting" data-user-greeting></p><a href="panel-usuario.html#crear-viaje" data-user-link>Crear viaje</a><a href="panel-usuario.html#mis-viajes" data-user-link>Mis viajes asignados</a><a href="panel-usuario.html#datos-cuenta" data-user-link>Datos de cuenta</a><a href="admin-viajes.html" data-admin-link hidden>Panel privado</a><button type="button" data-logout-button>Cerrar sesión</button></div></div>
       </nav>
     </div>
   </header>
@@ -25,7 +25,7 @@
       <span class="eyebrow">Interfaz publica</span>
       <h1 class="module-title">P&aacute;gina de seguimiento / rastreo p&uacute;blico</h1>
       <p class="module-lead">Consulta un c&oacute;digo de viaje para conocer el estado actual del plan, la &uacute;ltima ubicaci&oacute;n guardada y el mapa del destino. Funciona con los viajes guardados en Firebase desde el panel de administración.</p>
-      <div class="module-actions"><a class="btn btn-primary" href="#rastreo">Consultar viaje</a><a class="btn btn-secondary" href="#rastreo" data-user-link hidden>Ir a mi panel</a><a class="btn btn-secondary" href="admin-viajes.html" data-admin-link hidden>Ir al panel privado</a></div>
+      <div class="module-actions"><a class="btn btn-primary" href="#rastreo">Consultar viaje</a><a class="btn btn-secondary" href="panel-usuario.html#mis-viajes" data-user-link hidden>Mis viajes asignados</a><a class="btn btn-secondary" href="admin-viajes.html" data-admin-link hidden>Ir al panel privado</a></div>
     </div>
   </section>
 
@@ -50,17 +50,17 @@
 
       <article class="tracking-result reveal" id="trackingResult">
         <div class="inline-row"><div><span class="eyebrow">Resultado del viaje</span><h2 id="resultDestination">Destino</h2></div><span class="code-pill" id="resultCode">WT-0000</span></div>
-        <div class="status-grid"><article><span class="muted">Estado actual</span><strong id="resultStatus">Por planear</strong></article><article><span class="muted">&Uacute;ltima ubicaci&oacute;n</span><strong id="resultLocation">Sin ubicacion</strong></article><article><span class="muted">Presupuesto estimado</span><strong id="resultBudget">$0</strong></article></div>
+        <div class="status-grid"><article><span class="muted">Estado actual</span><strong id="resultStatus">Por planear</strong></article><article><span class="muted">&Uacute;ltima ubicaci&oacute;n</span><strong id="resultLocation">Sin ubicacion</strong></article><article><span class="muted">Finalizaci&oacute;n</span><strong id="resultFinished">Sin finalizar</strong></article></div>
         <section><h3>Progreso de planificaci&oacute;n</h3><div class="progress-track" id="progressTrack"></div></section>
-        <div class="status-grid"><article><span class="muted">Salida</span><strong id="resultStart">Sin fecha</strong></article><article><span class="muted">Regreso</span><strong id="resultEnd">Sin fecha</strong></article><article><span class="muted">Viajeros</span><strong id="resultTravelers">0</strong></article></div>
+        <div class="status-grid"><article><span class="muted">Salida</span><strong id="resultStart">Sin fecha</strong></article><article><span class="muted">Regreso</span><strong id="resultEnd">Sin fecha</strong></article><article><span class="muted">C&oacute;digo</span><strong id="resultCodeRepeat">WT-0000</strong></article></div>
         <section class="tracking-map"><h3>Mapa del destino / &uacute;ltima ubicaci&oacute;n</h3><p class="muted" id="resultMapCaption">Mapa del viaje consultado.</p><iframe id="trackingMap" title="Mapa del viaje consultado" src="https://www.google.com/maps?q=Europa%20turismo&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></section>
         <section><h3>Itinerario reportado</h3><div class="history-list" id="publicItinerary"></div></section>
-        <section><h3>Notas del plan</h3><p class="muted" id="resultNotes">Sin notas registradas.</p></section>
+        <section><h3>Historial resumido</h3><div class="history-list" id="publicStatusHistory"></div></section>
       </article>
     </div>
   </section>
 
-  <footer><div class="container footer-grid"><div><strong class="footer-brand">&copy; 2026 WayTure - Rastreo publico</strong><p class="muted">Consulta pública conectada a Firebase Firestore.</p></div><div class="footer-links"><a href="index.html#inicio">Inicio</a><a href="admin-viajes.html" data-admin-link hidden>Panel privado</a><a href="rastreo-viaje.html?mis=1" data-user-link hidden>Mi panel</a><a href="rastreo-viaje.html">Rastreo</a><a href="index.html#contacto">Contacto</a></div></div></footer>
+  <footer><div class="container footer-grid"><div><strong class="footer-brand">&copy; 2026 WayTure - Rastreo publico</strong><p class="muted">Consulta pública conectada a Firebase Firestore.</p></div><div class="footer-links"><a href="index.html#inicio">Inicio</a><a href="admin-viajes.html" data-admin-link hidden>Panel privado</a><a href="panel-usuario.html#mis-viajes" data-user-link hidden>Mis viajes</a><a href="rastreo-viaje.html">Rastreo</a><a href="index.html#contacto">Contacto</a></div></div></footer>
 
   <script type="module" src="js/tracking-page.js"></script>
   <script type="module" src="js/auth-state.js"></script>
