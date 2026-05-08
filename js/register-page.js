@@ -35,7 +35,7 @@ registerForm.addEventListener("submit", async event => {
     localStorage.setItem("wayture_logged_user", nombre);
     localStorage.setItem("wayture_user_role", rol);
     registerResponse.textContent = `Cuenta creada como ${rol}. Redirigiendo a tu panel de usuario...`;
-    setTimeout(() => { window.location.href = "rastreo-viaje.html?mis=1"; }, 900);
+    setTimeout(() => { window.location.href = "panel-usuario.html#mis-viajes"; }, 900);
   }catch(error){
     console.error(error);
     if(error.code === "auth/email-already-in-use") registerResponse.textContent = "Ese correo ya está registrado.";

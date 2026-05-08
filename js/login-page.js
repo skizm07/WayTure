@@ -29,7 +29,7 @@ loginForm.addEventListener("submit", async event => {
     localStorage.setItem("wayture_logged_user", nombre);
     localStorage.setItem("wayture_user_role", rol);
     welcomeBox.textContent = `Bienvenido, ${nombre}. Rol: ${rol}. Redirigiendo a tu panel de usuario...`;
-    setTimeout(() => { window.location.href = "rastreo-viaje.html?mis=1"; }, 900);
+    setTimeout(() => { window.location.href = "panel-usuario.html#mis-viajes"; }, 900);
   }catch(error){
     console.error(error);
     if(error.code === "auth/invalid-credential") welcomeBox.textContent = "Correo o contraseña incorrectos.";
