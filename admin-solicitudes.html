@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Solicitudes WayTure para revisar formularios recibidos y comunidad." />
+  <meta name="theme-color" content="#0f172a" />
+  <title>WayTure | Solicitudes y comunidad</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="stylesheet" href="css/admin-viajes.css" />
+</head>
+<body>
+  <header>
+    <div class="container header-wrap">
+      <a class="logo" href="index.html#inicio" aria-label="WayTure Inicio"><span class="logo-badge" aria-hidden="true"><img src="assets/WayTureNoMAP.png" alt="Logo WayTure" /></span><span class="logo-word">WayTure</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menu"><span>Menu</span></button>
+      <nav id="mainNav" aria-label="Navegacion principal">
+        <a href="admin-viajes.html" data-admin-link hidden>Dashboard</a>
+        <a href="rastreo-viaje.html">Rastreo</a>
+        <a href="datos-cuenta.html" data-user-link hidden>Cuenta</a>
+        <div class="user-menu" data-user-menu hidden><button class="user-menu-button" type="button" data-user-menu-button aria-expanded="false" aria-label="Abrir menu de usuario"><span class="user-avatar" data-user-initials>U</span><span class="user-menu-name" data-user-name>Usuario</span></button><div class="user-menu-dropdown" data-user-menu-dropdown><p class="user-menu-greeting" data-user-greeting></p><a href="admin-viajes.html" data-admin-link hidden>Panel privado</a><a href="datos-cuenta.html" data-user-link>Datos de cuenta</a><button type="button" data-logout-button>Cerrar sesion</button></div></div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="module-hero compact-hero">
+    <div class="container reveal">
+      <span class="eyebrow">Backoffice</span>
+      <h1 class="module-title">Solicitudes y comunidad</h1>
+      <p class="module-lead">Gestiona formularios recibidos y suscripciones sin mezclar esta operacion con la creacion de viajes.</p>
+      <div class="module-actions"><a class="btn btn-primary" href="admin-viajes.html">Volver al dashboard</a><button class="btn btn-secondary" id="refreshRequestsBtn" type="button">Actualizar</button></div>
+    </div>
+  </section>
+
+  <section class="dashboard-shell">
+    <div class="container">
+      <article class="card reveal" id="requestsGate">
+        <span class="eyebrow">Verificando sesion</span>
+        <h2>Cargando solicitudes</h2>
+        <p class="muted">Un momento mientras validamos tu rol administrativo.</p>
+      </article>
+
+      <div class="dashboard request-dashboard" id="requestsDashboard">
+        <div class="dashboard-top reveal">
+          <div><span class="eyebrow">Panel separado</span><h2 class="dashboard-title">Formularios recibidos</h2><p class="muted" id="requestsSessionInfo">Sesion privada activa.</p></div>
+          <div class="compact-actions"><a class="btn btn-secondary" href="admin-viajes.html">Viajes</a><a class="btn btn-secondary" href="datos-cuenta.html">Cuenta</a></div>
+        </div>
+
+        <div class="metrics-grid reveal">
+          <article class="metric-card"><strong id="metricPendingContacts">0</strong><span>contactos pendientes</span></article>
+          <article class="metric-card"><strong id="metricManagedContacts">0</strong><span>contactos gestionados</span></article>
+          <article class="metric-card"><strong id="metricSubscriptions">0</strong><span>suscripciones</span></article>
+          <article class="metric-card"><strong id="metricArchivedSubscriptions">0</strong><span>archivadas</span></article>
+        </div>
+
+        <section class="card reveal admin-requests-panel">
+          <div class="request-tabs"><button class="request-tab active" data-request-tab="contactos" type="button">Contactos</button><button class="request-tab" data-request-tab="suscripciones" type="button">Comunidad</button></div>
+          <div class="request-panel active" id="request-contactos"><div class="request-list" id="contactRequestsList"></div></div>
+          <div class="request-panel" id="request-suscripciones"><div class="request-list" id="subscriptionRequestsList"></div></div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <footer><div class="container footer-grid"><div><strong class="footer-brand">&copy; 2026 WayTure - Solicitudes</strong><p class="muted">Gestion de contacto y comunidad conectada a Firestore.</p></div><div class="footer-links"><a href="admin-viajes.html">Dashboard</a><a href="index.html#contacto">Contacto</a><a href="rastreo-viaje.html">Rastreo</a></div></div></footer>
+
+  <script type="module" src="js/admin-requests-page.js"></script>
+  <script type="module" src="js/auth-state.js"></script>
+</body>
+</html>

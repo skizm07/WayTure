@@ -1,0 +1,19 @@
+{
+  "name": "wayture",
+  "version": "1.0.0",
+  "description": "Plataforma WayTure con frontend, rastreo GPS y API REST local para pruebas en Postman.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "wayture",
+    "viajes",
+    "rastreo",
+    "gps",
+    "api-rest"
+  ],
+  "author": "WayTure",
+  "license": "MIT"
+}

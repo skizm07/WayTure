@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Panel privado WayTure para gestionar viajes, itinerarios, destinos, mapas, presupuesto y notas." />
+  <meta name="description" content="Dashboard privado WayTure para gestionar viajes, paquetes, mapas, estados, presupuesto y notas." />
   <meta name="theme-color" content="#0f172a" />
-  <title>WayTure | Panel privado de viajes</title>
+  <title>WayTure | Dashboard privado</title>
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="css/admin-viajes.css" />
 </head>
 <body>
@@ -15,17 +16,33 @@
       <a class="logo" href="index.html#inicio" aria-label="WayTure Inicio"><span class="logo-badge" aria-hidden="true"><img src="assets/WayTureNoMAP.png" alt="Logo WayTure" /></span><span class="logo-word">WayTure</span></a>
       <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menu"><span>Menu</span></button>
       <nav id="mainNav" aria-label="Navegacion principal">
-        <a href="index.html#inicio">Inicio</a><a href="index.html#funciones">Funciones</a><a href="index.html#destinos">Destinos</a><a href="index.html#planificador">Planificador</a><a href="index.html#contacto" class="btn btn-secondary">Contacto</a><div class="user-menu" data-user-menu hidden><button class="user-menu-button" type="button" data-user-menu-button aria-expanded="false" aria-label="Abrir menú de usuario"><span class="user-avatar" data-user-initials>U</span><span class="user-menu-name" data-user-name>Usuario</span></button><div class="user-menu-dropdown" data-user-menu-dropdown><p class="user-menu-greeting" data-user-greeting></p><a href="panel-usuario.html#crear-viaje" data-user-link>Crear viaje</a><a href="panel-usuario.html#mis-viajes" data-user-link>Mis viajes asignados</a><a href="panel-usuario.html#datos-cuenta" data-user-link>Datos de cuenta</a><a href="admin-viajes.html" data-admin-link hidden>Panel privado</a><button type="button" data-logout-button>Cerrar sesión</button></div></div>
+        <a href="index.html#inicio">Inicio</a>
+        <a href="rastreo-viaje.html">Rastreo</a>
+        <a href="admin-solicitudes.html" data-admin-link hidden>Solicitudes</a>
+        <a href="datos-cuenta.html" data-user-link hidden>Cuenta</a>
+        <a href="index.html#contacto" class="btn btn-secondary">Contacto</a>
+        <div class="user-menu" data-user-menu hidden>
+          <button class="user-menu-button" type="button" data-user-menu-button aria-expanded="false" aria-label="Abrir menu de usuario"><span class="user-avatar" data-user-initials>U</span><span class="user-menu-name" data-user-name>Usuario</span></button>
+          <div class="user-menu-dropdown" data-user-menu-dropdown>
+            <p class="user-menu-greeting" data-user-greeting></p>
+            <a href="panel-usuario.html#crear-viaje" data-user-link>Crear viaje</a>
+            <a href="panel-usuario.html#mis-viajes" data-user-link>Mis viajes asignados</a>
+            <a href="datos-cuenta.html" data-user-link>Datos de cuenta</a>
+            <a href="admin-viajes.html" data-admin-link hidden>Panel privado</a>
+            <a href="admin-solicitudes.html" data-admin-link hidden>Solicitudes y comunidad</a>
+            <button type="button" data-logout-button>Cerrar sesion</button>
+          </div>
+        </div>
       </nav>
     </div>
   </header>
 
-  <section class="module-hero">
+  <section class="module-hero compact-hero">
     <div class="container reveal">
-      <span class="eyebrow">Interfaz privada WayTure</span>
-      <h1 class="module-title">Panel de Administraci&oacute;n / Gesti&oacute;n de Viajes</h1>
-      <p class="module-lead">Gestiona viajes completos con destinos, fechas, itinerarios, mapas, estados, presupuesto y notas personales. Esta p&aacute;gina es independiente del index y conserva la misma identidad visual.</p>
-      <div class="module-actions"><a class="btn btn-primary" href="#panel">Entrar al panel</a><a class="btn btn-secondary" href="rastreo-viaje.html">Ir al rastreo p&uacute;blico</a></div>
+      <span class="eyebrow">Dashboard privado WayTure</span>
+      <h1 class="module-title">Panel de administracion</h1>
+      <p class="module-lead">Gestiona viajes, paquetes, ubicaciones y estados desde una vista operativa con tabla interactiva y mapa dinamico.</p>
+      <div class="module-actions"><a class="btn btn-primary" href="#panel">Entrar al dashboard</a><a class="btn btn-secondary" href="rastreo-viaje.html">Rastreo publico</a></div>
     </div>
   </section>
 
@@ -40,57 +57,165 @@
             <div><label for="adminName">Nombre del usuario</label><input id="adminName" name="adminName" type="text" placeholder="Ej. Carlos Prieto" required /></div>
             <div><label for="adminEmail">Correo</label><input id="adminEmail" name="adminEmail" type="email" placeholder="admin@wayture.com" required /></div>
             <div><label for="adminRole">Rol</label><select id="adminRole" name="adminRole"><option>Administrador</option><option>Empleado</option><option>Usuario registrado</option></select></div>
-            <button class="btn btn-primary" type="submit">Acceder al panel</button><p class="success" id="loginMessage"></p>
+            <button class="btn btn-primary" type="submit">Acceder al panel</button>
+            <p class="success" id="loginMessage"></p>
           </form>
         </article>
         <aside class="card">
-          <span class="eyebrow">Funcionalidades completas</span><h2>Este m&oacute;dulo permite</h2>
+          <span class="eyebrow">Modulo administrativo</span>
+          <h2>Gestion centralizada</h2>
           <ul class="feature-list">
-            <li><span class="feature-number">1</span><span><strong>Registrar viajes</strong><br><span class="muted">Destino, salida, regreso, viajeros y experiencia.</span></span></li>
-            <li><span class="feature-number">2</span><span><strong>Crear itinerarios</strong><br><span class="muted">Hora, lugar, descripci&oacute;n y categor&iacute;a por actividad.</span></span></li>
-            <li><span class="feature-number">3</span><span><strong>Gestionar destinos</strong><br><span class="muted">Imagen, valoraci&oacute;n, descripci&oacute;n y enlace a mapa.</span></span></li>
-            <li><span class="feature-number">4</span><span><strong>Controlar estado y presupuesto</strong><br><span class="muted">Estados, gastos, notas y mapa del viaje.</span></span></li>
+            <li><span class="feature-number">1</span><span><strong>Registrar viajes</strong><br><span class="muted">Destino, fechas, viajeros y experiencia.</span></span></li>
+            <li><span class="feature-number">2</span><span><strong>Tabla de paquetes</strong><br><span class="muted">Busqueda por codigo, destino, estado, fecha o correo.</span></span></li>
+            <li><span class="feature-number">3</span><span><strong>Mapa dinamico</strong><br><span class="muted">Leaflet se actualiza con la ubicacion del viaje.</span></span></li>
+            <li><span class="feature-number">4</span><span><strong>Paginas separadas</strong><br><span class="muted">Cuenta, formularios recibidos y comunidad viven fuera del panel principal.</span></span></li>
           </ul>
         </aside>
       </div>
 
       <div class="dashboard" id="adminDashboard">
-        <div class="dashboard-top reveal"><div><span class="eyebrow">Panel activo</span><h2 class="dashboard-title">Gesti&oacute;n integral de WayTure</h2><p class="muted" id="sessionInfo">Sesi&oacute;n privada activa.</p></div><div class="compact-actions"><a class="btn btn-secondary" href="rastreo-viaje.html">Ver rastreo</a><button class="btn btn-accent" id="exportTripsBtn" type="button">Exportar datos</button><button class="btn btn-secondary" id="logoutBtn" type="button">Cerrar sesi&oacute;n</button></div></div>
-        <div class="metrics-grid reveal"><article class="metric-card"><strong id="metricTrips">0</strong><span>viajes registrados</span></article><article class="metric-card"><strong id="metricActive">0</strong><span>viajes activos</span></article><article class="metric-card"><strong id="metricActivities">0</strong><span>actividades</span></article><article class="metric-card"><strong id="metricBudget">$0</strong><span>presupuesto total</span></article><article class="metric-card"><strong id="metricContacts">0</strong><span>contactos pendientes</span></article></div>
-        <section class="card reveal admin-requests-panel" id="adminRequestsPanel"><div class="inline-row"><div><span class="eyebrow">Formularios recibidos</span><h3>Gestión de contacto y comunidad</h3><p class="muted">Solicitudes enviadas desde el formulario de contacto y suscripciones de la comunidad.</p></div><button class="small-btn" id="refreshRequestsBtn" type="button">Actualizar</button></div><div class="request-tabs"><button class="request-tab active" data-request-tab="contactos" type="button">Contactos</button><button class="request-tab" data-request-tab="suscripciones" type="button">Comunidad</button></div><div class="request-panel active" id="request-contactos"><div class="request-list" id="contactRequestsList"></div></div><div class="request-panel" id="request-suscripciones"><div class="request-list" id="subscriptionRequestsList"></div></div></section>
-        <div class="dashboard-grid">
-          <div class="section-stack">
-            <article class="card reveal"><span class="eyebrow">Registro de viajes</span><h3 id="tripFormTitle">Crear nuevo viaje</h3><p class="muted">Al registrar un viaje se genera un c&oacute;digo p&uacute;blico para consultarlo desde la p&aacute;gina de rastreo.</p>
-              <form class="stack trip-form" id="tripForm">
-                <div><label for="destination">Destino principal</label><input id="destination" name="destination" type="text" placeholder="Ej. Paris, Francia" required /></div>
-                <div><label for="assignedEmail">Correo del usuario/viajero asignado</label><input id="assignedEmail" name="assignedEmail" type="email" placeholder="correo del usuario registrado (opcional)" /></div>
-                <div class="form-grid-2"><div><label for="startDate">Fecha de salida</label><input id="startDate" name="startDate" type="date" required /></div><div><label for="endDate">Fecha de regreso</label><input id="endDate" name="endDate" type="date" required /></div></div>
-                <div class="form-grid-2"><div><label for="travelers">N&uacute;mero de viajeros</label><input id="travelers" name="travelers" type="number" min="1" placeholder="Ej. 2" required /></div><div><label for="experience">Tipo de experiencia</label><select id="experience" name="experience"><option>Cultural</option><option>Aventura</option><option>Descanso</option><option>Gastronomica</option><option>Familiar</option><option>Tecnologia y compras</option></select></div></div>
-                <div><label for="tripStatus">Estado de planificaci&oacute;n</label><select id="tripStatus" name="tripStatus"><option>Por planear</option><option>En organizaci&oacute;n</option><option>Reservado</option><option>En curso</option><option>Reprogramado</option><option>Finalizado</option></select></div>
-                <div class="form-grid-2"><div><label for="lastLocation">&Uacute;ltima ubicaci&oacute;n guardada</label><input id="lastLocation" name="lastLocation" type="text" placeholder="Ej. Torre Eiffel" /></div><div><label for="mapQuery">B&uacute;squeda del mapa</label><input id="mapQuery" name="mapQuery" type="text" placeholder="Ej. Eiffel Tower Paris" /></div></div>
-                <div class="compact-actions"><button class="btn btn-primary" id="tripSubmitBtn" type="submit">Registrar viaje</button><button class="btn btn-secondary is-hidden" id="cancelTripEditBtn" type="button">Cancelar edici&oacute;n</button></div><p class="success" id="tripFormMessage"></p>
+        <div class="dashboard-app">
+          <aside class="dashboard-sidebar reveal" aria-label="Menu del dashboard">
+            <div class="side-brand">
+              <span class="eyebrow"><i data-lucide="shield-check"></i><span>Admin</span></span>
+              <h2><i data-lucide="layout-dashboard"></i><span>WayTure</span></h2>
+              <p class="muted"><i data-lucide="plane-takeoff"></i><span>Control operativo de viajes.</span></p>
+            </div>
+            <nav class="side-nav" aria-label="Secciones del panel">
+              <a href="#panel"><i data-lucide="gauge"></i><span>Dashboard</span></a>
+              <a href="#crear-viaje"><i data-lucide="plus-circle"></i><span>Crear viaje</span></a>
+              <a href="#tabla-viajes"><i data-lucide="table-2"></i><span>Paquetes</span></a>
+              <a href="#detalle-viaje"><i data-lucide="map"></i><span>Mapa y detalle</span></a>
+              <a href="admin-solicitudes.html"><i data-lucide="inbox"></i><span>Solicitudes</span></a>
+              <a href="datos-cuenta.html"><i data-lucide="user-round-cog"></i><span>Cuenta</span></a>
+            </nav>
+          </aside>
+
+          <main class="dashboard-main">
+            <div class="dashboard-top reveal">
+              <div><span class="eyebrow">Panel activo</span><h2 class="dashboard-title">Gestion integral de WayTure</h2><p class="muted" id="sessionInfo">Sesion privada activa.</p></div>
+              <div class="compact-actions"><a class="btn btn-secondary" href="rastreo-viaje.html">Ver rastreo</a><button class="btn btn-accent" id="exportTripsBtn" type="button">Exportar datos</button><button class="btn btn-secondary" id="logoutBtn" type="button">Cerrar sesion</button></div>
+            </div>
+
+            <div class="metrics-grid reveal">
+              <article class="metric-card"><strong id="metricTrips">0</strong><span>viajes registrados</span></article>
+              <article class="metric-card"><strong id="metricActive">0</strong><span>viajes activos</span></article>
+              <article class="metric-card"><strong id="metricActivities">0</strong><span>viajes finalizados</span></article>
+              <article class="metric-card"><strong id="metricBudget">0</strong><span>con incidencia</span></article>
+              <article class="metric-card"><strong id="metricContacts">0</strong><span>contactos pendientes</span></article>
+            </div>
+
+            <section class="operations-grid reveal" aria-label="Accesos rapidos">
+              <article class="operation-card"><span class="eyebrow">Tiempo real</span><h3>Mapa activo</h3><p class="muted">El mapa se actualiza cuando cambia el estado o la ubicacion del viaje seleccionado.</p></article>
+              <article class="operation-card"><span class="eyebrow">Solicitudes</span><h3>Contacto y comunidad</h3><p class="muted">Formularios recibidos y suscripciones estan en una pagina separada.</p><a class="small-btn" href="admin-solicitudes.html">Abrir solicitudes</a></article>
+              <article class="operation-card"><span class="eyebrow">Cuenta</span><h3>Datos privados</h3><p class="muted">La informacion del perfil se gestiona fuera del panel operativo.</p><a class="small-btn" href="datos-cuenta.html">Ver cuenta</a></article>
+            </section>
+
+            <article class="card reveal dashboard-table-card" id="tabla-viajes">
+              <span class="eyebrow">Paquetes / viajes</span>
+              <div class="inline-row"><h3>Tabla interactiva</h3><button class="small-btn danger icon-btn labeled" id="clearTripsBtn" type="button"><i data-lucide="trash-2"></i><span>Borrar todos</span></button></div>
+              <form class="filters-grid" id="tripFilters">
+                <div><label for="filterCode">Codigo</label><input id="filterCode" name="code" type="search" placeholder="WT-PARIS-1234" /></div>
+                <div><label for="filterDestination">Destino</label><input id="filterDestination" name="destination" type="search" placeholder="Destino" /></div>
+                <div><label for="filterStatus">Estado</label><select id="filterStatus" name="status"><option value="">Todos</option><option>Planificado</option><option>En preparación</option><option>En ruta</option><option>Cerca del destino</option><option>En destino</option><option>Finalizado</option><option>Incidencia</option></select></div>
+                <div><label for="filterAssigned">Correo o usuario</label><input id="filterAssigned" name="assigned" type="search" placeholder="correo@dominio.com" /></div>
+                <div><label for="filterStartDate">Salida</label><input id="filterStartDate" name="startDate" type="date" /></div>
+                <div class="filter-actions"><button class="small-btn icon-btn labeled" id="clearFiltersBtn" type="button"><i data-lucide="filter-x"></i><span>Limpiar</span></button></div>
               </form>
+              <div class="trip-list saved-trip-list" id="tripList"></div>
             </article>
-            <article class="card reveal"><span class="eyebrow">Viajes guardados</span><div class="inline-row"><h3>Lista de viajes</h3><button class="small-btn danger" id="clearTripsBtn" type="button">Borrar todos</button></div><form class="filters-grid" id="tripFilters"><div><label for="filterCode">C&oacute;digo</label><input id="filterCode" name="code" type="search" placeholder="WT-PARIS-1234" /></div><div><label for="filterDestination">Destino</label><input id="filterDestination" name="destination" type="search" placeholder="Destino" /></div><div><label for="filterStatus">Estado</label><select id="filterStatus" name="status"><option value="">Todos</option><option>Por planear</option><option>En organizaci&oacute;n</option><option>Reservado</option><option>En curso</option><option>Reprogramado</option><option>Finalizado</option></select></div><div><label for="filterAssigned">Correo o usuario</label><input id="filterAssigned" name="assigned" type="search" placeholder="correo@dominio.com" /></div><div><label for="filterStartDate">Salida</label><input id="filterStartDate" name="startDate" type="date" /></div><div class="filter-actions"><button class="small-btn" id="clearFiltersBtn" type="button">Limpiar filtros</button></div></form><div class="trip-list saved-trip-list" id="tripList"></div></article>
-          </div>
-          <div class="section-stack">
-            <article class="card reveal"><span class="eyebrow">Detalle del viaje</span><div class="inline-row"><h3 id="selectedTripTitle">Selecciona un viaje</h3><span class="code-pill" id="selectedTripCode">Sin codigo</span></div><p class="muted" id="selectedTripMeta">Elige un viaje para editar estado, itinerario, presupuesto, mapa y notas.</p>
-              <div class="tabs"><button class="tab-btn active" data-tab="estado" type="button">Estado y mapa</button><button class="tab-btn" data-tab="itinerario" type="button">Itinerario</button><button class="tab-btn" data-tab="presupuesto" type="button">Presupuesto</button><button class="tab-btn" data-tab="notas" type="button">Notas</button><button class="tab-btn" data-tab="destinos" type="button">Destinos recomendados</button></div>
-              <section class="tab-panel active" id="tab-estado"><form class="stack" id="statusForm"><div class="form-grid-3"><div><label for="editStatus">Estado</label><select id="editStatus" name="editStatus"><option>Por planear</option><option>En organizaci&oacute;n</option><option>Reservado</option><option>En curso</option><option>Reprogramado</option><option>Finalizado</option></select></div><div><label for="editLastLocation">&Uacute;ltima ubicaci&oacute;n</label><input id="editLastLocation" name="editLastLocation" type="text" /></div><div><label for="editMapQuery">Mapa</label><input id="editMapQuery" name="editMapQuery" type="text" /></div></div><div><label for="statusComment">Comentario del cambio</label><textarea id="statusComment" name="statusComment" placeholder="Ej. El vuelo fue reprogramado o el viajero ya lleg&oacute; al hotel."></textarea></div><button class="btn btn-primary" type="submit">Actualizar estado y ubicaci&oacute;n</button><p class="success" id="statusMessage"></p></form><article class="map-card"><h3>Mapa del destino principal</h3><p class="muted" id="mapCaption">Selecciona un viaje para ver su mapa.</p><iframe id="adminMap" title="Mapa del viaje" src="https://www.google.com/maps?q=Europa%20turismo&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></article><article class="history-box"><h3>Historial de estados</h3><div class="history-list" id="statusHistoryList"></div></article><article class="closed-summary" id="selectedClosedSummary"></article></section>
-              <section class="tab-panel" id="tab-itinerario"><form class="stack" id="activityForm"><div class="form-grid-3"><div><label for="activityDate">Fecha</label><input id="activityDate" name="activityDate" type="date" /></div><div><label for="activityTime">Hora</label><input id="activityTime" name="activityTime" type="time" required /></div><div><label for="activityCategory">Categor&iacute;a</label><select id="activityCategory" name="activityCategory"><option>Cultura</option><option>Comida</option><option>Aventura</option><option>Descanso</option><option>Transporte</option><option>Fotografia</option></select></div></div><div><label for="activityPlace">Lugar</label><input id="activityPlace" name="activityPlace" type="text" required /></div><div><label for="activityDescription">Descripci&oacute;n</label><textarea id="activityDescription" name="activityDescription"></textarea></div><div class="compact-actions"><button class="btn btn-primary" id="activitySubmitBtn" type="submit">Agregar actividad</button><button class="btn btn-secondary is-hidden" id="cancelActivityEditBtn" type="button">Cancelar edici&oacute;n</button></div><p class="success" id="activityMessage"></p></form><div class="activity-list" id="activityList"></div></section>
-              <section class="tab-panel" id="tab-presupuesto"><form class="stack" id="budgetForm"><div class="form-grid-2"><div><label for="transportBudget">Transporte</label><input id="transportBudget" name="transportBudget" type="number" min="0" /></div><div><label for="hotelBudget">Hospedaje</label><input id="hotelBudget" name="hotelBudget" type="number" min="0" /></div><div><label for="foodBudget">Comida</label><input id="foodBudget" name="foodBudget" type="number" min="0" /></div><div><label for="activitiesBudget">Actividades</label><input id="activitiesBudget" name="activitiesBudget" type="number" min="0" /></div></div><button class="btn btn-primary" type="submit">Guardar presupuesto</button></form><div class="budget-output"><article><span class="muted">Transporte</span><strong id="outTransport">$0</strong></article><article><span class="muted">Hospedaje</span><strong id="outHotel">$0</strong></article><article><span class="muted">Comida + actividades</span><strong id="outFoodActivities">$0</strong></article><article><span class="muted">Total</span><strong id="outBudgetTotal">$0</strong></article></div></section>
-              <section class="tab-panel" id="tab-notas"><form class="stack" id="notesForm"><div><label for="personalNotes">Notas personales</label><textarea id="personalNotes" name="personalNotes" placeholder="Restaurantes, lugares pendientes, recomendaciones o recuerdos del viaje..."></textarea></div><button class="btn btn-primary" type="submit">Guardar notas</button></form></section>
-              <section class="tab-panel" id="tab-destinos"><form class="stack" id="destinationForm"><div class="form-grid-2"><div><label for="recName">Nombre del destino</label><input id="recName" name="recName" type="text" required /></div><div><label for="recRating">Valoraci&oacute;n</label><input id="recRating" name="recRating" type="number" min="0" max="5" step="0.1" required /></div></div><div><label for="recImage">Imagen</label><input id="recImage" name="recImage" type="text" placeholder="assets/paris.jpg o URL" /></div><div><label for="recMapLink">Enlace al mapa</label><input id="recMapLink" name="recMapLink" type="url" /></div><div><label for="recDescription">Descripci&oacute;n</label><textarea id="recDescription" name="recDescription"></textarea></div><div class="compact-actions"><button class="btn btn-primary" id="destinationSubmitBtn" type="submit">Agregar destino recomendado</button><button class="btn btn-secondary is-hidden" id="cancelDestinationEditBtn" type="button">Cancelar edici&oacute;n</button></div><p class="success" id="destinationMessage"></p></form><div class="destination-grid" id="recommendationGrid"></div></section>
-            </article>
-          </div>
+
+            <div class="dashboard-grid">
+              <div class="section-stack">
+                <article class="card reveal" id="crear-viaje">
+                  <span class="eyebrow">Registro de viajes</span>
+                  <h3 id="tripFormTitle">Crear nuevo viaje</h3>
+                  <p class="muted">Usa una plantilla de destino para completar datos y crear una ruta GPS simulada. Al guardar se genera un codigo publico.</p>
+                  <form class="stack trip-form" id="tripForm">
+                    <div class="destination-picker">
+                      <div><label for="tripCountry">Pais</label><select id="tripCountry" name="tripCountry"><option value="">Seleccionar pais</option></select></div>
+                      <div><label for="tripCity">Ciudad</label><select id="tripCity" name="tripCity"><option value="">Seleccionar ciudad</option></select></div>
+                      <div><label for="tripPreset">Plan sugerido</label><select id="tripPreset" name="tripPreset"><option value="">Elegir plan</option></select></div>
+                    </div>
+                    <section class="form-section">
+                      <div class="form-grid-2"><div><label for="tripName">Nombre del viaje</label><input id="tripName" name="tripName" type="text" placeholder="Se completa con el destino" /></div><div><label for="destination">Destino final</label><input id="destination" name="destination" type="text" placeholder="Ej. Medellín, Colombia" required /></div></div>
+                      <div class="form-grid-2"><div><label for="origin">Origen del viaje</label><input id="origin" name="origin" type="text" placeholder="Ej. Aeropuerto Internacional El Dorado" value="Aeropuerto Internacional El Dorado, Bogotá" required /></div><div><label for="assignedEmail">Viajero asignado</label><input id="assignedEmail" name="assignedEmail" type="email" placeholder="correo del usuario viajero" required /></div></div>
+                      <div class="form-grid-2"><div><label for="startDate">Fecha de salida</label><input id="startDate" name="startDate" type="date" required /></div><div><label for="endDate">Fecha de regreso</label><input id="endDate" name="endDate" type="date" required /></div></div>
+                    </section>
+                    <details class="form-section compact-details">
+                      <summary>Opciones avanzadas de ruta y estado</summary>
+                      <div class="form-grid-2"><div><label for="tripCode">Código de viaje</label><input id="tripCode" name="tripCode" type="text" placeholder="Se genera automáticamente si queda vacío" /></div><div><label for="tripStatus">Estado del viaje</label><select id="tripStatus" name="tripStatus"><option>Planificado</option><option>En preparación</option><option>En ruta</option><option>Cerca del destino</option><option>En destino</option><option>Finalizado</option><option>Incidencia</option></select></div></div>
+                      <div class="form-grid-2"><div><label for="intermediatePoint1">Punto intermedio 1</label><input id="intermediatePoint1" name="intermediatePoint1" type="text" placeholder="Se sugiere automáticamente" /></div><div><label for="intermediatePoint2">Punto intermedio 2</label><input id="intermediatePoint2" name="intermediatePoint2" type="text" placeholder="Se sugiere automáticamente" /></div></div>
+                      <div class="form-grid-2"><div><label for="travelers">Numero de viajeros</label><input id="travelers" name="travelers" type="number" min="1" placeholder="Ej. 2" required /></div><div><label for="experience">Tipo de experiencia</label><select id="experience" name="experience"><option>Cultural</option><option>Aventura</option><option>Descanso</option><option>Gastronomica</option><option>Familiar</option><option>Tecnologia y compras</option></select></div></div>
+                      <div class="form-grid-2"><div><label for="lastLocation">Ultima ubicacion guardada</label><input id="lastLocation" name="lastLocation" type="text" placeholder="Se usa el origen al iniciar" /></div><div><label for="mapQuery">Busqueda del mapa</label><input id="mapQuery" name="mapQuery" type="text" placeholder="Coordenadas o lugar" /></div></div>
+                    </details>
+                    <div class="compact-actions"><button class="btn btn-primary" id="tripSubmitBtn" type="submit">Registrar viaje</button><button class="btn btn-secondary is-hidden" id="cancelTripEditBtn" type="button">Cancelar edicion</button></div>
+                    <p class="success" id="tripFormMessage"></p>
+                  </form>
+                </article>
+
+              </div>
+
+              <div class="section-stack">
+                <article class="card reveal" id="detalle-viaje">
+                  <span class="eyebrow">Detalle del viaje</span>
+                  <div class="inline-row"><h3 id="selectedTripTitle">Selecciona un viaje</h3><span class="code-pill" id="selectedTripCode">Sin codigo</span></div>
+                  <p class="muted" id="selectedTripMeta">Elige un viaje para editar estado, itinerario, presupuesto, mapa y notas.</p>
+                  <div class="tabs"><button class="tab-btn active" data-tab="estado" type="button">Estado y mapa</button><button class="tab-btn" data-tab="itinerario" type="button">Itinerario</button><button class="tab-btn" data-tab="presupuesto" type="button">Presupuesto</button><button class="tab-btn" data-tab="notas" type="button">Notas</button><button class="tab-btn" data-tab="destinos" type="button">Destinos recomendados</button></div>
+
+                  <section class="tab-panel active" id="tab-estado">
+                    <form class="stack" id="statusForm">
+                      <div class="form-grid-3"><div><label for="editStatus">Estado</label><select id="editStatus" name="editStatus"><option>Planificado</option><option>En preparación</option><option>En ruta</option><option>Cerca del destino</option><option>En destino</option><option>Finalizado</option><option>Incidencia</option></select></div><div><label for="editLastLocation">Ubicación actual simulada</label><input id="editLastLocation" name="editLastLocation" type="text" /></div><div><label for="editMapQuery">Mapa</label><input id="editMapQuery" name="editMapQuery" type="text" /></div></div>
+                      <div><label for="statusComment">Comentario del cambio</label><textarea id="statusComment" name="statusComment" placeholder="Ej. El vuelo fue reprogramado o el viajero ya llego al hotel."></textarea></div>
+                      <button class="btn btn-primary" type="submit">Actualizar estado y ubicacion</button>
+                      <p class="success" id="statusMessage"></p>
+                    </form>
+                    <article class="simulation-panel">
+                      <div class="inline-row"><div><h3>Simulación GPS</h3><p class="muted" id="simulationLocation">Ubicación actual simulada.</p></div><strong id="simulationProgressPercent">0%</strong></div>
+                      <div class="linear-progress" aria-label="Progreso del viaje"><span id="simulationProgressFill"></span></div>
+                      <div class="compact-actions simulation-actions">
+                        <button class="small-btn icon-btn labeled" id="startSimulationBtn" type="button"><i data-lucide="play"></i><span>Iniciar simulación</span></button>
+                        <button class="small-btn icon-btn labeled" id="resetSimulationBtn" type="button"><i data-lucide="rotate-ccw"></i><span>Reiniciar</span></button>
+                        <button class="small-btn danger icon-btn labeled" id="incidentSimulationBtn" type="button"><i data-lucide="triangle-alert"></i><span>Simular incidencia</span></button>
+                        <a class="small-btn icon-btn labeled" id="openTrackingLink" href="rastreo-viaje.html"><i data-lucide="route"></i><span>Abrir rastreo</span></a>
+                      </div>
+                      <p class="warning" id="simulationMessage"></p>
+                    </article>
+                    <article class="map-card"><h3>Mapa dinámico de la ruta</h3><p class="muted" id="mapCaption">Selecciona un viaje para ver su mapa.</p><div id="adminMap" class="leaflet-map" role="img" aria-label="Mapa del viaje"></div></article>
+                    <article class="history-box"><h3>Historial de estados</h3><div class="history-list" id="statusHistoryList"></div></article>
+                    <article class="closed-summary" id="selectedClosedSummary"></article>
+                  </section>
+
+                  <section class="tab-panel" id="tab-itinerario">
+                    <form class="stack" id="activityForm"><div><label for="activityTemplate">Plantilla rápida</label><select id="activityTemplate" name="activityTemplate"><option value="">Elegir sugerencia del viaje</option></select></div><div class="form-grid-3"><div><label for="activityDate">Fecha</label><input id="activityDate" name="activityDate" type="date" /></div><div><label for="activityTime">Hora</label><input id="activityTime" name="activityTime" type="time" required /></div><div><label for="activityCategory">Categoria</label><select id="activityCategory" name="activityCategory"><option>Cultura</option><option>Comida</option><option>Aventura</option><option>Descanso</option><option>Transporte</option><option>Fotografia</option></select></div></div><div><label for="activityPlace">Lugar</label><input id="activityPlace" name="activityPlace" type="text" required /></div><div><label for="activityDescription">Descripcion</label><textarea id="activityDescription" name="activityDescription"></textarea></div><div class="compact-actions"><button class="btn btn-primary" id="activitySubmitBtn" type="submit">Agregar actividad</button><button class="btn btn-secondary is-hidden" id="cancelActivityEditBtn" type="button">Cancelar edicion</button></div><p class="success" id="activityMessage"></p></form>
+                    <div class="activity-list" id="activityList"></div>
+                  </section>
+
+                  <section class="tab-panel" id="tab-presupuesto">
+                    <form class="stack" id="budgetForm"><div class="form-grid-2"><div><label for="transportBudget">Transporte</label><input id="transportBudget" name="transportBudget" type="number" min="0" /></div><div><label for="hotelBudget">Hospedaje</label><input id="hotelBudget" name="hotelBudget" type="number" min="0" /></div><div><label for="foodBudget">Comida</label><input id="foodBudget" name="foodBudget" type="number" min="0" /></div><div><label for="activitiesBudget">Actividades</label><input id="activitiesBudget" name="activitiesBudget" type="number" min="0" /></div></div><button class="btn btn-primary" type="submit">Guardar presupuesto</button></form>
+                    <div class="budget-output"><article><span class="muted">Transporte</span><strong id="outTransport">$0</strong></article><article><span class="muted">Hospedaje</span><strong id="outHotel">$0</strong></article><article><span class="muted">Comida + actividades</span><strong id="outFoodActivities">$0</strong></article><article><span class="muted">Total</span><strong id="outBudgetTotal">$0</strong></article></div>
+                  </section>
+
+                  <section class="tab-panel" id="tab-notas"><form class="stack" id="notesForm"><div><label for="personalNotes">Notas personales</label><textarea id="personalNotes" name="personalNotes" placeholder="Restaurantes, lugares pendientes, recomendaciones o recuerdos del viaje..."></textarea></div><button class="btn btn-primary" type="submit">Guardar notas</button></form></section>
+
+                  <section class="tab-panel" id="tab-destinos">
+                    <form class="stack" id="destinationForm"><div class="form-grid-2"><div><label for="recName">Nombre del destino</label><input id="recName" name="recName" type="text" required /></div><div><label for="recRating">Valoracion</label><input id="recRating" name="recRating" type="number" min="0" max="5" step="0.1" required /></div></div><div><label for="recImage">Imagen</label><input id="recImage" name="recImage" type="text" placeholder="assets/paris.jpg o URL" /></div><div><label for="recMapLink">Enlace al mapa</label><input id="recMapLink" name="recMapLink" type="url" /></div><div><label for="recDescription">Descripcion</label><textarea id="recDescription" name="recDescription"></textarea></div><div class="compact-actions"><button class="btn btn-primary" id="destinationSubmitBtn" type="submit">Agregar destino recomendado</button><button class="btn btn-secondary is-hidden" id="cancelDestinationEditBtn" type="button">Cancelar edicion</button></div><p class="success" id="destinationMessage"></p></form>
+                    <div class="destination-grid" id="recommendationGrid"></div>
+                  </section>
+                </article>
+              </div>
+            </div>
+          </main>
         </div>
       </div>
     </div>
   </section>
 
-  <footer><div class="container footer-grid"><div><strong class="footer-brand">&copy; 2026 WayTure - Panel privado</strong><p class="muted">M&oacute;dulo privado conectado a Firebase Auth y Firestore para gesti&oacute;n real de viajes.</p></div><div class="footer-links"><a href="index.html#inicio">Inicio</a><a href="admin-viajes.html">Panel privado</a><a href="rastreo-viaje.html">Rastreo</a><a href="index.html#contacto">Contacto</a></div></div></footer>
+  <footer><div class="container footer-grid"><div><strong class="footer-brand">&copy; 2026 WayTure - Dashboard privado</strong><p class="muted">Modulo conectado a Firebase Auth, Firestore y mapa Leaflet.</p></div><div class="footer-links"><a href="index.html#inicio">Inicio</a><a href="admin-viajes.html">Panel privado</a><a href="admin-solicitudes.html">Solicitudes</a><a href="rastreo-viaje.html">Rastreo</a></div></div></footer>
 
-    <script type="module" src="js/admin-page.js"></script>
-    <script type="module" src="js/auth-state.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script type="module" src="js/admin-page.js"></script>
+  <script type="module" src="js/auth-state.js"></script>
 </body>
 </html>

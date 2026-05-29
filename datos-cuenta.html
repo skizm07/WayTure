@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Datos de cuenta WayTure separados del panel de viajes." />
+  <meta name="theme-color" content="#0f172a" />
+  <title>WayTure | Datos de cuenta</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="stylesheet" href="css/rastreo-viaje.css" />
+</head>
+<body>
+  <header>
+    <div class="container header-wrap">
+      <a class="logo" href="index.html#inicio" aria-label="WayTure Inicio"><span class="logo-badge" aria-hidden="true"><img src="assets/WayTureNoMAP.png" alt="Logo WayTure" /></span><span class="logo-word">WayTure</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menu"><span>Menu</span></button>
+      <nav id="mainNav" aria-label="Navegacion principal">
+        <a href="panel-usuario.html#mis-viajes" data-user-link hidden>Mi panel</a>
+        <a href="rastreo-viaje.html">Rastreo</a>
+        <a href="admin-viajes.html" data-admin-link hidden>Panel privado</a>
+        <a href="admin-solicitudes.html" data-admin-link hidden>Solicitudes</a>
+        <a href="login.html" data-login-link>Login</a>
+        <a href="registro.html" data-register-link>Registro</a>
+        <div class="user-menu" data-user-menu hidden><button class="user-menu-button" type="button" data-user-menu-button aria-expanded="false" aria-label="Abrir menu de usuario"><span class="user-avatar" data-user-initials>U</span><span class="user-menu-name" data-user-name>Usuario</span></button><div class="user-menu-dropdown" data-user-menu-dropdown><p class="user-menu-greeting" data-user-greeting></p><a href="panel-usuario.html#crear-viaje" data-user-link>Crear viaje</a><a href="panel-usuario.html#mis-viajes" data-user-link>Mis viajes asignados</a><a href="datos-cuenta.html" data-user-link>Datos de cuenta</a><a href="admin-viajes.html" data-admin-link hidden>Panel privado</a><button type="button" data-logout-button>Cerrar sesion</button></div></div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="module-hero compact-user-hero">
+    <div class="container reveal">
+      <span class="eyebrow">Cuenta WayTure</span>
+      <h1 class="module-title">Datos de cuenta</h1>
+      <p class="module-lead">Actualiza tu perfil en una pagina separada del dashboard de viajes.</p>
+      <div class="module-actions"><a class="btn btn-primary" href="panel-usuario.html#mis-viajes">Volver a mis viajes</a><a class="btn btn-secondary" href="rastreo-viaje.html">Rastreo publico</a></div>
+    </div>
+  </section>
+
+  <section class="user-account-shell">
+    <div class="container user-account-grid single-column" id="accountContent">
+      <article class="card user-panel-card full-width">
+        <span class="eyebrow">Verificando sesion</span>
+        <h2>Cargando datos</h2>
+        <p class="muted">Un momento mientras WayTure carga tu perfil.</p>
+      </article>
+    </div>
+  </section>
+
+  <footer><div class="container footer-grid"><div><strong class="footer-brand">&copy; 2026 WayTure - Cuenta</strong><p class="muted">Perfil conectado a Firebase Authentication y Firestore.</p></div><div class="footer-links"><a href="panel-usuario.html#mis-viajes">Mi panel</a><a href="rastreo-viaje.html">Rastreo</a><a href="index.html#contacto">Contacto</a></div></div></footer>
+
+  <script type="module" src="js/account-page.js"></script>
+  <script type="module" src="js/auth-state.js"></script>
+</body>
+</html>

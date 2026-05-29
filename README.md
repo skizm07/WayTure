@@ -375,7 +375,62 @@ Las reglas exactas dependen del entorno, pero la app necesita:
 
 ## Cómo ejecutar en local
 
-No hay instalación de dependencias ni build.
+No hay build. Para la parte visual puede usarse Live Server, y para la actividad con Postman se agregó una API REST local en Node.js.
+
+### Opción API REST + Postman
+
+Desde la carpeta del proyecto:
+
+```bash
+npm start
+```
+
+Luego abre:
+
+```text
+http://localhost:3000
+```
+
+La API queda disponible en:
+
+```text
+http://localhost:3000/api
+```
+
+Endpoints principales:
+
+- `GET /api/health`
+- `GET /api/usuarios`
+- `POST /api/usuarios`
+- `GET /api/viajes`
+- `POST /api/viajes`
+- `GET /api/viajes/:id`
+- `PUT /api/viajes/:id`
+- `PATCH /api/viajes/:id/estado`
+- `PATCH /api/viajes/:id/gps`
+- `DELETE /api/viajes/:id`
+- `GET /api/rastreo/:codigo`
+- `GET /api/viajeros/ubicaciones`
+
+Colección de Postman:
+
+```text
+docs/WayTure.postman_collection.json
+```
+
+La API REST está conectada a Firebase Firestore. Al consultar:
+
+```text
+GET /api/health
+```
+
+debe aparecer `database: "firebase"` cuando la conexión está activa. Si aparece `database: "local-fallback"`, el servidor no pudo llegar a Firebase y usa temporalmente el respaldo local.
+
+El respaldo local guarda datos en:
+
+```text
+data/wayture-api.json
+```
 
 ### Opción recomendada: Live Server
 

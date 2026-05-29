@@ -1,6 +1,3 @@
-import { db } from "./firebase-config.js";
-import { addDoc, collection, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
-
     // Tema 28: Storage
     const moneyFormatter = new Intl.NumberFormat('es-CO', {
       style: 'currency',
@@ -27,6 +24,21 @@ import { addDoc, collection, serverTimestamp } from "https://www.gstatic.com/fir
     const closeOfferBtn = document.getElementById('closeOffer');
     const menuToggle = document.getElementById('menuToggle');
     const mainNav = document.getElementById('mainNav');
+
+    async function getFirestoreHelpers() {
+      const [{ db }, firestore] = await Promise.all([
+        import("./firebase-config.js"),
+        import("https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js")
+      ]);
+
+      return {
+        db,
+        addDoc: firestore.addDoc,
+        collection: firestore.collection,
+        serverTimestamp: firestore.serverTimestamp
+      };
+    }
+
     function calculateBudget() {
       const values = budgetInputs.map(input => Number(input.value) || 0);
       const total = values.reduce((acc, val) => acc + val, 0);
@@ -144,6 +156,7 @@ import { addDoc, collection, serverTimestamp } from "https://www.gstatic.com/fir
       const message = formData.get('message') || 'Sin mensaje adicional.';
       try {
         formResponse.textContent = 'Guardando solicitud...';
+        const { db, addDoc, collection, serverTimestamp } = await getFirestoreHelpers();
         await addDoc(collection(db, 'contactos'), {
           name,
           email,
@@ -171,6 +184,7 @@ import { addDoc, collection, serverTimestamp } from "https://www.gstatic.com/fir
 
         try {
           newsletterResponse.textContent = 'Guardando suscripción...';
+          const { db, addDoc, collection, serverTimestamp } = await getFirestoreHelpers();
           await addDoc(collection(db, 'suscripciones'), {
             email,
             status: 'activa',
@@ -187,15 +201,20 @@ import { addDoc, collection, serverTimestamp } from "https://www.gstatic.com/fir
       });
     }
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.15 });
+    if ('IntersectionObserver' in window) {
+      document.documentElement.classList.add('reveal-enabled');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15 });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }
 
     // Tema 25: Canvas
     function drawCanvas() {
@@ -306,12 +325,14 @@ let condicion1_cumplida = false;
 
       tituloPrincipal.classList.add("mission-title");
 
-      const mensaje = document.createElement("p");
-      mensaje.textContent = "Misión Cumplida: Agente DOM activado.";
+      const mensaje = document.getElementById("mensaje-mision") || document.createElement("p");
+      mensaje.textContent = "Misión Cumplida: Agente DOOM activado.";
       mensaje.className = "mission-message";
       mensaje.id = "mensaje-mision";
 
-      tituloPrincipal.parentNode.insertBefore(mensaje, tituloPrincipal.nextSibling);
+      if (!mensaje.isConnected) {
+        tituloPrincipal.parentNode.insertBefore(mensaje, tituloPrincipal.nextSibling);
+      }
     }
   }
 

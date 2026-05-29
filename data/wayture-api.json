@@ -1,0 +1,2198 @@
+{
+  "usuarios": [
+    {
+      "id": "0ld7lzqZmNZ5Qp7Jh4Cdd6O24633",
+      "uid": "0ld7lzqZmNZ5Qp7Jh4Cdd6O24633",
+      "rol": "admin",
+      "creadoEn": "2026-05-26T00:17:26.339Z",
+      "alias": "one",
+      "email": "juan@gmail.com",
+      "nombre": "one"
+    },
+    {
+      "id": "76smN7CwYDNP7Y9GOivVnoQt2M32",
+      "nombre": "JUAN",
+      "email": "droidjuan9@gmail.com",
+      "alias": "ONE",
+      "rol": "usuario",
+      "creadoEn": "2026-05-02T02:39:40.773Z",
+      "uid": "76smN7CwYDNP7Y9GOivVnoQt2M32"
+    },
+    {
+      "id": "8SwZyVyKEogIL5Uo8JogDhILESm2",
+      "email": "juanprojass312@gmail.com",
+      "alias": "Rojitas",
+      "nombre": "Juan",
+      "uid": "8SwZyVyKEogIL5Uo8JogDhILESm2",
+      "rol": "admin",
+      "creadoEn": "2026-05-29T03:54:05.934Z"
+    },
+    {
+      "id": "CXGopzaBxSSedq6yxlR5T9rhOw92",
+      "creadoEn": "2026-05-26T01:22:20.744Z",
+      "rol": "usuario",
+      "uid": "CXGopzaBxSSedq6yxlR5T9rhOw92",
+      "alias": "JpEjp",
+      "email": "juanrojas@gmail.com",
+      "nombre": "Juan",
+      "actualizadoEn": "2026-05-26T01:22:20.744Z"
+    },
+    {
+      "id": "Go9MfxkJCZcPLKzlyVo11FBIwEU2",
+      "nombre": "ONE",
+      "email": "fajardojuan735@gmail.com",
+      "alias": "ONE",
+      "rol": "admin",
+      "creadoEn": "2026-05-02T02:41:55.734Z",
+      "uid": "Go9MfxkJCZcPLKzlyVo11FBIwEU2"
+    },
+    {
+      "id": "fuOnI7Y3I0UgFRWN65fhFBjCo2l1",
+      "uid": "fuOnI7Y3I0UgFRWN65fhFBjCo2l1",
+      "rol": "admin",
+      "creadoEn": "2026-05-26T00:20:06.473Z",
+      "nombre": "David",
+      "email": "perillad823@gmail.com",
+      "alias": "skizm"
+    },
+    {
+      "id": "mMzD2nHn9sVmi3U4eZdydxLIDxL2",
+      "uid": "mMzD2nHn9sVmi3U4eZdydxLIDxL2",
+      "rol": "admin",
+      "creadoEn": "2026-05-08T14:59:27.516Z",
+      "nombre": "Cardenas",
+      "email": "Cardenas@gmail.com",
+      "alias": "Chupona"
+    }
+  ],
+  "viajes": [
+    {
+      "id": "8LzDimyC77P8YaEWA7kz",
+      "destino": "Roma, Italia",
+      "lastLocation": "Aeropuerto Internacional El Dorado, Bogotá",
+      "statusHistory": [
+        {
+          "comment": "Viaje creado desde el panel administrativo.",
+          "changedAt": "2026-05-26T01:42:39.718Z",
+          "fecha": "2026-05-26T01:42:39.718Z",
+          "previousStatus": "",
+          "newStatus": "Planificado",
+          "lat": 4.7016,
+          "observacion": "Viaje creado desde el panel administrativo.",
+          "location": "Aeropuerto Internacional El Dorado, Bogotá",
+          "lng": -74.1469,
+          "ubicacion": "Aeropuerto Internacional El Dorado, Bogotá",
+          "progreso": 0,
+          "id": "1779759759718-f57de4624003f8",
+          "estado": "Planificado"
+        },
+        {
+          "progreso": 20,
+          "id": "1780064637815-6457493707f668",
+          "estado": "En preparación",
+          "comment": "Estado actualizado por GPS",
+          "fecha": "2026-05-29T14:23:57.815Z",
+          "changedAt": "2026-05-29T14:23:57.815Z",
+          "previousStatus": "Planificado",
+          "newStatus": "En preparación",
+          "location": "Salida de Aeropuerto Internacional El Dorado, Bogotá",
+          "lat": 10.28178,
+          "observacion": "Estado actualizado por GPS",
+          "ubicacion": "Salida de Aeropuerto Internacional El Dorado, Bogotá",
+          "lng": -61.150405
+        },
+        {
+          "progreso": 40,
+          "id": "1780064639314-054eb6cb3aef68",
+          "estado": "En ruta",
+          "fecha": "2026-05-29T14:23:59.314Z",
+          "changedAt": "2026-05-29T14:23:59.314Z",
+          "comment": "Estado actualizado por GPS",
+          "newStatus": "En ruta",
+          "previousStatus": "En preparación",
+          "lng": -45.554611,
+          "ubicacion": "Lyon",
+          "observacion": "Estado actualizado por GPS",
+          "lat": 16.977996,
+          "location": "Lyon"
+        },
+        {
+          "estado": "En destino",
+          "progreso": 80,
+          "id": "1780064642317-bfe9c86bc3fc18",
+          "observacion": "Estado actualizado por GPS",
+          "lat": 36.32262,
+          "location": "Cerca de Roma, Italia",
+          "lng": -0.500095,
+          "ubicacion": "Cerca de Roma, Italia",
+          "comment": "Estado actualizado por GPS",
+          "fecha": "2026-05-29T14:24:02.317Z",
+          "changedAt": "2026-05-29T14:24:02.317Z",
+          "previousStatus": "En ruta",
+          "newStatus": "En destino"
+        },
+        {
+          "comment": "Viaje finalizado por GPS",
+          "changedAt": "2026-05-29T14:24:07.588Z",
+          "fecha": "2026-05-29T14:24:07.588Z",
+          "previousStatus": "En destino",
+          "newStatus": "Finalizado",
+          "lat": 41.9028,
+          "observacion": "Viaje finalizado por GPS",
+          "location": "Roma, Italia",
+          "lng": 12.4964,
+          "ubicacion": "Roma, Italia",
+          "progreso": 100,
+          "id": "1780064647588-e54a2eced8f11",
+          "estado": "Finalizado"
+        },
+        {
+          "estado": "Planificado",
+          "id": "1780064914881-94486c8aacfe08",
+          "progreso": 0,
+          "lng": -74.1469,
+          "ubicacion": "Aeropuerto Internacional El Dorado, Bogotá",
+          "lat": 4.7016,
+          "observacion": "GPS reiniciado desde WayTure",
+          "location": "Aeropuerto Internacional El Dorado, Bogotá",
+          "newStatus": "Planificado",
+          "previousStatus": "Finalizado",
+          "fecha": "2026-05-29T14:28:34.881Z",
+          "changedAt": "2026-05-29T14:28:34.881Z",
+          "comment": "GPS reiniciado desde WayTure"
+        },
+        {
+          "comment": "Estado actualizado por GPS",
+          "changedAt": "2026-05-29T14:31:45.726Z",
+          "fecha": "2026-05-29T14:31:45.726Z",
+          "previousStatus": "Planificado",
+          "newStatus": "En preparación",
+          "observacion": "Estado actualizado por GPS",
+          "lat": 10.28178,
+          "location": "Salida de Aeropuerto Internacional El Dorado, Bogotá",
+          "lng": -61.150405,
+          "ubicacion": "Salida de Aeropuerto Internacional El Dorado, Bogotá",
+          "progreso": 20,
+          "id": "1780065105726-1145559f66a2d",
+          "estado": "En preparación"
+        },
+        {
+          "newStatus": "En ruta",
+          "previousStatus": "En preparación",
+          "changedAt": "2026-05-29T14:31:47.229Z",
+          "fecha": "2026-05-29T14:31:47.229Z",
+          "comment": "Estado actualizado por GPS",
+          "lng": -45.554611,
+          "ubicacion": "Lyon",
+          "observacion": "Estado actualizado por GPS",
+          "lat": 16.977996,
+          "location": "Lyon",
+          "id": "1780065107229-a537b17062a1",
+          "progreso": 40,
+          "estado": "En ruta"
+        },
+        {
+          "id": "1780065110235-dd23e8eda8372",
+          "progreso": 80,
+          "estado": "En destino",
+          "previousStatus": "En ruta",
+          "newStatus": "En destino",
+          "comment": "Estado actualizado por GPS",
+          "changedAt": "2026-05-29T14:31:50.235Z",
+          "fecha": "2026-05-29T14:31:50.235Z",
+          "observacion": "Estado actualizado por GPS",
+          "lat": 36.32262,
+          "location": "Cerca de Roma, Italia",
+          "lng": -0.500095,
+          "ubicacion": "Cerca de Roma, Italia"
+        },
+        {
+          "id": "1780065115161-b5064dcd552408",
+          "progreso": 100,
+          "estado": "Finalizado",
+          "newStatus": "Finalizado",
+          "previousStatus": "En destino",
+          "fecha": "2026-05-29T14:31:55.161Z",
+          "changedAt": "2026-05-29T14:31:55.161Z",
+          "comment": "Viaje finalizado por GPS",
+          "ubicacion": "Roma, Italia",
+          "lng": 12.4964,
+          "location": "Roma, Italia",
+          "observacion": "Viaje finalizado por GPS",
+          "lat": 41.9028
+        },
+        {
+          "lat": 4.7016,
+          "observacion": "GPS reiniciado desde WayTure",
+          "location": "Aeropuerto Internacional El Dorado, Bogotá",
+          "lng": -74.1469,
+          "ubicacion": "Aeropuerto Internacional El Dorado, Bogotá",
+          "comment": "GPS reiniciado desde WayTure",
+          "changedAt": "2026-05-29T14:31:58.561Z",
+          "fecha": "2026-05-29T14:31:58.561Z",
+          "previousStatus": "Finalizado",
+          "newStatus": "Planificado",
+          "estado": "Planificado",
+          "progreso": 0,
+          "id": "1780065118561-c8c630dbd6ba78"
+        }
+      ],
+      "endDate": "2026-06-07",
+      "createdBy": "fuOnI7Y3I0UgFRWN65fhFBjCo2l1",
+      "itinerary": [],
+      "finishedAt": "",
+      "status": "Planificado",
+      "gpsRealActivo": false,
+      "codigoViaje": "WT-ROMA-ITALIA-2846",
+      "activitiesCost": 420,
+      "gpsDistanciaRutaKm": 0,
+      "assignedByEmail": "perillad823@gmail.com",
+      "currentLocation": {
+        "lat": 4.7016,
+        "lng": -74.1469,
+        "label": "Aeropuerto Internacional El Dorado, Bogotá"
+      },
+      "userEmail": "juanrojas@gmail.com",
+      "notes": "",
+      "userId": "CXGopzaBxSSedq6yxlR5T9rhOw92",
+      "origen": "Aeropuerto Internacional El Dorado, Bogotá",
+      "assignedAt": "2026-05-26T01:42:48.374Z",
+      "transport": 1512,
+      "hotel": 2070,
+      "puntoIntermedio2": "Milán",
+      "nombreViaje": "Viaje a Roma, Italia",
+      "assignedBy": "fuOnI7Y3I0UgFRWN65fhFBjCo2l1",
+      "updatedAt": "2026-05-29T14:30:47.600Z",
+      "destination": "Roma, Italia",
+      "code": "WT-ROMA-ITALIA-2846",
+      "lastUpdate": "2026-05-29T14:31:58.561Z",
+      "mapQuery": "4.7016,-74.1469",
+      "simulacionActiva": false,
+      "startDate": "2026-06-02",
+      "gpsFueraDeRuta": false,
+      "createdAt": "2026-05-26T01:42:48.374Z",
+      "experience": "Cultural",
+      "createdByRole": "admin",
+      "progreso": 0,
+      "puntoIntermedio1": "Lyon",
+      "food": 864,
+      "estado": "Planificado",
+      "route": [
+        {
+          "lat": 4.7016,
+          "lng": -74.1469,
+          "time": "2026-05-26T01:42:39.470Z",
+          "label": "Aeropuerto Internacional El Dorado, Bogotá"
+        },
+        {
+          "label": "Salida de Aeropuerto Internacional El Dorado, Bogotá",
+          "time": "2026-05-26T02:27:39.470Z",
+          "lng": -61.150405,
+          "lat": 10.28178
+        },
+        {
+          "lat": 16.977996,
+          "lng": -45.554611,
+          "time": "2026-05-26T03:12:39.470Z",
+          "label": "Lyon"
+        },
+        {
+          "lat": 29.254392,
+          "label": "Milán",
+          "lng": -16.962322,
+          "time": "2026-05-26T04:42:39.470Z"
+        },
+        {
+          "lat": 36.32262,
+          "label": "Cerca de Roma, Italia",
+          "lng": -0.500095,
+          "time": "2026-05-26T05:32:39.470Z"
+        },
+        {
+          "lat": 41.9028,
+          "lng": 12.4964,
+          "time": "2026-05-26T06:12:39.470Z",
+          "label": "Roma, Italia"
+        }
+      ],
+      "travelers": 2
+    },
+    {
+      "id": "CwLJTrn23gqZAOnqiZyn",
+      "progreso": 20,
+      "experience": "Cultural",
+      "createdByRole": "admin",
+      "route": [
+        {
+          "lat": 4.7016,
+          "lng": -74.1469,
+          "label": "Aeropuerto Internacional El Dorado, Bogotá",
+          "time": "2026-05-26T00:21:27.856Z"
+        },
+        {
+          "lat": 10.10328,
+          "lng": -74.125765,
+          "label": "Salida de Aeropuerto Internacional El Dorado, Bogotá",
+          "time": "2026-05-26T01:06:27.856Z"
+        },
+        {
+          "lat": 16.585296,
+          "lng": -74.100403,
+          "label": "Punto intermedio 1",
+          "time": "2026-05-26T01:51:27.856Z"
+        },
+        {
+          "lat": 28.468992,
+          "lng": -74.053906,
+          "label": "Punto intermedio 2",
+          "time": "2026-05-26T03:21:27.856Z"
+        },
+        {
+          "lat": 35.31112,
+          "lng": -74.027135,
+          "label": "Cerca de Nueva York, Estados Unidos",
+          "time": "2026-05-26T04:11:27.856Z"
+        },
+        {
+          "lat": 40.7128,
+          "lng": -74.006,
+          "label": "Nueva York, Estados Unidos",
+          "time": "2026-05-26T04:51:27.856Z"
+        }
+      ],
+      "travelers": 2,
+      "puntoIntermedio1": "Punto intermedio 1",
+      "food": 1037,
+      "estado": "En ruta",
+      "lastUpdate": "2026-05-29T15:12:04.574Z",
+      "mapQuery": "4.7016,-74.1469",
+      "code": "WT-NUEVA-YORK-EST-9284",
+      "createdAt": "2026-05-26T00:21:36.765Z",
+      "simulacionActiva": false,
+      "gpsFueraDeRuta": true,
+      "startDate": "2026-06-02",
+      "currentLocation": {
+        "lat": 4.7016,
+        "lng": -74.1469,
+        "label": "GPS real del dispositivo"
+      },
+      "userEmail": "perillad823@gmail.com",
+      "origen": "Aeropuerto Internacional El Dorado, Bogotá",
+      "notes": "",
+      "userId": "fuOnI7Y3I0UgFRWN65fhFBjCo2l1",
+      "gpsDistanciaRutaKm": 4333,
+      "nombreViaje": "Viaje a Nueva York, Estados Unidos",
+      "updatedAt": "2026-05-29T15:12:04.574Z",
+      "destination": "Nueva York, Estados Unidos",
+      "transport": 1512,
+      "puntoIntermedio2": "Punto intermedio 2",
+      "hotel": 2484,
+      "lastLocation": "GPS real del dispositivo",
+      "statusHistory": [
+        {
+          "id": "1779754888133-fd2b247a9c7ee",
+          "progreso": 0,
+          "estado": "Planificado",
+          "newStatus": "Planificado",
+          "previousStatus": "",
+          "changedAt": "2026-05-26T00:21:28.133Z",
+          "fecha": "2026-05-26T00:21:28.133Z",
+          "comment": "Viaje creado por el usuario.",
+          "lng": -74.1469,
+          "ubicacion": "Aeropuerto Internacional El Dorado, Bogotá",
+          "observacion": "Viaje creado por el usuario.",
+          "lat": 4.7016,
+          "location": "Aeropuerto Internacional El Dorado, Bogotá"
+        },
+        {
+          "id": "1779755679685-02d428e36e831",
+          "progreso": 60,
+          "estado": "En ruta",
+          "newStatus": "En ruta",
+          "previousStatus": "Planificado",
+          "fecha": "2026-05-26T00:34:39.685Z",
+          "changedAt": "2026-05-26T00:34:39.685Z",
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "lng": 13.404954,
+          "ubicacion": "GPS real del dispositivo (precisión 150 m)",
+          "lat": 52.520007,
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "location": "GPS real del dispositivo (precisión 150 m)"
+        },
+        {
+          "changedAt": "2026-05-26T00:45:14.646Z",
+          "fecha": "2026-05-26T00:45:14.646Z",
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "newStatus": "Fuera de ruta",
+          "previousStatus": "En ruta",
+          "lng": 37.6173,
+          "ubicacion": "GPS real del dispositivo (55.755826, 37.6173) - precision 150 m",
+          "lat": 55.755826,
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "location": "GPS real del dispositivo (55.755826, 37.6173) - precision 150 m",
+          "progreso": 49,
+          "id": "1779756314646-7c9f0890aa2bd8",
+          "estado": "Fuera de ruta"
+        },
+        {
+          "estado": "En preparación",
+          "id": "1779756793077-6ef07738860c58",
+          "progreso": 0,
+          "ubicacion": "Aeropuerto Internacional El Dorado, Bogota (4.594669, -74.082955) - precision 105 m",
+          "lng": -74.082955,
+          "location": "Aeropuerto Internacional El Dorado, Bogota (4.594669, -74.082955) - precision 105 m",
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "lat": 4.594669,
+          "newStatus": "En preparación",
+          "previousStatus": "Fuera de ruta",
+          "fecha": "2026-05-26T00:53:13.077Z",
+          "changedAt": "2026-05-26T00:53:13.077Z",
+          "comment": "Ubicación GPS real actualizada desde el navegador."
+        },
+        {
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "lat": 52.520007,
+          "location": "Berlin, Alemania (52.520007, 13.404954) - precision 150 m",
+          "lng": 13.404954,
+          "ubicacion": "Berlin, Alemania (52.520007, 13.404954) - precision 150 m",
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "fecha": "2026-05-26T00:53:27.085Z",
+          "changedAt": "2026-05-26T00:53:27.085Z",
+          "previousStatus": "En preparación",
+          "newStatus": "Fuera de ruta",
+          "estado": "Fuera de ruta",
+          "progreso": 0,
+          "id": "1779756807085-4a1f5f1014d34"
+        },
+        {
+          "lng": -74.082802,
+          "ubicacion": "Aeropuerto Internacional El Dorado, Bogota (4.594751, -74.082802) - precision 95 m",
+          "lat": 4.594751,
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "location": "Aeropuerto Internacional El Dorado, Bogota (4.594751, -74.082802) - precision 95 m",
+          "newStatus": "En preparación",
+          "previousStatus": "Fuera de ruta",
+          "changedAt": "2026-05-26T00:53:47.735Z",
+          "fecha": "2026-05-26T00:53:47.735Z",
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "estado": "En preparación",
+          "id": "1779756827735-b296d1d01ad84",
+          "progreso": 0
+        },
+        {
+          "estado": "Fuera de ruta",
+          "progreso": 0,
+          "id": "1779758222988-f949f0751b9c28",
+          "ubicacion": "GPS real del dispositivo (-23.55052, -46.633309) - precision 150 m",
+          "lng": -46.633309,
+          "location": "GPS real del dispositivo (-23.55052, -46.633309) - precision 150 m",
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "lat": -23.55052,
+          "fecha": "2026-05-26T01:17:02.988Z",
+          "changedAt": "2026-05-26T01:17:02.988Z",
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "newStatus": "Fuera de ruta",
+          "previousStatus": "En preparación"
+        },
+        {
+          "estado": "En preparación",
+          "progreso": 0,
+          "id": "1780066993664-f5c0229a9dc41",
+          "location": "Aeropuerto Internacional El Dorado, Bogota (4.66, -74.04) - precision 50000 m",
+          "lat": 4.66,
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "ubicacion": "Aeropuerto Internacional El Dorado, Bogota (4.66, -74.04) - precision 50000 m",
+          "lng": -74.04,
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "fecha": "2026-05-29T15:03:13.664Z",
+          "changedAt": "2026-05-29T15:03:13.664Z",
+          "previousStatus": "Fuera de ruta",
+          "newStatus": "En preparación"
+        },
+        {
+          "previousStatus": "En preparación",
+          "newStatus": "Fuera de ruta",
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "fecha": "2026-05-29T15:03:20.609Z",
+          "changedAt": "2026-05-29T15:03:20.609Z",
+          "location": "Moscu, Rusia (55.755826, 37.6173) - precision 150 m",
+          "lat": 55.755826,
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "ubicacion": "Moscu, Rusia (55.755826, 37.6173) - precision 150 m",
+          "lng": 37.6173,
+          "id": "1780067000609-ba2dd0499969f8",
+          "progreso": 0,
+          "estado": "Fuera de ruta"
+        },
+        {
+          "lng": -74.04,
+          "ubicacion": "Aeropuerto Internacional El Dorado, Bogota (4.66, -74.04) - precision 50000 m",
+          "lat": 4.66,
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "location": "Aeropuerto Internacional El Dorado, Bogota (4.66, -74.04) - precision 50000 m",
+          "changedAt": "2026-05-29T15:04:37.234Z",
+          "fecha": "2026-05-29T15:04:37.234Z",
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "newStatus": "En preparación",
+          "previousStatus": "Fuera de ruta",
+          "estado": "En preparación",
+          "progreso": 0,
+          "id": "1780067077234-e40d3aebb73ff"
+        },
+        {
+          "location": "GPS real del dispositivo (51.507351, -0.127758) - precision 150 m",
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "lat": 51.507351,
+          "ubicacion": "GPS real del dispositivo (51.507351, -0.127758) - precision 150 m",
+          "lng": -0.127758,
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "changedAt": "2026-05-29T15:05:29.448Z",
+          "fecha": "2026-05-29T15:05:29.448Z",
+          "previousStatus": "En preparación",
+          "newStatus": "Fuera de ruta",
+          "estado": "Fuera de ruta",
+          "progreso": 0,
+          "id": "1780067129448-0fe75de7de4c2"
+        },
+        {
+          "comment": "Ubicacion GPS real actualizada desde API REST.",
+          "changedAt": "2026-05-29T15:07:02.697Z",
+          "fecha": "2026-05-29T15:07:02.697Z",
+          "previousStatus": "Fuera de ruta",
+          "newStatus": "En ruta",
+          "observacion": "Ubicacion GPS real actualizada desde API REST.",
+          "lat": 4.7016,
+          "location": "GPS real del dispositivo",
+          "lng": -74.1469,
+          "ubicacion": "GPS real del dispositivo",
+          "progreso": 20,
+          "id": "1780067222697-3df9a2166fc5e",
+          "estado": "En ruta"
+        },
+        {
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "lat": 4.66,
+          "location": "Aeropuerto Internacional El Dorado, Bogota (4.66, -74.04) - precision 50000 m",
+          "lng": -74.04,
+          "ubicacion": "Aeropuerto Internacional El Dorado, Bogota (4.66, -74.04) - precision 50000 m",
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "changedAt": "2026-05-29T15:08:23.761Z",
+          "fecha": "2026-05-29T15:08:23.761Z",
+          "previousStatus": "En ruta",
+          "newStatus": "En preparación",
+          "estado": "En preparación",
+          "progreso": 0,
+          "id": "1780067303761-accab633356cc8"
+        },
+        {
+          "lat": 19.075984,
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "location": "GPS real del dispositivo (19.075984, 72.877656) - precision 150 m",
+          "lng": 72.877656,
+          "ubicacion": "GPS real del dispositivo (19.075984, 72.877656) - precision 150 m",
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "fecha": "2026-05-29T15:08:27.195Z",
+          "changedAt": "2026-05-29T15:08:27.195Z",
+          "previousStatus": "En preparación",
+          "newStatus": "Fuera de ruta",
+          "estado": "Fuera de ruta",
+          "progreso": 0,
+          "id": "1780067307195-03041f012b3198"
+        },
+        {
+          "observacion": "Ubicacion GPS real actualizada desde API REST.",
+          "lat": 4.7016,
+          "location": "GPS real del dispositivo",
+          "lng": -74.1469,
+          "ubicacion": "GPS real del dispositivo",
+          "comment": "Ubicacion GPS real actualizada desde API REST.",
+          "fecha": "2026-05-29T15:08:33.706Z",
+          "changedAt": "2026-05-29T15:08:33.706Z",
+          "previousStatus": "Fuera de ruta",
+          "newStatus": "En ruta",
+          "estado": "En ruta",
+          "progreso": 20,
+          "id": "1780067313706-e3ae8bbaf08b1"
+        },
+        {
+          "fecha": "2026-05-29T15:09:33.938Z",
+          "changedAt": "2026-05-29T15:09:33.938Z",
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "newStatus": "Fuera de ruta",
+          "previousStatus": "En ruta",
+          "ubicacion": "GPS real del dispositivo (19.075984, 72.877656) - precision 150 m",
+          "lng": 72.877656,
+          "location": "GPS real del dispositivo (19.075984, 72.877656) - precision 150 m",
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "lat": 19.075984,
+          "progreso": 0,
+          "id": "1780067373938-15e4bf240f18f8",
+          "estado": "Fuera de ruta"
+        },
+        {
+          "estado": "En ruta",
+          "progreso": 20,
+          "id": "1780067381890-7d2b5f46f833f",
+          "lng": -74.1469,
+          "ubicacion": "GPS real del dispositivo",
+          "lat": 4.7016,
+          "observacion": "Ubicacion GPS real actualizada desde API REST.",
+          "location": "GPS real del dispositivo",
+          "fecha": "2026-05-29T15:09:41.890Z",
+          "changedAt": "2026-05-29T15:09:41.890Z",
+          "comment": "Ubicacion GPS real actualizada desde API REST.",
+          "newStatus": "En ruta",
+          "previousStatus": "Fuera de ruta"
+        },
+        {
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "fecha": "2026-05-29T15:10:54.081Z",
+          "changedAt": "2026-05-29T15:10:54.081Z",
+          "previousStatus": "En ruta",
+          "newStatus": "Fuera de ruta",
+          "location": "GPS real del dispositivo (19.075984, 72.877656) - precision 150 m",
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "lat": 19.075984,
+          "ubicacion": "GPS real del dispositivo (19.075984, 72.877656) - precision 150 m",
+          "lng": 72.877656,
+          "progreso": 0,
+          "id": "1780067454081-2cecab5f901b5",
+          "estado": "Fuera de ruta"
+        },
+        {
+          "comment": "Ubicacion GPS real actualizada desde API REST.",
+          "changedAt": "2026-05-29T15:11:01.875Z",
+          "fecha": "2026-05-29T15:11:01.875Z",
+          "previousStatus": "Fuera de ruta",
+          "newStatus": "En ruta",
+          "lat": 4.7016,
+          "observacion": "Ubicacion GPS real actualizada desde API REST.",
+          "location": "GPS real del dispositivo",
+          "lng": -74.1469,
+          "ubicacion": "GPS real del dispositivo",
+          "progreso": 20,
+          "id": "1780067461875-b27a4459ffbff",
+          "estado": "En ruta"
+        },
+        {
+          "changedAt": "2026-05-29T15:11:54.457Z",
+          "fecha": "2026-05-29T15:11:54.457Z",
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "newStatus": "Fuera de ruta",
+          "previousStatus": "En ruta",
+          "ubicacion": "GPS real del dispositivo (51.507351, -0.127758) - precision 150 m",
+          "lng": -0.127758,
+          "location": "GPS real del dispositivo (51.507351, -0.127758) - precision 150 m",
+          "lat": 51.507351,
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "progreso": 0,
+          "id": "1780067514457-23d68230d4225",
+          "estado": "Fuera de ruta"
+        },
+        {
+          "id": "1780067524574-a318d4d893508",
+          "estado": "En ruta",
+          "newStatus": "En ruta",
+          "previousStatus": "Fuera de ruta",
+          "progreso": 20,
+          "ubicacion": "GPS real del dispositivo",
+          "location": "GPS real del dispositivo",
+          "lat": 4.7016,
+          "lng": -74.1469,
+          "fecha": "2026-05-29T15:12:04.574Z",
+          "changedAt": "2026-05-29T15:12:04.574Z",
+          "observacion": "Ubicacion GPS real actualizada desde API REST.",
+          "comment": "Ubicacion GPS real actualizada desde API REST."
+        }
+      ],
+      "endDate": "2026-06-08",
+      "destino": "Nueva York, Estados Unidos",
+      "codigoViaje": "WT-NUEVA-YORK-EST-9284",
+      "activitiesCost": 420,
+      "createdBy": "fuOnI7Y3I0UgFRWN65fhFBjCo2l1",
+      "itinerary": [],
+      "finishedAt": "",
+      "status": "En ruta",
+      "gpsRealActivo": true
+    },
+    {
+      "id": "WT-0001",
+      "progreso": 3,
+      "experience": "Cultural",
+      "createdByRole": "admin",
+      "route": [
+        {
+          "lat": 4.711,
+          "label": "Bogotá",
+          "lng": -74.0721,
+          "time": "2026-05-25T20:28:50.762Z"
+        },
+        {
+          "lat": 4.94098,
+          "label": "Salida de Bogotá",
+          "lng": -74.298465,
+          "time": "2026-05-25T21:13:50.762Z"
+        },
+        {
+          "time": "2026-05-25T21:58:50.762Z",
+          "lng": -74.570103,
+          "label": "Facatativá",
+          "lat": 5.216956
+        },
+        {
+          "lat": 5.0703,
+          "label": "Manizales",
+          "lng": -75.5138,
+          "time": "2026-05-25T23:28:50.762Z"
+        },
+        {
+          "lat": 6.01422,
+          "lng": -75.354835,
+          "time": "2026-05-26T00:18:50.762Z",
+          "label": "Cerca de Medellín"
+        },
+        {
+          "lat": 6.2442,
+          "label": "Medellín",
+          "lng": -75.5812,
+          "time": "2026-05-26T00:58:50.762Z"
+        }
+      ],
+      "travelers": 2,
+      "puntoIntermedio1": "Facatativá",
+      "food": 260,
+      "estado": "En preparación",
+      "lastUpdate": "2026-05-29T14:30:31.222Z",
+      "mapQuery": "4.66,-74.04",
+      "code": "WT-0001",
+      "createdAt": "2026-05-25T20:28:50.759Z",
+      "simulacionActiva": false,
+      "startDate": "2026-06-08",
+      "gpsFueraDeRuta": false,
+      "currentLocation": {
+        "label": "Aeropuerto Internacional El Dorado, Bogota (4.66, -74.04) - precision 50000 m",
+        "lng": -74.04,
+        "lat": 4.66
+      },
+      "userEmail": "andrea.viajera@wayture.demo",
+      "origen": "Bogotá",
+      "userId": "",
+      "notes": "Ruta urbana con museos, Comuna 13 y experiencias gastronómicas.",
+      "gpsDistanciaRutaKm": 7,
+      "nombreViaje": "Viaje a Medellín",
+      "updatedAt": "2026-05-29T14:29:20.754Z",
+      "destination": "Medellín",
+      "transport": 360,
+      "hotel": 620,
+      "puntoIntermedio2": "Manizales",
+      "lastLocation": "Aeropuerto Internacional El Dorado, Bogota (4.66, -74.04) - precision 50000 m",
+      "statusHistory": [
+        {
+          "newStatus": "Planificado",
+          "previousStatus": "",
+          "changedAt": "2026-05-25T20:28:50.762Z",
+          "fecha": "2026-05-25T20:28:50.762Z",
+          "comment": "Viaje precargado para demostración operativa WayTure",
+          "lng": -74.0721,
+          "ubicacion": "Bogotá",
+          "observacion": "Viaje precargado para demostración operativa WayTure",
+          "lat": 4.711,
+          "location": "Bogotá",
+          "id": "1779740930762-b125a0418e3e2",
+          "progreso": 0,
+          "estado": "Planificado"
+        },
+        {
+          "newStatus": "En preparación",
+          "previousStatus": "Planificado",
+          "fecha": "2026-05-29T14:30:31.220Z",
+          "changedAt": "2026-05-29T14:30:31.220Z",
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "ubicacion": "Aeropuerto Internacional El Dorado, Bogota (4.66, -74.04) - precision 50000 m",
+          "lng": -74.04,
+          "location": "Aeropuerto Internacional El Dorado, Bogota (4.66, -74.04) - precision 50000 m",
+          "lat": 4.66,
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "id": "1780065031220-dde4c3ea756ee",
+          "progreso": 3,
+          "estado": "En preparación"
+        }
+      ],
+      "endDate": "2026-06-13",
+      "destino": "Medellín",
+      "codigoViaje": "WT-0001",
+      "activitiesCost": 310,
+      "createdBy": "seed-wayture",
+      "itinerary": [
+        {
+          "time": "09:00",
+          "place": "Terminal Salitre Bogotá",
+          "description": "Salida simulada y revisión de documentos.",
+          "date": "2026-06-08",
+          "id": "act-1",
+          "category": "Transporte"
+        },
+        {
+          "category": "Cultura",
+          "id": "act-2",
+          "date": "2026-06-09",
+          "description": "Tour de grafiti y escaleras eléctricas.",
+          "time": "15:00",
+          "place": "Comuna 13 Medellín"
+        },
+        {
+          "description": "Visita guiada al centro histórico.",
+          "time": "10:00",
+          "place": "Museo de Antioquia",
+          "category": "Cultura",
+          "date": "2026-06-11",
+          "id": "act-3"
+        }
+      ],
+      "finishedAt": "",
+      "status": "En preparación",
+      "gpsRealActivo": true
+    },
+    {
+      "id": "WT-0002",
+      "mapQuery": "4.711,-74.0721",
+      "lastUpdate": "2026-05-25T20:28:51.177Z",
+      "code": "WT-0002",
+      "createdAt": "2026-05-25T20:28:50.759Z",
+      "startDate": "2026-06-15",
+      "simulacionActiva": false,
+      "progreso": 0,
+      "createdByRole": "admin",
+      "experience": "Descanso",
+      "travelers": 4,
+      "route": [
+        {
+          "label": "Bogotá",
+          "lng": -74.0721,
+          "time": "2026-05-25T20:28:51.177Z",
+          "lat": 4.711
+        },
+        {
+          "lng": -74.283195,
+          "time": "2026-05-25T21:13:51.177Z",
+          "label": "Salida de Bogotá",
+          "lat": 5.563
+        },
+        {
+          "label": "Honda",
+          "time": "2026-05-25T21:58:51.177Z",
+          "lng": -74.536509,
+          "lat": 6.5854
+        },
+        {
+          "lat": 8.4598,
+          "lng": -75.000918,
+          "time": "2026-05-25T23:28:51.177Z",
+          "label": "Sincelejo"
+        },
+        {
+          "label": "Cerca de Cartagena",
+          "lng": -75.268305,
+          "time": "2026-05-26T00:18:51.177Z",
+          "lat": 9.539
+        },
+        {
+          "lat": 10.391,
+          "time": "2026-05-26T00:58:51.177Z",
+          "lng": -75.4794,
+          "label": "Cartagena"
+        }
+      ],
+      "estado": "Planificado",
+      "food": 520,
+      "puntoIntermedio1": "Honda",
+      "endDate": "2026-06-20",
+      "statusHistory": [
+        {
+          "estado": "Planificado",
+          "id": "1779740931177-06a3684ce14e08",
+          "progreso": 0,
+          "ubicacion": "Bogotá",
+          "lng": -74.0721,
+          "location": "Bogotá",
+          "observacion": "Viaje precargado para demostración operativa WayTure",
+          "lat": 4.711,
+          "newStatus": "Planificado",
+          "previousStatus": "",
+          "fecha": "2026-05-25T20:28:51.177Z",
+          "changedAt": "2026-05-25T20:28:51.177Z",
+          "comment": "Viaje precargado para demostración operativa WayTure"
+        }
+      ],
+      "lastLocation": "Bogotá",
+      "destino": "Cartagena",
+      "activitiesCost": 430,
+      "codigoViaje": "WT-0002",
+      "finishedAt": "",
+      "status": "Planificado",
+      "itinerary": [
+        {
+          "place": "Aeropuerto El Dorado",
+          "time": "08:30",
+          "description": "Salida hacia Cartagena.",
+          "id": "act-1",
+          "date": "2026-06-15",
+          "category": "Transporte"
+        },
+        {
+          "id": "act-2",
+          "date": "2026-06-16",
+          "category": "Cultura",
+          "time": "17:00",
+          "place": "Ciudad Amurallada Cartagena",
+          "description": "Recorrido al atardecer."
+        },
+        {
+          "time": "09:00",
+          "place": "Islas del Rosario",
+          "description": "Día de playa y snorkel.",
+          "id": "act-3",
+          "date": "2026-06-18",
+          "category": "Descanso"
+        }
+      ],
+      "createdBy": "seed-wayture",
+      "origen": "Bogotá",
+      "notes": "Viaje familiar con playa, ciudad amurallada y paseo en barco.",
+      "userId": "",
+      "userEmail": "familia.rojas@wayture.demo",
+      "currentLocation": {
+        "lat": 4.711,
+        "lng": -74.0721,
+        "label": "Bogotá"
+      },
+      "destination": "Cartagena",
+      "updatedAt": "2026-05-25T20:28:50.759Z",
+      "nombreViaje": "Cartagena histórica",
+      "puntoIntermedio2": "Sincelejo",
+      "hotel": 1180,
+      "transport": 780
+    },
+    {
+      "id": "WT-0003",
+      "createdAt": "2026-05-25T20:28:50.759Z",
+      "startDate": "2026-06-22",
+      "simulacionActiva": false,
+      "mapQuery": "3.4516,-76.532",
+      "lastUpdate": "2026-05-25T20:28:51.487Z",
+      "code": "WT-0003",
+      "travelers": 3,
+      "route": [
+        {
+          "lat": 3.4516,
+          "label": "Cali",
+          "lng": -76.532,
+          "time": "2026-05-25T20:28:51.486Z"
+        },
+        {
+          "lng": -76.18205,
+          "time": "2026-05-25T21:13:51.486Z",
+          "label": "Salida de Cali",
+          "lat": 4.61998
+        },
+        {
+          "label": "Ibagué",
+          "lng": -75.76211,
+          "time": "2026-05-25T21:58:51.486Z",
+          "lat": 6.022036
+        },
+        {
+          "lat": 10.9685,
+          "lng": -74.7813,
+          "time": "2026-05-25T23:28:51.486Z",
+          "label": "Barranquilla"
+        },
+        {
+          "lng": -74.54895,
+          "time": "2026-05-26T00:18:51.486Z",
+          "label": "Cerca de Santa Marta",
+          "lat": 10.07242
+        },
+        {
+          "label": "Santa Marta",
+          "lng": -74.199,
+          "time": "2026-05-26T00:58:51.486Z",
+          "lat": 11.2408
+        }
+      ],
+      "food": 380,
+      "estado": "Planificado",
+      "puntoIntermedio1": "Ibagué",
+      "progreso": 0,
+      "createdByRole": "admin",
+      "experience": "Aventura",
+      "codigoViaje": "WT-0003",
+      "activitiesCost": 560,
+      "finishedAt": "",
+      "status": "Planificado",
+      "createdBy": "seed-wayture",
+      "itinerary": [
+        {
+          "description": "Ingreso temprano y caminata a Cabo San Juan.",
+          "time": "07:00",
+          "place": "Parque Tayrona",
+          "category": "Aventura",
+          "date": "2026-06-23",
+          "id": "act-1"
+        },
+        {
+          "category": "Fotografía",
+          "id": "act-2",
+          "date": "2026-06-25",
+          "description": "Cascadas y café de montaña.",
+          "time": "10:30",
+          "place": "Minca Santa Marta"
+        },
+        {
+          "category": "Descanso",
+          "id": "act-3",
+          "date": "2026-06-27",
+          "description": "Cierre del viaje frente al mar.",
+          "time": "16:00",
+          "place": "Bahía de Santa Marta"
+        }
+      ],
+      "statusHistory": [
+        {
+          "lng": -76.532,
+          "ubicacion": "Cali",
+          "observacion": "Viaje precargado para demostración operativa WayTure",
+          "lat": 3.4516,
+          "location": "Cali",
+          "newStatus": "Planificado",
+          "previousStatus": "",
+          "changedAt": "2026-05-25T20:28:51.486Z",
+          "fecha": "2026-05-25T20:28:51.486Z",
+          "comment": "Viaje precargado para demostración operativa WayTure",
+          "estado": "Planificado",
+          "id": "1779740931486-2f32f53168cdf8",
+          "progreso": 0
+        }
+      ],
+      "endDate": "2026-06-28",
+      "lastLocation": "Cali",
+      "destino": "Santa Marta",
+      "destination": "Santa Marta",
+      "updatedAt": "2026-05-25T20:28:50.759Z",
+      "nombreViaje": "Santa Marta aventura",
+      "hotel": 870,
+      "puntoIntermedio2": "Barranquilla",
+      "transport": 640,
+      "userEmail": "sebastian.montoya@wayture.demo",
+      "origen": "Cali",
+      "notes": "Plan de naturaleza con Tayrona, caminatas y playas.",
+      "userId": "",
+      "currentLocation": {
+        "lat": 3.4516,
+        "label": "Cali",
+        "lng": -76.532
+      }
+    },
+    {
+      "id": "WT-0004",
+      "activitiesCost": 390,
+      "codigoViaje": "WT-0004",
+      "finishedAt": "",
+      "status": "Planificado",
+      "itinerary": [
+        {
+          "date": "2026-07-01",
+          "id": "act-1",
+          "category": "Transporte",
+          "time": "11:00",
+          "place": "Aeropuerto José María Córdova",
+          "description": "Vuelo hacia la isla."
+        },
+        {
+          "date": "2026-07-02",
+          "id": "act-2",
+          "category": "Descanso",
+          "time": "09:00",
+          "place": "Johnny Cay San Andrés",
+          "description": "Día de mar y almuerzo típico."
+        },
+        {
+          "time": "14:00",
+          "place": "Acuario San Andrés",
+          "description": "Snorkel en aguas claras.",
+          "date": "2026-07-04",
+          "id": "act-3",
+          "category": "Aventura"
+        }
+      ],
+      "createdBy": "seed-wayture",
+      "endDate": "2026-07-06",
+      "statusHistory": [
+        {
+          "estado": "Planificado",
+          "id": "1779740931660-8972b941c661f8",
+          "progreso": 0,
+          "lat": 6.2442,
+          "observacion": "Viaje precargado para demostración operativa WayTure",
+          "location": "Medellín",
+          "lng": -75.5812,
+          "ubicacion": "Medellín",
+          "previousStatus": "",
+          "newStatus": "Planificado",
+          "comment": "Viaje precargado para demostración operativa WayTure",
+          "changedAt": "2026-05-25T20:28:51.660Z",
+          "fecha": "2026-05-25T20:28:51.660Z"
+        }
+      ],
+      "lastLocation": "Medellín",
+      "destino": "San Andrés",
+      "updatedAt": "2026-05-25T20:28:50.759Z",
+      "destination": "San Andrés",
+      "nombreViaje": "San Andrés azul",
+      "hotel": 1040,
+      "puntoIntermedio2": "Cartagena",
+      "transport": 920,
+      "userId": "",
+      "notes": "Viaje de descanso con playas, vuelta a la isla y acuario.",
+      "origen": "Medellín",
+      "userEmail": "laura.mar@wayture.demo",
+      "currentLocation": {
+        "lng": -75.5812,
+        "label": "Medellín",
+        "lat": 6.2442
+      },
+      "createdAt": "2026-05-25T20:28:50.759Z",
+      "startDate": "2026-07-01",
+      "simulacionActiva": false,
+      "mapQuery": "6.2442,-75.5812",
+      "lastUpdate": "2026-05-25T20:28:51.660Z",
+      "code": "WT-0004",
+      "travelers": 2,
+      "route": [
+        {
+          "lng": -75.5812,
+          "time": "2026-05-25T20:28:51.660Z",
+          "label": "Medellín",
+          "lat": 6.2442
+        },
+        {
+          "time": "2026-05-25T21:13:51.660Z",
+          "lng": -76.49911,
+          "label": "Salida de Medellín",
+          "lat": 7.195275
+        },
+        {
+          "lng": -74.0721,
+          "time": "2026-05-25T21:58:51.660Z",
+          "label": "Bogotá",
+          "lat": 4.711
+        },
+        {
+          "lat": 10.391,
+          "time": "2026-05-25T23:28:51.660Z",
+          "lng": -75.4794,
+          "label": "Cartagena"
+        },
+        {
+          "lng": -80.78269,
+          "time": "2026-05-26T00:18:51.660Z",
+          "label": "Cerca de San Andrés",
+          "lat": 11.633625
+        },
+        {
+          "lat": 12.5847,
+          "lng": -81.7006,
+          "time": "2026-05-26T00:58:51.660Z",
+          "label": "San Andrés"
+        }
+      ],
+      "estado": "Planificado",
+      "food": 420,
+      "puntoIntermedio1": "Bogotá",
+      "progreso": 0,
+      "createdByRole": "admin",
+      "experience": "Descanso"
+    },
+    {
+      "id": "WT-0005",
+      "destino": "Barcelona",
+      "lastLocation": "Madrid",
+      "statusHistory": [
+        {
+          "comment": "Viaje precargado para demostración operativa WayTure",
+          "fecha": "2026-05-25T20:28:51.950Z",
+          "changedAt": "2026-05-25T20:28:51.950Z",
+          "previousStatus": "",
+          "newStatus": "Planificado",
+          "location": "Madrid",
+          "lat": 40.4168,
+          "observacion": "Viaje precargado para demostración operativa WayTure",
+          "ubicacion": "Madrid",
+          "lng": -3.7038,
+          "progreso": 0,
+          "id": "1779740931950-d44542e40abb28",
+          "estado": "Planificado"
+        }
+      ],
+      "endDate": "2026-07-14",
+      "createdBy": "seed-wayture",
+      "itinerary": [
+        {
+          "place": "Puerta del Sol Madrid",
+          "time": "10:00",
+          "description": "Inicio del recorrido por el centro.",
+          "id": "act-1",
+          "date": "2026-07-08",
+          "category": "Cultura"
+        },
+        {
+          "place": "Zaragoza",
+          "time": "12:00",
+          "description": "Parada intermedia y almuerzo.",
+          "id": "act-2",
+          "date": "2026-07-10",
+          "category": "Transporte"
+        },
+        {
+          "description": "Visita con reserva anticipada.",
+          "place": "Sagrada Familia Barcelona",
+          "time": "09:30",
+          "category": "Cultura",
+          "id": "act-3",
+          "date": "2026-07-12"
+        }
+      ],
+      "finishedAt": "",
+      "status": "Planificado",
+      "codigoViaje": "WT-0005",
+      "activitiesCost": 520,
+      "currentLocation": {
+        "lng": -3.7038,
+        "label": "Madrid",
+        "lat": 40.4168
+      },
+      "userEmail": "euro.plan@wayture.demo",
+      "notes": "Ruta urbana por España con tren, museos y arquitectura.",
+      "userId": "",
+      "origen": "Madrid",
+      "transport": 540,
+      "puntoIntermedio2": "Lleida",
+      "hotel": 1350,
+      "nombreViaje": "Madrid a Barcelona",
+      "updatedAt": "2026-05-25T20:28:50.759Z",
+      "destination": "Barcelona",
+      "code": "WT-0005",
+      "lastUpdate": "2026-05-25T20:28:51.950Z",
+      "mapQuery": "40.4168,-3.7038",
+      "simulacionActiva": false,
+      "startDate": "2026-07-08",
+      "createdAt": "2026-05-25T20:28:50.759Z",
+      "experience": "Cultural",
+      "createdByRole": "admin",
+      "progreso": 0,
+      "puntoIntermedio1": "Zaragoza",
+      "food": 640,
+      "estado": "Planificado",
+      "route": [
+        {
+          "lat": 40.4168,
+          "time": "2026-05-25T20:28:51.950Z",
+          "lng": -3.7038,
+          "label": "Madrid"
+        },
+        {
+          "lng": -2.82222,
+          "time": "2026-05-25T21:13:51.950Z",
+          "label": "Salida de Madrid",
+          "lat": 40.562045
+        },
+        {
+          "label": "Zaragoza",
+          "lng": -1.764324,
+          "time": "2026-05-25T21:58:51.950Z",
+          "lat": 40.736339
+        },
+        {
+          "lat": 41.055878,
+          "time": "2026-05-25T23:28:51.950Z",
+          "lng": 0.175152,
+          "label": "Lleida"
+        },
+        {
+          "label": "Cerca de Barcelona",
+          "lng": 1.29182,
+          "time": "2026-05-26T00:18:51.950Z",
+          "lat": 41.239855
+        },
+        {
+          "lat": 41.3851,
+          "lng": 2.1734,
+          "time": "2026-05-26T00:58:51.950Z",
+          "label": "Barcelona"
+        }
+      ],
+      "travelers": 2
+    },
+    {
+      "id": "WT-0006",
+      "code": "WT-0006",
+      "lastUpdate": "2026-05-29T14:28:03.449Z",
+      "mapQuery": "4.66,-74.04",
+      "simulacionActiva": false,
+      "startDate": "2026-07-18",
+      "gpsFueraDeRuta": true,
+      "createdAt": "2026-05-25T20:28:50.759Z",
+      "experience": "Gastronómica",
+      "createdByRole": "admin",
+      "progreso": 0,
+      "puntoIntermedio1": "Lyon",
+      "estado": "Fuera de ruta",
+      "food": 790,
+      "route": [
+        {
+          "lng": 2.3522,
+          "time": "2026-05-25T20:28:52.124Z",
+          "label": "París",
+          "lat": 48.8566
+        },
+        {
+          "lng": 3.87383,
+          "time": "2026-05-25T21:13:52.124Z",
+          "label": "Salida de París",
+          "lat": 47.81353
+        },
+        {
+          "lat": 46.561846,
+          "label": "Lyon",
+          "lng": 5.699786,
+          "time": "2026-05-25T21:58:52.124Z"
+        },
+        {
+          "lat": 44.267092,
+          "lng": 9.047372,
+          "time": "2026-05-25T23:28:52.124Z",
+          "label": "Milán"
+        },
+        {
+          "label": "Cerca de Roma",
+          "lng": 10.97477,
+          "time": "2026-05-26T00:18:52.124Z",
+          "lat": 42.94587
+        },
+        {
+          "lng": 12.4964,
+          "time": "2026-05-26T00:58:52.124Z",
+          "label": "Roma",
+          "lat": 41.9028
+        }
+      ],
+      "travelers": 2,
+      "destino": "Roma",
+      "lastLocation": "Aeropuerto Internacional El Dorado, Bogota (4.66, -74.04) - precision 50000 m",
+      "endDate": "2026-07-26",
+      "statusHistory": [
+        {
+          "estado": "Planificado",
+          "id": "1779740932124-24d552f3c50ff",
+          "progreso": 0,
+          "ubicacion": "París",
+          "lng": 2.3522,
+          "location": "París",
+          "lat": 48.8566,
+          "observacion": "Viaje precargado para demostración operativa WayTure",
+          "newStatus": "Planificado",
+          "previousStatus": "",
+          "changedAt": "2026-05-25T20:28:52.124Z",
+          "fecha": "2026-05-25T20:28:52.124Z",
+          "comment": "Viaje precargado para demostración operativa WayTure"
+        },
+        {
+          "ubicacion": "Aeropuerto Internacional El Dorado, Bogota (4.66, -74.04) - precision 50000 m",
+          "lng": -74.04,
+          "location": "Aeropuerto Internacional El Dorado, Bogota (4.66, -74.04) - precision 50000 m",
+          "lat": 4.66,
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "newStatus": "Fuera de ruta",
+          "previousStatus": "Planificado",
+          "changedAt": "2026-05-29T14:28:03.447Z",
+          "fecha": "2026-05-29T14:28:03.447Z",
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "estado": "Fuera de ruta",
+          "id": "1780064883447-9c9e2571bbf61",
+          "progreso": 0
+        }
+      ],
+      "itinerary": [
+        {
+          "id": "act-1",
+          "date": "2026-07-18",
+          "category": "Cultura",
+          "time": "18:00",
+          "place": "Torre Eiffel París",
+          "description": "Inicio con vista nocturna."
+        },
+        {
+          "time": "13:00",
+          "place": "Lyon",
+          "description": "Almuerzo en bouchon tradicional.",
+          "date": "2026-07-21",
+          "id": "act-2",
+          "category": "Gastronomía"
+        },
+        {
+          "place": "Coliseo Romano",
+          "time": "09:00",
+          "description": "Tour histórico en Roma.",
+          "id": "act-3",
+          "date": "2026-07-25",
+          "category": "Cultura"
+        }
+      ],
+      "createdBy": "seed-wayture",
+      "gpsRealActivo": true,
+      "status": "Fuera de ruta",
+      "finishedAt": "",
+      "activitiesCost": 680,
+      "codigoViaje": "WT-0006",
+      "gpsDistanciaRutaKm": 8624,
+      "currentLocation": {
+        "lat": 4.66,
+        "label": "Aeropuerto Internacional El Dorado, Bogota (4.66, -74.04) - precision 50000 m",
+        "lng": -74.04
+      },
+      "origen": "París",
+      "notes": "Ruta europea con trenes, cocina local y monumentos clásicos.",
+      "userId": "",
+      "userEmail": "maria.europa@wayture.demo",
+      "transport": 880,
+      "puntoIntermedio2": "Milán",
+      "hotel": 1720,
+      "nombreViaje": "París a Roma",
+      "updatedAt": "2026-05-29T14:26:53.011Z",
+      "destination": "Roma"
+    },
+    {
+      "id": "WT-0007",
+      "createdByRole": "admin",
+      "experience": "Tecnología y cultura",
+      "progreso": 0,
+      "estado": "Planificado",
+      "food": 580,
+      "puntoIntermedio1": "Monte Fuji",
+      "travelers": 1,
+      "route": [
+        {
+          "lat": 35.6762,
+          "lng": 139.6503,
+          "time": "2026-05-25T20:28:52.310Z",
+          "label": "Tokio"
+        },
+        {
+          "time": "2026-05-25T21:13:52.310Z",
+          "lng": 139.06797,
+          "label": "Salida de Tokio",
+          "lat": 35.57651
+        },
+        {
+          "label": "Monte Fuji",
+          "lng": 138.369174,
+          "time": "2026-05-25T21:58:52.310Z",
+          "lat": 35.456882
+        },
+        {
+          "lng": 135.5023,
+          "time": "2026-05-25T23:28:52.310Z",
+          "label": "Osaka",
+          "lat": 34.6937
+        },
+        {
+          "lat": 35.11129,
+          "label": "Cerca de Kioto",
+          "lng": 136.35043,
+          "time": "2026-05-26T00:18:52.310Z"
+        },
+        {
+          "lat": 35.0116,
+          "label": "Kioto",
+          "lng": 135.7681,
+          "time": "2026-05-26T00:58:52.310Z"
+        }
+      ],
+      "code": "WT-0007",
+      "mapQuery": "35.6762,139.6503",
+      "lastUpdate": "2026-05-25T20:28:52.310Z",
+      "startDate": "2026-08-03",
+      "simulacionActiva": false,
+      "createdAt": "2026-05-25T20:28:50.759Z",
+      "origen": "Tokio",
+      "notes": "Recorrido por Japón con templos, tren bala y barrios tecnológicos.",
+      "userId": "",
+      "userEmail": "akira.demo@wayture.demo",
+      "currentLocation": {
+        "label": "Tokio",
+        "lng": 139.6503,
+        "lat": 35.6762
+      },
+      "puntoIntermedio2": "Osaka",
+      "hotel": 1460,
+      "transport": 760,
+      "updatedAt": "2026-05-25T20:28:50.759Z",
+      "destination": "Kioto",
+      "nombreViaje": "Japón clásico",
+      "destino": "Kioto",
+      "endDate": "2026-08-11",
+      "statusHistory": [
+        {
+          "newStatus": "Planificado",
+          "previousStatus": "",
+          "changedAt": "2026-05-25T20:28:52.310Z",
+          "fecha": "2026-05-25T20:28:52.310Z",
+          "comment": "Viaje precargado para demostración operativa WayTure",
+          "lng": 139.6503,
+          "ubicacion": "Tokio",
+          "lat": 35.6762,
+          "observacion": "Viaje precargado para demostración operativa WayTure",
+          "location": "Tokio",
+          "id": "1779740932310-1a108dd501cb",
+          "progreso": 0,
+          "estado": "Planificado"
+        }
+      ],
+      "lastLocation": "Tokio",
+      "finishedAt": "",
+      "status": "Planificado",
+      "itinerary": [
+        {
+          "description": "Primer contacto con Tokio.",
+          "place": "Shibuya Crossing Tokyo",
+          "time": "16:00",
+          "category": "Tecnología y compras",
+          "id": "act-1",
+          "date": "2026-08-03"
+        },
+        {
+          "time": "08:00",
+          "place": "Monte Fuji",
+          "description": "Excursión panorámica.",
+          "id": "act-2",
+          "date": "2026-08-06",
+          "category": "Fotografía"
+        },
+        {
+          "category": "Cultura",
+          "id": "act-3",
+          "date": "2026-08-09",
+          "description": "Ruta por torii y templos.",
+          "time": "10:00",
+          "place": "Fushimi Inari Taisha Kyoto"
+        }
+      ],
+      "createdBy": "seed-wayture",
+      "activitiesCost": 740,
+      "codigoViaje": "WT-0007"
+    },
+    {
+      "id": "WT-0008",
+      "experience": "Familiar",
+      "createdByRole": "admin",
+      "progreso": 0,
+      "puntoIntermedio1": "Washington DC",
+      "food": 720,
+      "estado": "Planificado",
+      "route": [
+        {
+          "time": "2026-05-25T20:28:52.601Z",
+          "lng": -74.006,
+          "label": "Nueva York",
+          "lat": 40.7128
+        },
+        {
+          "lng": -74.93387,
+          "time": "2026-05-25T21:13:52.601Z",
+          "label": "Salida de Nueva York",
+          "lat": 38.470135
+        },
+        {
+          "lng": -76.047314,
+          "time": "2026-05-25T21:58:52.601Z",
+          "label": "Washington DC",
+          "lat": 35.778937
+        },
+        {
+          "label": "Orlando",
+          "lng": -81.3792,
+          "time": "2026-05-25T23:28:52.601Z",
+          "lat": 28.5383
+        },
+        {
+          "lat": 28.004365,
+          "lng": -79.26393,
+          "time": "2026-05-26T00:18:52.601Z",
+          "label": "Cerca de Miami"
+        },
+        {
+          "lat": 25.7617,
+          "lng": -80.1918,
+          "time": "2026-05-26T00:58:52.601Z",
+          "label": "Miami"
+        }
+      ],
+      "travelers": 3,
+      "code": "WT-0008",
+      "lastUpdate": "2026-05-25T20:28:52.601Z",
+      "mapQuery": "40.7128,-74.006",
+      "simulacionActiva": false,
+      "startDate": "2026-08-15",
+      "createdAt": "2026-05-25T20:28:50.759Z",
+      "currentLocation": {
+        "lat": 40.7128,
+        "lng": -74.006,
+        "label": "Nueva York"
+      },
+      "userEmail": "usa.family@wayture.demo",
+      "userId": "",
+      "notes": "Ruta por la costa este con ciudad, parques y playa.",
+      "origen": "Nueva York",
+      "transport": 980,
+      "hotel": 1840,
+      "puntoIntermedio2": "Orlando",
+      "nombreViaje": "Nueva York a Miami",
+      "updatedAt": "2026-05-25T20:28:50.759Z",
+      "destination": "Miami",
+      "destino": "Miami",
+      "lastLocation": "Nueva York",
+      "statusHistory": [
+        {
+          "previousStatus": "",
+          "newStatus": "Planificado",
+          "comment": "Viaje precargado para demostración operativa WayTure",
+          "fecha": "2026-05-25T20:28:52.601Z",
+          "changedAt": "2026-05-25T20:28:52.601Z",
+          "observacion": "Viaje precargado para demostración operativa WayTure",
+          "lat": 40.7128,
+          "location": "Nueva York",
+          "lng": -74.006,
+          "ubicacion": "Nueva York",
+          "id": "1779740932601-ab43e32b0c46d",
+          "progreso": 0,
+          "estado": "Planificado"
+        }
+      ],
+      "endDate": "2026-08-23",
+      "createdBy": "seed-wayture",
+      "itinerary": [
+        {
+          "description": "Inicio del viaje urbano.",
+          "time": "12:00",
+          "place": "Times Square New York",
+          "category": "Cultura",
+          "date": "2026-08-15",
+          "id": "act-1"
+        },
+        {
+          "id": "act-2",
+          "date": "2026-08-19",
+          "category": "Familiar",
+          "time": "09:30",
+          "place": "Walt Disney World Orlando",
+          "description": "Día de parques."
+        },
+        {
+          "description": "Cierre en playa.",
+          "place": "South Beach Miami",
+          "time": "17:00",
+          "category": "Descanso",
+          "id": "act-3",
+          "date": "2026-08-22"
+        }
+      ],
+      "status": "Planificado",
+      "finishedAt": "",
+      "codigoViaje": "WT-0008",
+      "activitiesCost": 910
+    },
+    {
+      "id": "WT-0009",
+      "lastLocation": "Ciudad de México",
+      "statusHistory": [
+        {
+          "estado": "Planificado",
+          "id": "1779740932756-60b853a3d6cbb8",
+          "progreso": 0,
+          "lng": -99.1332,
+          "ubicacion": "Ciudad de México",
+          "lat": 19.4326,
+          "observacion": "Viaje precargado para demostración operativa WayTure",
+          "location": "Ciudad de México",
+          "newStatus": "Planificado",
+          "previousStatus": "",
+          "fecha": "2026-05-25T20:28:52.756Z",
+          "changedAt": "2026-05-25T20:28:52.756Z",
+          "comment": "Viaje precargado para demostración operativa WayTure"
+        }
+      ],
+      "endDate": "2026-09-09",
+      "destino": "Cancún",
+      "codigoViaje": "WT-0009",
+      "activitiesCost": 610,
+      "createdBy": "seed-wayture",
+      "itinerary": [
+        {
+          "description": "Recorrido por el Zócalo.",
+          "time": "10:00",
+          "place": "Centro Histórico CDMX",
+          "category": "Cultura",
+          "date": "2026-09-02",
+          "id": "act-1"
+        },
+        {
+          "description": "Comida yucateca.",
+          "time": "13:30",
+          "place": "Paseo de Montejo Mérida",
+          "category": "Gastronomía",
+          "id": "act-2",
+          "date": "2026-09-05"
+        },
+        {
+          "description": "Día de playa.",
+          "time": "09:00",
+          "place": "Zona Hotelera Cancún",
+          "category": "Descanso",
+          "id": "act-3",
+          "date": "2026-09-08"
+        }
+      ],
+      "finishedAt": "",
+      "status": "Planificado",
+      "currentLocation": {
+        "lat": 19.4326,
+        "label": "Ciudad de México",
+        "lng": -99.1332
+      },
+      "userEmail": "mexico.ruta@wayture.demo",
+      "userId": "",
+      "notes": "Ruta mexicana con centro histórico, comida regional y Caribe.",
+      "origen": "Ciudad de México",
+      "nombreViaje": "México Caribe",
+      "updatedAt": "2026-05-25T20:28:50.759Z",
+      "destination": "Cancún",
+      "transport": 620,
+      "hotel": 1220,
+      "puntoIntermedio2": "Mérida",
+      "lastUpdate": "2026-05-25T20:28:52.756Z",
+      "mapQuery": "19.4326,-99.1332",
+      "code": "WT-0009",
+      "createdAt": "2026-05-25T20:28:50.759Z",
+      "simulacionActiva": false,
+      "startDate": "2026-09-02",
+      "progreso": 0,
+      "experience": "Gastronómica",
+      "createdByRole": "admin",
+      "route": [
+        {
+          "lat": 19.4326,
+          "label": "Ciudad de México",
+          "lng": -99.1332,
+          "time": "2026-05-25T20:28:52.756Z"
+        },
+        {
+          "lat": 19.691995,
+          "lng": -97.290945,
+          "time": "2026-05-25T21:13:52.756Z",
+          "label": "Salida de Ciudad de México"
+        },
+        {
+          "label": "Puebla",
+          "time": "2026-05-25T21:58:52.756Z",
+          "lng": -95.080239,
+          "lat": 20.003269
+        },
+        {
+          "label": "Mérida",
+          "lng": -91.027278,
+          "time": "2026-05-25T23:28:52.756Z",
+          "lat": 20.573938
+        },
+        {
+          "label": "Cerca de Cancún",
+          "lng": -88.693755,
+          "time": "2026-05-26T00:18:52.756Z",
+          "lat": 20.902505
+        },
+        {
+          "lng": -86.8515,
+          "time": "2026-05-26T00:58:52.756Z",
+          "label": "Cancún",
+          "lat": 21.1619
+        }
+      ],
+      "travelers": 2,
+      "puntoIntermedio1": "Puebla",
+      "food": 540,
+      "estado": "Planificado"
+    },
+    {
+      "id": "WT-0010",
+      "puntoIntermedio1": "Neuquén",
+      "estado": "Planificado",
+      "food": 520,
+      "route": [
+        {
+          "time": "2026-05-25T20:28:52.938Z",
+          "lng": -58.3816,
+          "label": "Buenos Aires",
+          "lat": -34.6037
+        },
+        {
+          "lat": -35.58317,
+          "lng": -60.32086,
+          "time": "2026-05-25T21:13:52.938Z",
+          "label": "Salida de Buenos Aires"
+        },
+        {
+          "lat": -36.758534,
+          "lng": -62.647972,
+          "time": "2026-05-25T21:58:52.938Z",
+          "label": "Neuquén"
+        },
+        {
+          "lng": -66.914344,
+          "time": "2026-05-25T23:28:52.938Z",
+          "label": "Villa La Angostura",
+          "lat": -38.913368
+        },
+        {
+          "time": "2026-05-26T00:18:52.938Z",
+          "lng": -69.37074,
+          "label": "Cerca de Bariloche",
+          "lat": -40.15403
+        },
+        {
+          "lat": -41.1335,
+          "time": "2026-05-26T00:58:52.938Z",
+          "lng": -71.31,
+          "label": "Bariloche"
+        }
+      ],
+      "travelers": 2,
+      "experience": "Aventura",
+      "createdByRole": "admin",
+      "progreso": 0,
+      "simulacionActiva": false,
+      "startDate": "2026-09-14",
+      "gpsFueraDeRuta": true,
+      "createdAt": "2026-05-25T20:28:50.759Z",
+      "code": "WT-0010",
+      "lastUpdate": "2026-05-29T14:28:52.682Z",
+      "mapQuery": "-34.6037,-58.3816",
+      "transport": 740,
+      "hotel": 1320,
+      "puntoIntermedio2": "Villa La Angostura",
+      "nombreViaje": "Patagonia argentina",
+      "updatedAt": "2026-05-29T14:27:41.759Z",
+      "destination": "Bariloche",
+      "gpsDistanciaRutaKm": 4659,
+      "currentLocation": {
+        "lng": -58.3816,
+        "label": "Buenos Aires",
+        "lat": -34.6037
+      },
+      "userId": "",
+      "notes": "Viaje de montaña con lagos, senderismo y miradores.",
+      "origen": "Buenos Aires",
+      "userEmail": "patagonia.demo@wayture.demo",
+      "itinerary": [
+        {
+          "description": "Salida simbólica desde la ciudad.",
+          "place": "Obelisco Buenos Aires",
+          "time": "09:00",
+          "category": "Cultura",
+          "id": "act-1",
+          "date": "2026-09-14"
+        },
+        {
+          "category": "Aventura",
+          "id": "act-2",
+          "date": "2026-09-18",
+          "description": "Parada de montaña y lago.",
+          "time": "11:00",
+          "place": "Villa La Angostura"
+        },
+        {
+          "description": "Día de senderismo y miradores.",
+          "place": "Cerro Catedral Bariloche",
+          "time": "08:30",
+          "category": "Aventura",
+          "id": "act-3",
+          "date": "2026-09-20"
+        }
+      ],
+      "createdBy": "seed-wayture",
+      "gpsRealActivo": true,
+      "finishedAt": "",
+      "status": "Planificado",
+      "activitiesCost": 820,
+      "codigoViaje": "WT-0010",
+      "destino": "Bariloche",
+      "lastLocation": "Buenos Aires",
+      "endDate": "2026-09-22",
+      "statusHistory": [
+        {
+          "lng": -58.3816,
+          "ubicacion": "Buenos Aires",
+          "observacion": "Viaje precargado para demostración operativa WayTure",
+          "lat": -34.6037,
+          "location": "Buenos Aires",
+          "fecha": "2026-05-25T20:28:52.938Z",
+          "changedAt": "2026-05-25T20:28:52.938Z",
+          "comment": "Viaje precargado para demostración operativa WayTure",
+          "newStatus": "Planificado",
+          "previousStatus": "",
+          "estado": "Planificado",
+          "progreso": 0,
+          "id": "1779740932938-bf1242e9d32f08"
+        },
+        {
+          "estado": "En preparación",
+          "progreso": 20,
+          "id": "1779741197995-f53d3cab7426",
+          "ubicacion": "Salida de Buenos Aires",
+          "lng": -60.32086,
+          "location": "Salida de Buenos Aires",
+          "lat": -35.58317,
+          "observacion": "Estado actualizado automáticamente por simulación GPS",
+          "fecha": "2026-05-25T20:33:17.995Z",
+          "changedAt": "2026-05-25T20:33:17.995Z",
+          "comment": "Estado actualizado automáticamente por simulación GPS",
+          "newStatus": "En preparación",
+          "previousStatus": "Planificado"
+        },
+        {
+          "id": "1779741199495-94b6cc361551c8",
+          "progreso": 40,
+          "estado": "En ruta",
+          "newStatus": "En ruta",
+          "previousStatus": "En preparación",
+          "fecha": "2026-05-25T20:33:19.495Z",
+          "changedAt": "2026-05-25T20:33:19.495Z",
+          "comment": "Estado actualizado automáticamente por simulación GPS",
+          "ubicacion": "Neuquén",
+          "lng": -62.647972,
+          "location": "Neuquén",
+          "lat": -36.758534,
+          "observacion": "Estado actualizado automáticamente por simulación GPS"
+        },
+        {
+          "id": "1779741202496-a3df530922c8e",
+          "progreso": 80,
+          "estado": "En destino",
+          "newStatus": "En destino",
+          "previousStatus": "En ruta",
+          "changedAt": "2026-05-25T20:33:22.496Z",
+          "fecha": "2026-05-25T20:33:22.496Z",
+          "comment": "Estado actualizado automáticamente por simulación GPS",
+          "ubicacion": "Cerca de Bariloche",
+          "lng": -69.37074,
+          "location": "Cerca de Bariloche",
+          "observacion": "Estado actualizado automáticamente por simulación GPS",
+          "lat": -40.15403
+        },
+        {
+          "lng": -71.31,
+          "ubicacion": "Bariloche",
+          "lat": -41.1335,
+          "observacion": "Viaje finalizado automáticamente por simulación GPS",
+          "location": "Bariloche",
+          "fecha": "2026-05-25T20:33:27.184Z",
+          "changedAt": "2026-05-25T20:33:27.184Z",
+          "comment": "Viaje finalizado automáticamente por simulación GPS",
+          "newStatus": "Finalizado",
+          "previousStatus": "En destino",
+          "estado": "Finalizado",
+          "progreso": 100,
+          "id": "1779741207184-a944114b13e838"
+        },
+        {
+          "lng": -58.3816,
+          "ubicacion": "Buenos Aires",
+          "observacion": "Simulación GPS reiniciada desde WayTure",
+          "lat": -34.6037,
+          "location": "Buenos Aires",
+          "newStatus": "Planificado",
+          "previousStatus": "Finalizado",
+          "changedAt": "2026-05-25T20:33:37.303Z",
+          "fecha": "2026-05-25T20:33:37.303Z",
+          "comment": "Simulación GPS reiniciada desde WayTure",
+          "estado": "Planificado",
+          "id": "1779741217303-a5bd6ab7ea7f28",
+          "progreso": 0
+        },
+        {
+          "progreso": 0,
+          "id": "1779757014965-e8e7a5702de8c",
+          "estado": "Fuera de ruta",
+          "fecha": "2026-05-26T00:56:54.965Z",
+          "changedAt": "2026-05-26T00:56:54.965Z",
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "newStatus": "Fuera de ruta",
+          "previousStatus": "Planificado",
+          "lng": -74.082787,
+          "ubicacion": "Aeropuerto Internacional El Dorado, Bogota (4.594701, -74.082787) - precision 96 m",
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "lat": 4.594701,
+          "location": "Aeropuerto Internacional El Dorado, Bogota (4.594701, -74.082787) - precision 96 m"
+        },
+        {
+          "estado": "En preparación",
+          "id": "1779758414816-be6c88da55de",
+          "progreso": 0,
+          "location": "GPS real del dispositivo (-34.61315, -58.37723) - precision 150 m",
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "lat": -34.61315,
+          "ubicacion": "GPS real del dispositivo (-34.61315, -58.37723) - precision 150 m",
+          "lng": -58.37723,
+          "previousStatus": "Fuera de ruta",
+          "newStatus": "En preparación",
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "fecha": "2026-05-26T01:20:14.816Z",
+          "changedAt": "2026-05-26T01:20:14.816Z"
+        },
+        {
+          "progreso": 0,
+          "id": "1779758426342-95bc84bc92ce18",
+          "estado": "Fuera de ruta",
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "changedAt": "2026-05-26T01:20:26.342Z",
+          "fecha": "2026-05-26T01:20:26.342Z",
+          "previousStatus": "En preparación",
+          "newStatus": "Fuera de ruta",
+          "location": "GPS real del dispositivo (50.61315, -58.37723) - precision 150 m",
+          "lat": 50.61315,
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "ubicacion": "GPS real del dispositivo (50.61315, -58.37723) - precision 150 m",
+          "lng": -58.37723
+        },
+        {
+          "lat": -34.61315,
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "location": "GPS real del dispositivo (-34.61315, -58.37723) - precision 150 m",
+          "lng": -58.37723,
+          "ubicacion": "GPS real del dispositivo (-34.61315, -58.37723) - precision 150 m",
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "changedAt": "2026-05-26T01:20:37.720Z",
+          "fecha": "2026-05-26T01:20:37.720Z",
+          "previousStatus": "Fuera de ruta",
+          "newStatus": "En preparación",
+          "estado": "En preparación",
+          "progreso": 0,
+          "id": "1779758437720-11e5842af44d28"
+        },
+        {
+          "estado": "Fuera de ruta",
+          "id": "1779758446790-416cb9660582d",
+          "progreso": 0,
+          "lat": 4.594864,
+          "observacion": "Ubicación GPS real actualizada desde el navegador.",
+          "location": "Aeropuerto Internacional El Dorado, Bogota (4.594864, -74.082943) - precision 114 m",
+          "lng": -74.082943,
+          "ubicacion": "Aeropuerto Internacional El Dorado, Bogota (4.594864, -74.082943) - precision 114 m",
+          "previousStatus": "En preparación",
+          "newStatus": "Fuera de ruta",
+          "comment": "Ubicación GPS real actualizada desde el navegador.",
+          "fecha": "2026-05-26T01:20:46.790Z",
+          "changedAt": "2026-05-26T01:20:46.790Z"
+        },
+        {
+          "changedAt": "2026-05-29T14:28:40.001Z",
+          "fecha": "2026-05-29T14:28:40.001Z",
+          "comment": "Estado actualizado por GPS",
+          "newStatus": "Planificado",
+          "previousStatus": "Fuera de ruta",
+          "ubicacion": "Buenos Aires",
+          "lng": -58.3816,
+          "location": "Buenos Aires",
+          "observacion": "Estado actualizado por GPS",
+          "lat": -34.6037,
+          "progreso": 0,
+          "id": "1780064920002-0380a93d0075d8",
+          "estado": "Planificado"
+        },
+        {
+          "fecha": "2026-05-29T14:28:41.516Z",
+          "changedAt": "2026-05-29T14:28:41.516Z",
+          "comment": "Estado actualizado por GPS",
+          "newStatus": "En preparación",
+          "previousStatus": "Planificado",
+          "lng": -60.32086,
+          "ubicacion": "Salida de Buenos Aires",
+          "observacion": "Estado actualizado por GPS",
+          "lat": -35.58317,
+          "location": "Salida de Buenos Aires",
+          "progreso": 20,
+          "id": "1780064921516-f0dc2a35c52c7",
+          "estado": "En preparación"
+        },
+        {
+          "previousStatus": "En preparación",
+          "newStatus": "En ruta",
+          "comment": "Estado actualizado por GPS",
+          "fecha": "2026-05-29T14:28:44.674Z",
+          "changedAt": "2026-05-29T14:28:44.674Z",
+          "lat": -36.758534,
+          "observacion": "Estado actualizado por GPS",
+          "location": "Neuquén",
+          "lng": -62.647972,
+          "ubicacion": "Neuquén",
+          "id": "1780064924674-52402f32e7a6a8",
+          "progreso": 40,
+          "estado": "En ruta"
+        },
+        {
+          "comment": "Estado actualizado por GPS",
+          "fecha": "2026-05-29T14:28:47.674Z",
+          "changedAt": "2026-05-29T14:28:47.674Z",
+          "previousStatus": "En ruta",
+          "newStatus": "En destino",
+          "lat": -40.15403,
+          "observacion": "Estado actualizado por GPS",
+          "location": "Cerca de Bariloche",
+          "lng": -69.37074,
+          "ubicacion": "Cerca de Bariloche",
+          "progreso": 80,
+          "id": "1780064927674-8096a8ffd0c68",
+          "estado": "En destino"
+        },
+        {
+          "progreso": 100,
+          "id": "1780064932633-78415a3ddf3d2",
+          "estado": "Finalizado",
+          "fecha": "2026-05-29T14:28:52.633Z",
+          "changedAt": "2026-05-29T14:28:52.633Z",
+          "comment": "Viaje finalizado por GPS",
+          "newStatus": "Finalizado",
+          "previousStatus": "En destino",
+          "ubicacion": "Bariloche",
+          "lng": -71.31,
+          "location": "Bariloche",
+          "observacion": "Viaje finalizado por GPS",
+          "lat": -41.1335
+        },
+        {
+          "lng": -58.3816,
+          "ubicacion": "Buenos Aires",
+          "observacion": "GPS reiniciado desde WayTure",
+          "lat": -34.6037,
+          "location": "Buenos Aires",
+          "newStatus": "Planificado",
+          "previousStatus": "Finalizado",
+          "fecha": "2026-05-29T14:28:52.682Z",
+          "changedAt": "2026-05-29T14:28:52.682Z",
+          "comment": "GPS reiniciado desde WayTure",
+          "estado": "Planificado",
+          "id": "1780064932682-c4cf112d2340a8",
+          "progreso": 0
+        }
+      ]
+    }
+  ]
+}

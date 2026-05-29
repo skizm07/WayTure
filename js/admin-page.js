@@ -2,11 +2,34 @@ import { auth, db } from "./firebase-config.js";
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 import {
   collection, addDoc, getDocs, query, where, orderBy, doc, getDoc,
-  updateDoc, deleteDoc, serverTimestamp
+  updateDoc, deleteDoc, serverTimestamp, onSnapshot
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+import {
+  TRIP_STATUSES as SIM_TRIP_STATUSES,
+  agregarHistorialSiCambio,
+  buildSimulationFirestorePatch,
+  crearEntradaHistorial,
+  detenerSimulacionLocal,
+  detenerSimulacionPorIncidencia,
+  ensureTripSimulationFields,
+  generarRutaSimulada,
+  getTripCode,
+  getTripDestination,
+  getTripName,
+  getTripOrigin,
+  iniciarSimulacionViaje,
+  normalizeTripCode,
+  normalizeTripStatus,
+  reiniciarSimulacion,
+  statusClass as simulationStatusClass
+} from "./trip-simulation.js";
+import {
+  moverMarcadorEnRuta,
+  renderizarMapaRuta
+} from "./tracking-map.js";
 
 const moneyFormatter = new Intl.NumberFormat("es-CO", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
-const TRIP_STATUSES = ["Por planear", "En organización", "Reservado", "En curso", "Reprogramado", "Finalizado"];
+const TRIP_STATUSES = SIM_TRIP_STATUSES;
 
 const privateGate = document.getElementById("privateGate");
 const adminDashboard = document.getElementById("adminDashboard");
@@ -39,6 +62,7 @@ const mapCaption = document.getElementById("mapCaption");
 const statusHistoryList = document.getElementById("statusHistoryList");
 const selectedClosedSummary = document.getElementById("selectedClosedSummary");
 const activityList = document.getElementById("activityList");
+const activityTemplate = document.getElementById("activityTemplate");
 const activitySubmitBtn = document.getElementById("activitySubmitBtn");
 const cancelActivityEditBtn = document.getElementById("cancelActivityEditBtn");
 const activityMessage = document.getElementById("activityMessage");
@@ -64,6 +88,17 @@ const metricContacts = document.getElementById("metricContacts");
 const refreshRequestsBtn = document.getElementById("refreshRequestsBtn");
 const contactRequestsList = document.getElementById("contactRequestsList");
 const subscriptionRequestsList = document.getElementById("subscriptionRequestsList");
+const applyTripPresetBtn = document.getElementById("applyTripPresetBtn");
+const tripCountry = document.getElementById("tripCountry");
+const tripCity = document.getElementById("tripCity");
+const startSimulationBtn = document.getElementById("startSimulationBtn");
+const resetSimulationBtn = document.getElementById("resetSimulationBtn");
+const incidentSimulationBtn = document.getElementById("incidentSimulationBtn");
+const simulationProgressPercent = document.getElementById("simulationProgressPercent");
+const simulationProgressFill = document.getElementById("simulationProgressFill");
+const simulationLocation = document.getElementById("simulationLocation");
+const simulationMessage = document.getElementById("simulationMessage");
+const openTrackingLink = document.getElementById("openTrackingLink");
 const mainNav = document.getElementById("mainNav");
 const menuToggle = document.getElementById("menuToggle");
 
@@ -77,6 +112,82 @@ let selectedId = null;
 let editingTripId = null;
 let editingActivityId = null;
 let editingDestinationId = null;
+let unsubscribeTrips = null;
+let unsubscribeDestinos = null;
+let unsubscribeContactos = null;
+let unsubscribeSuscripciones = null;
+let adminLeafletMap = null;
+const DEFAULT_ORIGIN_AIRPORT = "Aeropuerto Internacional El Dorado, Bogotá";
+let adminLeafletMarker = null;
+const simulationControllers = new Map();
+const geocodeCache = new Map();
+const DESTINATION_CATALOG = {
+  "Colombia": [
+    ["Bogota", "Monserrate, Bogota", "Cultural", 2],
+    ["Cartagena", "Ciudad Amurallada, Cartagena", "Descanso", 2],
+    ["Medellin", "Comuna 13, Medellin", "Cultural", 2],
+    ["Santa Marta", "Parque Tayrona, Santa Marta", "Aventura", 2],
+    ["San Andres", "Johnny Cay, San Andres", "Descanso", 2],
+    ["Cali", "San Antonio, Cali", "Gastronomica", 2]
+  ],
+  "Mexico": [
+    ["Ciudad de Mexico", "Centro Historico CDMX", "Cultural", 2],
+    ["Cancun", "Zona Hotelera Cancun", "Descanso", 2],
+    ["Guadalajara", "Centro de Guadalajara", "Gastronomica", 2],
+    ["Oaxaca", "Centro Historico Oaxaca", "Gastronomica", 2],
+    ["Merida", "Paseo de Montejo, Merida", "Cultural", 2]
+  ],
+  "Estados Unidos": [
+    ["Nueva York", "Times Square, New York", "Cultural", 2],
+    ["Miami", "South Beach Miami", "Descanso", 2],
+    ["Los Angeles", "Hollywood Boulevard", "Cultural", 2],
+    ["Orlando", "Walt Disney World Orlando", "Familiar", 4],
+    ["San Francisco", "Golden Gate Bridge", "Aventura", 2]
+  ],
+  "Espana": [
+    ["Madrid", "Puerta del Sol, Madrid", "Cultural", 2],
+    ["Barcelona", "Sagrada Familia, Barcelona", "Cultural", 2],
+    ["Sevilla", "Real Alcazar de Sevilla", "Cultural", 2],
+    ["Valencia", "Ciudad de las Artes y las Ciencias", "Familiar", 2],
+    ["Granada", "Alhambra, Granada", "Cultural", 2]
+  ],
+  "Francia": [
+    ["Paris", "Torre Eiffel, Paris", "Cultural", 2],
+    ["Niza", "Promenade des Anglais, Nice", "Descanso", 2],
+    ["Lyon", "Vieux Lyon", "Gastronomica", 2],
+    ["Marsella", "Puerto Viejo de Marsella", "Cultural", 2]
+  ],
+  "Italia": [
+    ["Roma", "Coliseo Romano", "Cultural", 2],
+    ["Venecia", "Plaza de San Marcos, Venecia", "Cultural", 2],
+    ["Florencia", "Duomo Firenze", "Cultural", 2],
+    ["Milan", "Duomo di Milano", "Tecnologia y compras", 2],
+    ["Napoles", "Centro Storico Napoli", "Gastronomica", 2]
+  ],
+  "Japon": [
+    ["Tokio", "Shibuya Crossing, Tokyo", "Tecnologia y compras", 1],
+    ["Kioto", "Fushimi Inari Taisha, Kyoto", "Cultural", 2],
+    ["Osaka", "Dotonbori Osaka", "Gastronomica", 2],
+    ["Sapporo", "Odori Park Sapporo", "Aventura", 2]
+  ],
+  "Brasil": [
+    ["Rio de Janeiro", "Cristo Redentor, Rio de Janeiro", "Aventura", 2],
+    ["Sao Paulo", "Avenida Paulista, Sao Paulo", "Tecnologia y compras", 2],
+    ["Salvador", "Pelourinho Salvador", "Cultural", 2],
+    ["Florianopolis", "Praia Mole Florianopolis", "Descanso", 2]
+  ],
+  "Argentina": [
+    ["Buenos Aires", "Obelisco Buenos Aires", "Cultural", 2],
+    ["Bariloche", "Cerro Catedral Bariloche", "Aventura", 2],
+    ["Mendoza", "Parque General San Martin Mendoza", "Gastronomica", 2],
+    ["Ushuaia", "Parque Nacional Tierra del Fuego", "Aventura", 2]
+  ],
+  "Paises Bajos": [
+    ["Amsterdam", "Amsterdam Centraal", "Cultural", 2],
+    ["Rotterdam", "Erasmusbrug Rotterdam", "Cultural", 2],
+    ["La Haya", "Binnenhof The Hague", "Cultural", 2]
+  ]
+};
 
 function esc(text) {
   return String(text ?? "").replace(/[&<>'"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" }[c]));
@@ -91,23 +202,11 @@ function normalizeForSearch(text) {
 }
 
 function normalizeStatus(status) {
-  const raw = normalizeForSearch(status);
-  if (raw.includes("organ")) return "En organización";
-  if (raw.includes("reserv")) return "Reservado";
-  if (raw.includes("curso")) return "En curso";
-  if (raw.includes("final")) return "Finalizado";
-  if (raw.includes("reprogram") || raw.includes("incid") || raw.includes("cambio")) return "Reprogramado";
-  return "Por planear";
+  return normalizeTripStatus(status);
 }
 
 function statusClass(status) {
-  const s = normalizeStatus(status);
-  if (s === "En organización") return "organizacion";
-  if (s === "Reservado") return "reservado";
-  if (s === "En curso") return "curso";
-  if (s === "Reprogramado") return "reprogramado";
-  if (s === "Finalizado") return "finalizado";
-  return "planear";
+  return simulationStatusClass(status);
 }
 
 function mapUrl(q) {
@@ -116,6 +215,57 @@ function mapUrl(q) {
 
 function mapsLink(q) {
   return "https://maps.google.com/?q=" + encodeURIComponent(q || "");
+}
+
+function dateOffset(days) {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  return d.toISOString().slice(0, 10);
+}
+
+async function geocodePlace(place) {
+  const key = clean(place) || "Europa turismo";
+  if (geocodeCache.has(key)) return geocodeCache.get(key);
+  try {
+    const response = await fetch("https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" + encodeURIComponent(key), {
+      headers: { "Accept": "application/json" }
+    });
+    const data = await response.json();
+    if (data[0]) {
+      const coords = [Number(data[0].lat), Number(data[0].lon)];
+      geocodeCache.set(key, coords);
+      return coords;
+    }
+  } catch (error) {
+    console.warn("No se pudo geocodificar el lugar:", error);
+  }
+  return [4.711, -74.0721];
+}
+
+async function updateAdminMap(place, label = "") {
+  if (!adminMap) return;
+  const queryText = clean(place) || "Europa turismo";
+  if (!window.L) {
+    adminMap.innerHTML = `<iframe title="Mapa del viaje" src="${esc(mapUrl(queryText))}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+    return;
+  }
+
+  const coords = await geocodePlace(queryText);
+  if (!adminLeafletMap) {
+    adminLeafletMap = L.map(adminMap, { scrollWheelZoom: false }).setView(coords, 12);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: "&copy; OpenStreetMap"
+    }).addTo(adminLeafletMap);
+  }
+  adminLeafletMap.setView(coords, 12);
+  if (!adminLeafletMarker) {
+    adminLeafletMarker = L.marker(coords).addTo(adminLeafletMap);
+  } else {
+    adminLeafletMarker.setLatLng(coords);
+  }
+  adminLeafletMarker.bindPopup(esc(label || queryText)).openPopup();
+  setTimeout(() => adminLeafletMap?.invalidateSize(), 120);
 }
 
 function id() {
@@ -150,8 +300,22 @@ function makeCode(destination) {
 }
 
 async function codeExists(code) {
-  const snap = await getDocs(query(collection(db, "viajes"), where("code", "==", code)));
-  return !snap.empty;
+  const normalized = normalizeTripCode(code);
+  const [codeSnap, codigoSnap] = await Promise.all([
+    getDocs(query(collection(db, "viajes"), where("code", "==", normalized))),
+    getDocs(query(collection(db, "viajes"), where("codigoViaje", "==", normalized)))
+  ]);
+  return !codeSnap.empty || !codigoSnap.empty;
+}
+
+async function codeBelongsToOtherTrip(code, tripId = "") {
+  const normalized = normalizeTripCode(code);
+  if (!normalized) return false;
+  const [codeSnap, codigoSnap] = await Promise.all([
+    getDocs(query(collection(db, "viajes"), where("code", "==", normalized))),
+    getDocs(query(collection(db, "viajes"), where("codigoViaje", "==", normalized)))
+  ]);
+  return [...codeSnap.docs, ...codigoSnap.docs].some(d => d.id !== tripId);
 }
 
 async function makeUniqueCode(destination) {
@@ -172,24 +336,134 @@ function setMessage(el, text, type = "success") {
   el.className = type === "error" ? "warning" : "success";
 }
 
+function refreshIcons() {
+  if (window.lucide) window.lucide.createIcons();
+}
+
+function countryCityLabel(country, city) {
+  return city && country ? `${city}, ${country}` : city || country || "";
+}
+
+function addDays(dateValue, days) {
+  const d = dateValue ? new Date(dateValue + "T00:00:00") : new Date();
+  if (Number.isNaN(d.getTime())) return dateOffset(days);
+  d.setDate(d.getDate() + days);
+  return d.toISOString().slice(0, 10);
+}
+
+function routeDefaultsForDestination(destination) {
+  const key = normalizeForSearch(destination);
+  if (key.includes("medellin")) return ["Facatativá", "Manizales"];
+  if (key.includes("cartagena")) return ["Honda", "Sincelejo"];
+  if (key.includes("santa marta")) return ["Ibagué", "Barranquilla"];
+  if (key.includes("san andres")) return ["Cartagena", "Johnny Cay"];
+  if (key.includes("cali")) return ["Girardot", "Ibagué"];
+  if (key.includes("barcelona")) return ["Zaragoza", "Lleida"];
+  if (key.includes("madrid")) return ["Toledo", "Zaragoza"];
+  if (key.includes("paris")) return ["Madrid", "Lyon"];
+  if (key.includes("roma")) return ["Lyon", "Milán"];
+  if (key.includes("kioto") || key.includes("tokio")) return ["Monte Fuji", "Osaka"];
+  if (key.includes("miami") || key.includes("orlando")) return ["Washington DC", "Orlando"];
+  if (key.includes("cancun")) return ["Puebla", "Mérida"];
+  if (key.includes("bariloche")) return ["Neuquén", "Villa La Angostura"];
+  return ["Punto intermedio 1", "Punto intermedio 2"];
+}
+
+function defaultDurationByExperience(experience) {
+  const key = normalizeForSearch(experience);
+  if (key.includes("aventura")) return 7;
+  if (key.includes("familiar")) return 8;
+  if (key.includes("tecnologia")) return 8;
+  if (key.includes("descanso")) return 5;
+  if (key.includes("gastronom")) return 6;
+  return 5;
+}
+
+function estimateTripBudget({ destination, travelers = 1, startDate = "", endDate = "", experience = "Cultural" }) {
+  const nights = Math.max(2, Math.round((new Date((endDate || addDays(startDate, 5)) + "T00:00:00") - new Date((startDate || dateOffset(7)) + "T00:00:00")) / 86400000) || 5);
+  const intl = !["bogota", "medellin", "cartagena", "santa marta", "san andres", "cali", "barranquilla"].some(city => normalizeForSearch(destination).includes(city));
+  const multiplier = intl ? 1.8 : 1;
+  const adventure = normalizeForSearch(experience).includes("aventura") ? 1.2 : 1;
+  return {
+    transport: Math.round(travelers * (intl ? 420 : 180) * multiplier),
+    hotel: Math.round(travelers * nights * (intl ? 115 : 70) * multiplier),
+    food: Math.round(travelers * nights * (intl ? 48 : 32) * multiplier),
+    activitiesCost: Math.round(travelers * (intl ? 210 : 130) * adventure)
+  };
+}
+
+function setAutoField(field, value, force = false) {
+  if (!field || typeof value === "undefined" || value === null) return;
+  const current = clean(field.value);
+  if (force || !current || field.dataset.autoFilled === "true") {
+    field.value = value;
+    field.dataset.autoFilled = "true";
+  }
+}
+
+function applyTripAutomation({ destination, location, experience, travelers, force = false }) {
+  const dest = clean(destination || tripForm.destination?.value);
+  if (!dest) return;
+  const exp = experience || tripForm.experience?.value || "Cultural";
+  const people = Number(travelers || tripForm.travelers?.value || 2) || 2;
+  const [mid1, mid2] = routeDefaultsForDestination(dest);
+  setAutoField(tripForm.tripName, "Viaje a " + dest, force);
+  setAutoField(tripForm.destination, dest, force);
+  setAutoField(tripForm.origin, DEFAULT_ORIGIN_AIRPORT, false);
+  setAutoField(tripForm.intermediatePoint1, mid1, force);
+  setAutoField(tripForm.intermediatePoint2, mid2, force);
+  setAutoField(tripForm.lastLocation, tripForm.origin?.value || DEFAULT_ORIGIN_AIRPORT, force);
+  setAutoField(tripForm.mapQuery, location || dest, force);
+  setAutoField(tripForm.travelers, people, force);
+  setAutoField(tripForm.experience, exp, force);
+  const start = tripForm.startDate?.value || dateOffset(7);
+  const duration = defaultDurationByExperience(exp);
+  setAutoField(tripForm.startDate, start, force);
+  setAutoField(tripForm.endDate, addDays(start, duration), force);
+}
+
+function populateCountries() {
+  if (!tripCountry || !tripCity || !tripForm?.tripPreset) return;
+  tripCountry.innerHTML = '<option value="">Seleccionar pais</option>' +
+    Object.keys(DESTINATION_CATALOG).map(country => `<option value="${esc(country)}">${esc(country)}</option>`).join("");
+  populateCities("");
+}
+
+function populateCities(country) {
+  if (!tripCity || !tripForm?.tripPreset) return;
+  const cities = DESTINATION_CATALOG[country] || [];
+  tripCity.innerHTML = '<option value="">Seleccionar ciudad</option>' +
+    cities.map(([city]) => `<option value="${esc(city)}">${esc(city)}</option>`).join("");
+  populateTripPlans(country, "");
+}
+
+function populateTripPlans(country, selectedCity) {
+  if (!tripForm?.tripPreset) return;
+  const cities = DESTINATION_CATALOG[country] || [];
+  const options = cities
+    .filter(([city]) => !selectedCity || city === selectedCity)
+    .map(([city, location, experience, travelers]) => {
+      const destination = countryCityLabel(country, city);
+      return `<option value="${esc([destination, location, experience, travelers].join("|"))}">${esc(city)} - ${esc(experience)}</option>`;
+    })
+    .join("");
+  tripForm.tripPreset.innerHTML = '<option value="">Elegir plan</option>' + options;
+}
+
+function applyPreset(raw) {
+  if (!raw) return;
+  const [destination, location, experience, travelers] = raw.split("|");
+  applyTripAutomation({ destination, location, experience, travelers, force: true });
+  setMessage(tripFormMessage, "Destino aplicado automáticamente. Solo revisa responsable y guarda.");
+}
+
 function statusOptions(selected) {
   const normalized = normalizeStatus(selected);
   return TRIP_STATUSES.map(status => `<option value="${esc(status)}" ${status === normalized ? "selected" : ""}>${esc(status)}</option>`).join("");
 }
 
-function makeHistoryEntry(previousStatus, newStatus, location, comment = "") {
-  return {
-    id: id(),
-    previousStatus: previousStatus ? normalizeStatus(previousStatus) : "Sin estado previo",
-    newStatus: normalizeStatus(newStatus),
-    changedAt: new Date().toISOString(),
-    location: clean(location),
-    comment: clean(comment)
-  };
-}
-
 function historyItems(t) {
-  return [...(t?.statusHistory || [])].sort((a, b) => String(b.changedAt || "").localeCompare(String(a.changedAt || "")));
+  return [...(t?.statusHistory || [])].sort((a, b) => String(b.fecha || b.changedAt || "").localeCompare(String(a.fecha || a.changedAt || "")));
 }
 
 function validateDates(startDate, endDate) {
@@ -197,24 +471,63 @@ function validateDates(startDate, endDate) {
   if (endDate < startDate) throw new Error("La fecha de regreso no puede ser anterior a la fecha de salida.");
 }
 
-function buildTripData(formData, assigned) {
+function buildTripData(formData, assigned, existingTrip = {}) {
   const destination = clean(formData.get("destination"));
+  const origin = clean(formData.get("origin")) || getTripOrigin(existingTrip);
+  const intermediatePoint1 = clean(formData.get("intermediatePoint1"));
+  const intermediatePoint2 = clean(formData.get("intermediatePoint2"));
   const startDate = formData.get("startDate");
   const endDate = formData.get("endDate");
   const travelers = Number(formData.get("travelers")) || 0;
   const email = clean(formData.get("assignedEmail")).toLowerCase();
+  const codigoViaje = normalizeTripCode(formData.get("tripCode")) || getTripCode(existingTrip);
+  const nombreViaje = clean(formData.get("tripName")) || getTripName({ ...existingTrip, destino: destination, destination });
 
   if (!destination) throw new Error("El destino principal es obligatorio.");
+  if (!origin) throw new Error("El origen del viaje es obligatorio.");
   validateDates(startDate, endDate);
   if (travelers < 1) throw new Error("El número de viajeros debe ser mayor a cero.");
+  const route = generarRutaSimulada(origin, destination, intermediatePoint1, intermediatePoint2);
+  const estado = normalizeStatus(formData.get("tripStatus"));
+  const progreso = ["Finalizado", "En destino"].includes(estado) ? 100 : (Number(existingTrip.progreso ?? 0) || 0);
+  const currentLocation = progreso === 100 ? route[route.length - 1] : (existingTrip.currentLocation || route[0]);
+
+  const simulationFields = ensureTripSimulationFields({
+    ...existingTrip,
+    codigoViaje,
+    code: codigoViaje,
+    nombreViaje,
+    origen: origin,
+    destino: destination,
+    destination,
+    estado,
+    status: estado,
+    progreso,
+    currentLocation,
+    route,
+    puntoIntermedio1: intermediatePoint1,
+    puntoIntermedio2: intermediatePoint2
+  });
 
   return {
+    ...simulationFields,
     destination,
+    destino: destination,
+    origen: origin,
+    nombreViaje,
+    codigoViaje,
+    code: codigoViaje,
+    puntoIntermedio1: intermediatePoint1,
+    puntoIntermedio2: intermediatePoint2,
     startDate,
     endDate,
     travelers,
     experience: formData.get("experience") || "Cultural",
-    status: normalizeStatus(formData.get("tripStatus")),
+    status: simulationFields.estado,
+    estado: simulationFields.estado,
+    progreso: simulationFields.progreso,
+    currentLocation: simulationFields.currentLocation,
+    route: simulationFields.route,
     mapQuery: clean(formData.get("mapQuery")) || destination,
     lastLocation: clean(formData.get("lastLocation")) || destination,
     userEmail: email,
@@ -241,14 +554,67 @@ async function getUserByEmail(email) {
   const e = clean(email).toLowerCase();
   if (!e) return null;
   const snap = await getDocs(query(collection(db, "usuarios"), where("email", "==", e)));
-  if (snap.empty) return null;
+  if (snap.empty) {
+    const allUsers = await getDocs(collection(db, "usuarios"));
+    const found = allUsers.docs.find(item => clean(item.data().email).toLowerCase() === e);
+    return found ? { id: found.id, ...found.data() } : null;
+  }
   const d = snap.docs[0];
   return { id: d.id, ...d.data() };
 }
 
+function isTravelerProfile(profile) {
+  return ["usuario", "viajero", "traveler"].includes(normalizeForSearch(profile?.rol || profile?.role || "usuario"));
+}
+
+function currentManagerLabel() {
+  return currentProfile?.nombre || currentUser?.displayName || currentUser?.email || "Administrador";
+}
+
+function currentManagerEmail() {
+  return currentUser?.email || currentProfile?.email || "";
+}
+
+async function markTripManaged(tripId, action = "Gestionado desde el panel administrativo") {
+  if (!tripId) return;
+  await updateDoc(doc(db, "viajes", tripId), {
+    managedBy: currentUser?.uid || "",
+    managedByName: currentManagerLabel(),
+    managedByEmail: currentManagerEmail(),
+    managedAt: serverTimestamp(),
+    managedAction: action
+  });
+}
+
+function shouldBackfillTrip(raw, normalized) {
+  return !raw.codigoViaje ||
+    !raw.code ||
+    raw.estado !== normalized.estado ||
+    raw.status !== normalized.status ||
+    raw.destino !== normalized.destino ||
+    raw.destination !== normalized.destination ||
+    typeof raw.progreso === "undefined" ||
+    !raw.currentLocation ||
+    !Array.isArray(raw.route) ||
+    raw.route.length < 2 ||
+    !Array.isArray(raw.statusHistory);
+}
+
+function normalizeTripSnapshot(d) {
+  const raw = { id: d.id, ...d.data() };
+  const normalized = ensureTripSimulationFields(raw);
+  if (shouldBackfillTrip(raw, normalized)) {
+    updateDoc(doc(db, "viajes", d.id), {
+      ...buildSimulationFirestorePatch(normalized),
+      updatedAt: serverTimestamp()
+    }).catch(error => console.warn("No se pudo completar datos de simulación del viaje:", error));
+  }
+  return normalized;
+}
+
 async function loadViajes() {
   const snap = await getDocs(query(collection(db, "viajes"), orderBy("createdAt", "desc")));
-  viajes = snap.docs.map(d => ({ id: d.id, ...d.data(), status: normalizeStatus(d.data().status) }));
+  viajes = snap.docs.map(normalizeTripSnapshot);
   if (!selectedId && viajes[0]) selectedId = viajes[0].id;
 }
 
@@ -283,6 +649,44 @@ async function refreshRequests() {
   renderRequests();
 }
 
+function renderRealtimeCollections() {
+  renderMetrics();
+  renderTrips();
+  renderSelected();
+  renderRecommended();
+  renderRequests();
+  refreshIcons();
+}
+
+function startRealtime() {
+  unsubscribeTrips?.();
+  unsubscribeDestinos?.();
+  unsubscribeContactos?.();
+  unsubscribeSuscripciones?.();
+
+  unsubscribeTrips = onSnapshot(query(collection(db, "viajes"), orderBy("createdAt", "desc")), snap => {
+    viajes = snap.docs.map(normalizeTripSnapshot);
+    if (!selectedId || !viajes.some(t => t.id === selectedId)) selectedId = viajes[0]?.id || null;
+    renderRealtimeCollections();
+  }, error => console.error("Error en tiempo real de viajes:", error));
+
+  unsubscribeDestinos = onSnapshot(query(collection(db, "destinosRecomendados"), orderBy("createdAt", "desc")), snap => {
+    destinos = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderRecommended();
+  }, error => console.error("Error en tiempo real de destinos:", error));
+
+  unsubscribeContactos = onSnapshot(query(collection(db, "contactos"), orderBy("createdAt", "desc")), snap => {
+    contactos = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderMetrics();
+    renderRequests();
+  }, error => console.error("Error en tiempo real de contactos:", error));
+
+  unsubscribeSuscripciones = onSnapshot(query(collection(db, "suscripciones"), orderBy("createdAt", "desc")), snap => {
+    suscripciones = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderRequests();
+  }, error => console.error("Error en tiempo real de suscripciones:", error));
+}
+
 function filteredTrips() {
   if (!tripFilters) return viajes;
   const d = new FormData(tripFilters);
@@ -293,8 +697,8 @@ function filteredTrips() {
   const startDate = clean(d.get("startDate"));
 
   return viajes.filter(t => {
-    const matchesCode = !code || normalizeForSearch(t.code).includes(code);
-    const matchesDestination = !destination || normalizeForSearch(t.destination).includes(destination);
+    const matchesCode = !code || normalizeForSearch(getTripCode(t)).includes(code);
+    const matchesDestination = !destination || normalizeForSearch(`${getTripDestination(t)} ${getTripName(t)}`).includes(destination);
     const matchesStatus = !status || normalizeStatus(t.status) === normalizeStatus(status);
     const matchesAssigned = !assigned || normalizeForSearch(`${t.userEmail || ""} ${t.userId || ""}`).includes(assigned);
     const matchesStart = !startDate || t.startDate === startDate;
@@ -304,13 +708,13 @@ function filteredTrips() {
 
 function renderMetrics() {
   metricTrips.textContent = viajes.length;
-  metricActive.textContent = viajes.filter(t => ["En organización", "Reservado", "En curso", "Reprogramado"].includes(normalizeStatus(t.status))).length;
-  metricActivities.textContent = viajes.reduce((s, t) => s + (t.itinerary || []).length, 0);
-  metricBudget.textContent = moneyFormatter.format(viajes.reduce((s, t) => s + budget(t), 0));
+  metricActive.textContent = viajes.filter(t => ["En preparación", "En ruta", "Cerca del destino", "En destino"].includes(normalizeStatus(t.status))).length;
+  metricActivities.textContent = viajes.filter(t => normalizeStatus(t.status) === "Finalizado").length;
+  metricBudget.textContent = viajes.filter(t => normalizeStatus(t.status) === "Incidencia").length;
   if (metricContacts) metricContacts.textContent = contactos.filter(c => c.status !== "gestionado" && c.status !== "archivado").length;
 }
 
-function renderTrips() {
+function renderTripsLegacy() {
   if (!viajes.length) {
     tripList.innerHTML = '<div class="empty-state">Todavía no hay viajes registrados. Crea el primero desde el formulario.</div>';
     return;
@@ -348,7 +752,7 @@ function renderTrips() {
   }).join("");
 }
 
-function renderSelected() {
+function renderSelectedLegacy() {
   const t = selectedTrip();
   if (!t) {
     selectedTripTitle.textContent = "Selecciona un viaje";
@@ -357,6 +761,7 @@ function renderSelected() {
     adminMap.src = mapUrl("Europa turismo");
     mapCaption.textContent = "Selecciona un viaje para ver su mapa.";
     activityList.innerHTML = '<div class="empty-state">Sin viaje seleccionado.</div>';
+    populateActivityTemplates(null);
     statusHistoryList.innerHTML = '<div class="empty-state">Sin historial disponible.</div>';
     selectedClosedSummary.className = "closed-summary is-hidden";
     return;
@@ -391,9 +796,9 @@ function renderStatusHistory(t) {
 
   statusHistoryList.innerHTML = items.map(h => `
     <article class="history-entry">
-      <strong>${esc(h.previousStatus || "Sin estado previo")} → ${esc(h.newStatus || "Sin estado")}</strong>
-      <p class="muted">${fmtDateTime(h.changedAt)}${h.location ? " · " + esc(h.location) : ""}</p>
-      <p class="muted">${esc(h.comment || "Cambio registrado desde el panel administrativo.")}</p>
+      <strong>${esc(h.estado || h.newStatus || "Estado actualizado")} · ${Number(h.progreso || 0)}%</strong>
+      <p class="muted">${fmtDateTime(h.fecha || h.changedAt)}${h.ubicacion || h.location ? " · " + esc(h.ubicacion || h.location) : ""}</p>
+      <p class="muted">${esc(h.observacion || h.comment || "Cambio registrado desde el panel administrativo.")}</p>
     </article>
   `).join("");
 }
@@ -436,6 +841,70 @@ function renderActivities(t) {
   `).join("");
 }
 
+function activityTemplatesForTrip(t) {
+  const trip = ensureTripSimulationFields(t || {});
+  const start = trip.startDate || dateOffset(7);
+  const route = trip.route || [];
+  const origin = route[0]?.label || getTripOrigin(trip);
+  const mid = route[Math.floor(route.length / 2)]?.label || getTripDestination(trip);
+  const destination = getTripDestination(trip);
+  return [
+    {
+      label: "Salida / check-in de ruta",
+      date: start,
+      time: "09:00",
+      place: origin,
+      category: "Transporte",
+      description: "Inicio del viaje, verificación de documentos y salida programada."
+    },
+    {
+      label: "Actividad principal en destino",
+      date: addDays(start, 1),
+      time: "10:00",
+      place: destination,
+      category: normalizeForSearch(trip.experience).includes("aventura") ? "Aventura" : "Cultura",
+      description: `Actividad recomendada para disfrutar ${destination}.`
+    },
+    {
+      label: "Parada intermedia de ruta",
+      date: addDays(start, 2),
+      time: "13:30",
+      place: mid,
+      category: "Fotografia",
+      description: "Punto de descanso, fotos y actualización de ubicación simulada."
+    },
+    {
+      label: "Cierre del viaje",
+      date: trip.endDate || addDays(start, 5),
+      time: "16:00",
+      place: destination,
+      category: "Descanso",
+      description: "Cierre del itinerario y preparación de regreso."
+    }
+  ];
+}
+
+function populateActivityTemplates(t) {
+  if (!activityTemplate) return;
+  const options = activityTemplatesForTrip(t).map(item => `<option value="${esc(JSON.stringify(item))}">${esc(item.label)}</option>`).join("");
+  activityTemplate.innerHTML = '<option value="">Elegir sugerencia del viaje</option>' + options;
+}
+
+function applyActivityTemplate(raw) {
+  if (!raw || !activityForm) return;
+  try {
+    const item = JSON.parse(raw);
+    activityForm.activityDate.value = item.date || "";
+    activityForm.activityTime.value = item.time || "";
+    activityForm.activityCategory.value = item.category || "Cultura";
+    activityForm.activityPlace.value = item.place || "";
+    activityForm.activityDescription.value = item.description || "";
+    setMessage(activityMessage, "Actividad completada automáticamente. Puedes ajustar cualquier dato.");
+  } catch (error) {
+    console.warn("No se pudo aplicar la plantilla de actividad:", error);
+  }
+}
+
 function renderBudget(t) {
   outTransport.textContent = moneyFormatter.format(Number(t.transport || 0));
   outHotel.textContent = moneyFormatter.format(Number(t.hotel || 0));
@@ -463,6 +932,28 @@ function renderRecommended() {
       </div>
     </article>
   `).join("");
+}
+
+function defaultImageForDestination(name) {
+  const key = normalizeForSearch(name);
+  if (key.includes("paris")) return "assets/paris.jpg";
+  if (key.includes("amsterdam")) return "assets/amsterdam.jpg";
+  if (key.includes("tokio") || key.includes("japon")) return "assets/tokyo.jpg";
+  if (key.includes("playa") || key.includes("cartagena") || key.includes("cancun") || key.includes("san andres")) return "assets/playa.jpg";
+  if (key.includes("montana") || key.includes("bariloche") || key.includes("medellin")) return "assets/montana.jpg";
+  return "assets/fondo.jpg";
+}
+
+function autoFillRecommendationForm() {
+  if (!destinationForm) return;
+  const name = clean(destinationForm.recName?.value);
+  if (!name) return;
+  if (!destinationForm.recRating.value) destinationForm.recRating.value = "4.8";
+  if (!clean(destinationForm.recImage.value)) destinationForm.recImage.value = defaultImageForDestination(name);
+  if (!clean(destinationForm.recMapLink.value)) destinationForm.recMapLink.value = mapsLink(name);
+  if (!clean(destinationForm.recDescription.value)) {
+    destinationForm.recDescription.value = `${name} es una recomendación WayTure lista para conectar con rutas, presupuesto e itinerario.`;
+  }
 }
 
 function renderRequests() {
@@ -504,7 +995,8 @@ function renderRequests() {
 function resetTripEdit() {
   editingTripId = null;
   tripForm.reset();
-  tripForm.tripStatus.innerHTML = statusOptions("Por planear");
+  if (tripForm.origin) tripForm.origin.value = DEFAULT_ORIGIN_AIRPORT;
+  tripForm.tripStatus.innerHTML = statusOptions("Planificado");
   tripFormTitle.textContent = "Crear nuevo viaje";
   tripSubmitBtn.textContent = "Registrar viaje";
   cancelTripEditBtn.classList.add("is-hidden");
@@ -512,20 +1004,26 @@ function resetTripEdit() {
 }
 
 function fillTripForm(t) {
+  const trip = ensureTripSimulationFields(t);
   editingTripId = t.id;
-  tripForm.destination.value = t.destination || "";
-  tripForm.assignedEmail.value = t.userEmail || "";
-  tripForm.startDate.value = t.startDate || "";
-  tripForm.endDate.value = t.endDate || "";
-  tripForm.travelers.value = t.travelers || 1;
-  tripForm.experience.value = t.experience || "Cultural";
-  tripForm.tripStatus.innerHTML = statusOptions(t.status);
-  tripForm.lastLocation.value = t.lastLocation || "";
-  tripForm.mapQuery.value = t.mapQuery || "";
+  tripForm.tripCode.value = getTripCode(trip);
+  tripForm.tripName.value = getTripName(trip);
+  tripForm.origin.value = getTripOrigin(trip);
+  tripForm.destination.value = getTripDestination(trip);
+  tripForm.intermediatePoint1.value = trip.puntoIntermedio1 || trip.route?.[2]?.label || "";
+  tripForm.intermediatePoint2.value = trip.puntoIntermedio2 || trip.route?.[3]?.label || "";
+  tripForm.assignedEmail.value = trip.userEmail || "";
+  tripForm.startDate.value = trip.startDate || "";
+  tripForm.endDate.value = trip.endDate || "";
+  tripForm.travelers.value = trip.travelers || 1;
+  tripForm.experience.value = trip.experience || "Cultural";
+  tripForm.tripStatus.innerHTML = statusOptions(trip.status);
+  tripForm.lastLocation.value = trip.currentLocation?.label || trip.lastLocation || "";
+  tripForm.mapQuery.value = trip.mapQuery || trip.currentLocation?.label || "";
   tripFormTitle.textContent = "Editar viaje";
   tripSubmitBtn.textContent = "Guardar cambios";
   cancelTripEditBtn.classList.remove("is-hidden");
-  setMessage(tripFormMessage, "Editando " + (t.code || "viaje seleccionado") + ".");
+  setMessage(tripFormMessage, "Editando " + (getTripCode(trip) || "viaje seleccionado") + ".");
   tripForm.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
@@ -569,6 +1067,182 @@ function fillDestinationForm(destination) {
   setMessage(destinationMessage, "Editando destino recomendado.");
 }
 
+function renderTrips() {
+  if (!viajes.length) {
+    tripList.innerHTML = '<div class="empty-state">Todavia no hay viajes registrados. Crea el primero desde el formulario.</div>';
+    return;
+  }
+
+  const items = filteredTrips();
+  if (!items.length) {
+    tripList.innerHTML = '<div class="empty-state">No encontramos viajes con esos filtros. Ajusta la busqueda o limpia los filtros.</div>';
+    return;
+  }
+
+  tripList.innerHTML = `<div class="trip-table-wrap"><table class="trip-table">
+    <thead><tr><th>Codigo</th><th>Viaje / ruta</th><th>Estado</th><th>Progreso</th><th>Ubicacion</th><th>Asignado</th><th>Acciones</th></tr></thead>
+    <tbody>${items.map(t => {
+      const status = normalizeStatus(t.status);
+      const code = getTripCode(t);
+      const destination = getTripDestination(t);
+      const location = t.currentLocation?.label || t.lastLocation || destination;
+      return `<tr class="${t.id === selectedId ? "selected" : ""} ${status === "Finalizado" ? "is-finalized" : ""}" data-row-id="${esc(t.id)}" tabindex="0">
+        <td><span class="code-pill">${esc(code)}</span></td>
+        <td><strong>${esc(getTripName(t))}</strong><br><span class="muted">${esc(getTripOrigin(t))} → ${esc(destination)}</span></td>
+        <td><span class="status-pill ${statusClass(status)}">${esc(status)}</span></td>
+        <td><strong>${Number(t.progreso || 0)}%</strong><br><span class="muted">${t.simulacionActiva ? "simulando" : "detenido"}</span></td>
+        <td>${esc(location)}<br><span class="muted">${fmtDate(t.startDate)} - ${fmtDate(t.endDate)}</span></td>
+        <td>${esc(t.userEmail || "publico / sin usuario")}<br><span class="muted">Gestor: ${esc(t.managedByName || t.assignedByEmail || "Sin asignar")}</span></td>
+        <td><div class="table-actions">
+          <button class="small-btn icon-btn" data-action="select" data-id="${t.id}" title="Ver detalle" aria-label="Ver detalle"><i data-lucide="eye"></i></button>
+          <button class="small-btn icon-btn" data-action="edit" data-id="${t.id}" title="Editar viaje" aria-label="Editar viaje"><i data-lucide="pencil"></i></button>
+          <button class="small-btn icon-btn" data-action="start-simulation" data-id="${t.id}" title="Iniciar simulacion" aria-label="Iniciar simulacion"><i data-lucide="play"></i></button>
+          <button class="small-btn icon-btn" data-action="reset-simulation" data-id="${t.id}" title="Reiniciar simulacion" aria-label="Reiniciar simulacion"><i data-lucide="rotate-ccw"></i></button>
+          <button class="small-btn icon-btn danger" data-action="incident" data-id="${t.id}" title="Simular incidencia" aria-label="Simular incidencia"><i data-lucide="triangle-alert"></i></button>
+          <button class="small-btn icon-btn" data-action="copy" data-code="${esc(code)}" title="Copiar codigo" aria-label="Copiar codigo"><i data-lucide="copy"></i></button>
+          <button class="small-btn icon-btn" data-action="track" data-code="${esc(code)}" title="Abrir rastreo" aria-label="Abrir rastreo"><i data-lucide="route"></i></button>
+          <button class="small-btn icon-btn danger" data-action="delete" data-id="${t.id}" title="Eliminar" aria-label="Eliminar"><i data-lucide="trash-2"></i></button>
+        </div></td>
+      </tr>`;
+    }).join("")}</tbody></table></div>`;
+  refreshIcons();
+}
+
+function renderSimulationPanel(t) {
+  if (!simulationProgressPercent || !simulationProgressFill || !simulationLocation) return;
+  if (!t) {
+    simulationProgressPercent.textContent = "0%";
+    simulationProgressFill.style.width = "0%";
+    simulationLocation.textContent = "Selecciona un viaje para ver la ubicación simulada.";
+    if (openTrackingLink) openTrackingLink.href = "rastreo-viaje.html";
+    return;
+  }
+  const trip = ensureTripSimulationFields(t);
+  const progress = Math.max(0, Math.min(100, Number(trip.progreso || 0)));
+  simulationProgressPercent.textContent = `${progress}%`;
+  simulationProgressFill.style.width = `${progress}%`;
+  simulationLocation.textContent = `${trip.currentLocation?.label || "Ubicación GPS simulada"} · ${trip.estado}`;
+  if (openTrackingLink) openTrackingLink.href = "rastreo-viaje.html?codigo=" + encodeURIComponent(getTripCode(trip));
+}
+
+function renderSelected() {
+  const t = selectedTrip();
+  if (!t) {
+    selectedTripTitle.textContent = "Selecciona un viaje";
+    selectedTripCode.textContent = "Sin codigo";
+    selectedTripMeta.textContent = "Elige un viaje para editarlo.";
+    renderizarMapaRuta(ensureTripSimulationFields({
+      id: "admin-preview",
+      codigoViaje: "WT-DEMO",
+      nombreViaje: "Ruta demo WayTure",
+      origen: DEFAULT_ORIGIN_AIRPORT,
+      destino: "Medellín"
+    }), { container: adminMap, fit: true });
+    mapCaption.textContent = "Selecciona un viaje para ver su mapa.";
+    activityList.innerHTML = '<div class="empty-state">Sin viaje seleccionado.</div>';
+    statusHistoryList.innerHTML = '<div class="empty-state">Sin historial disponible.</div>';
+    selectedClosedSummary.className = "closed-summary is-hidden";
+    renderSimulationPanel(null);
+    return;
+  }
+
+  const trip = ensureTripSimulationFields(t);
+  const status = normalizeStatus(trip.status);
+  selectedTripTitle.textContent = getTripName(trip);
+  selectedTripCode.textContent = getTripCode(trip);
+  selectedTripMeta.textContent = `${getTripOrigin(trip)} → ${getTripDestination(trip)} - ${trip.progreso}% - ${trip.travelers || 1} viajero(s) · Gestionado por ${trip.managedByName || trip.assignedByEmail || "Sin asignar"}`;
+  editStatus.innerHTML = statusOptions(status);
+  editLastLocation.value = trip.currentLocation?.label || trip.lastLocation || "";
+  editMapQuery.value = trip.mapQuery || trip.currentLocation?.label || getTripDestination(trip);
+  const suggestedBudget = estimateTripBudget({
+    destination: getTripDestination(trip),
+    travelers: trip.travelers || 1,
+    startDate: trip.startDate,
+    endDate: trip.endDate,
+    experience: trip.experience
+  });
+  transportBudget.value = trip.transport || suggestedBudget.transport;
+  hotelBudget.value = trip.hotel || suggestedBudget.hotel;
+  foodBudget.value = trip.food || suggestedBudget.food;
+  activitiesBudget.value = trip.activitiesCost || suggestedBudget.activitiesCost;
+  personalNotes.value = trip.notes || "";
+  renderizarMapaRuta(trip, { container: adminMap, fit: true });
+  mapCaption.textContent = `Ruta simulada: ${getTripOrigin(trip)} → ${getTripDestination(trip)} · Gestor: ${trip.managedByName || trip.assignedByEmail || "Sin asignar"}`;
+  renderSimulationPanel(trip);
+  populateActivityTemplates(trip);
+  renderActivities(trip);
+  renderBudget(trip);
+  renderStatusHistory(trip);
+  renderClosedSummary(trip);
+}
+
+async function persistSimulationTrip(trip) {
+  if (!trip?.id) return;
+  await updateDoc(doc(db, "viajes", trip.id), {
+    ...buildSimulationFirestorePatch(trip),
+    updatedAt: serverTimestamp()
+  });
+}
+
+function updateTripCache(trip) {
+  const normalized = ensureTripSimulationFields(trip);
+  viajes = viajes.map(item => item.id === normalized.id ? normalized : item);
+  if (selectedId === normalized.id) {
+    renderSimulationPanel(normalized);
+    moverMarcadorEnRuta(normalized, { container: adminMap });
+    renderStatusHistory(normalized);
+    renderSelected();
+  }
+  renderTrips();
+}
+
+async function startTripSimulation(tripId = selectedId) {
+  const existing = viajes.find(t => t.id === tripId);
+  if (!existing) {
+    setMessage(simulationMessage, "Selecciona un viaje para iniciar la simulación.", "error");
+    return;
+  }
+  const trip = ensureTripSimulationFields(existing);
+  simulationControllers.get(trip.id)?.stop?.();
+  await persistSimulationTrip({ ...trip, simulacionActiva: true });
+  const controller = iniciarSimulacionViaje({ ...trip, simulacionActiva: true }, {
+    intervalMs: 1500,
+    onTick: updated => {
+      updateTripCache({ ...updated, id: trip.id });
+      setMessage(simulationMessage, updated.estado === "Finalizado" ? "Simulación finalizada." : "Simulación GPS en curso.");
+    },
+    onPersist: updated => persistSimulationTrip({ ...updated, id: trip.id }),
+    onDone: () => setMessage(simulationMessage, "Viaje finalizado automáticamente.")
+  });
+  simulationControllers.set(trip.id, controller);
+}
+
+async function resetTripSimulation(tripId = selectedId) {
+  const existing = viajes.find(t => t.id === tripId);
+  if (!existing) {
+    setMessage(simulationMessage, "Selecciona un viaje para reiniciar la simulación.", "error");
+    return;
+  }
+  simulationControllers.get(existing.id)?.stop?.();
+  const reset = reiniciarSimulacion(existing);
+  await persistSimulationTrip(reset);
+  setMessage(simulationMessage, "Simulación reiniciada desde el origen.");
+  await refresh();
+}
+
+async function incidentTripSimulation(tripId = selectedId) {
+  const existing = viajes.find(t => t.id === tripId);
+  if (!existing) {
+    setMessage(simulationMessage, "Selecciona un viaje para simular una incidencia.", "error");
+    return;
+  }
+  simulationControllers.get(existing.id)?.stop?.();
+  const incident = detenerSimulacionPorIncidencia(existing);
+  await persistSimulationTrip(incident);
+  setMessage(simulationMessage, "El viaje presenta una incidencia y se encuentra detenido temporalmente.", "error");
+  await refresh();
+}
+
 onAuthStateChanged(auth, async user => {
   if (!user) {
     showBlocked("No has iniciado sesión.");
@@ -588,8 +1262,12 @@ onAuthStateChanged(auth, async user => {
 
   showDashboard();
   sessionInfo.textContent = `Administrador: ${currentProfile.nombre || user.displayName || user.email} - ${user.email}`;
-  tripForm.tripStatus.innerHTML = statusOptions("Por planear");
-  editStatus.innerHTML = statusOptions("Por planear");
+  tripForm.tripStatus.innerHTML = statusOptions("Planificado");
+  editStatus.innerHTML = statusOptions("Planificado");
+  if (tripForm.origin && !tripForm.origin.value) tripForm.origin.value = DEFAULT_ORIGIN_AIRPORT;
+  populateCountries();
+  refreshIcons();
+  startRealtime();
   await refresh();
 });
 
@@ -601,45 +1279,83 @@ tripForm.addEventListener("submit", async e => {
   try {
     setMessage(tripFormMessage, editingTripId ? "Guardando cambios..." : "Creando viaje...");
     const assigned = email ? await getUserByEmail(email) : null;
-    const tripData = buildTripData(d, assigned);
+    if (!email) throw new Error("Debes asignar el viaje al correo de un usuario viajero.");
+    if (!assigned) throw new Error("No existe un usuario viajero registrado con ese correo.");
+    if (!isTravelerProfile(assigned)) throw new Error("Ese correo pertenece a una cuenta administrativa. Asigna el viaje a un usuario viajero.");
+    const existing = editingTripId ? viajes.find(t => t.id === editingTripId) : null;
+    let tripData = buildTripData(d, assigned, existing || {});
+    if (await codeBelongsToOtherTrip(getTripCode(tripData), editingTripId || "")) {
+      throw new Error("Ese código de viaje ya existe. Usa otro código o deja el campo vacío.");
+    }
+    if (!editingTripId && !clean(d.get("tripCode"))) {
+      const generatedCode = await makeUniqueCode(tripData.destination);
+      tripData = ensureTripSimulationFields({ ...tripData, codigoViaje: generatedCode, code: generatedCode });
+    }
 
     if (editingTripId) {
-      const existing = viajes.find(t => t.id === editingTripId);
       if (!existing) throw new Error("No se encontró el viaje que intentas editar.");
       const previousStatus = normalizeStatus(existing.status);
       const nextStatus = normalizeStatus(tripData.status);
-      const statusHistory = [...(existing.statusHistory || [])];
-      if (previousStatus !== nextStatus) {
-        statusHistory.push(makeHistoryEntry(previousStatus, nextStatus, tripData.lastLocation, "Cambio guardado desde edición completa del viaje."));
-      }
+      let statusHistory = [...(tripData.statusHistory || existing.statusHistory || [])];
+      statusHistory = previousStatus !== nextStatus
+        ? agregarHistorialSiCambio({ ...tripData, statusHistory, estado: previousStatus, status: previousStatus }, nextStatus, tripData.currentLocation, tripData.progreso, "Cambio guardado desde edición completa del viaje.")
+        : statusHistory;
 
-      const updateData = { ...tripData, statusHistory };
+      const updateData = {
+        ...tripData,
+        statusHistory,
+        ...buildSimulationFirestorePatch({ ...tripData, statusHistory }),
+        managedBy: currentUser.uid,
+        managedByName: currentManagerLabel(),
+        managedByEmail: currentManagerEmail(),
+        managedAt: serverTimestamp(),
+        managedAction: "Edicion del viaje"
+      };
       if (nextStatus === "Finalizado" && previousStatus !== "Finalizado") updateData.finishedAt = new Date().toISOString();
       await updateDoc(doc(db, "viajes", editingTripId), updateData);
       selectedId = editingTripId;
       resetTripEdit();
       setMessage(tripFormMessage, "Viaje actualizado correctamente.");
     } else {
-      const code = await makeUniqueCode(tripData.destination);
-      const statusHistory = [makeHistoryEntry("", tripData.status, tripData.lastLocation, "Viaje creado desde el panel administrativo.")];
+      const code = getTripCode(tripData);
+      const statusHistory = [crearEntradaHistorial(tripData.status, tripData.progreso, tripData.currentLocation, "Viaje creado desde el panel administrativo.")];
+      const suggestedBudget = estimateTripBudget({
+        destination: tripData.destination,
+        travelers: tripData.travelers,
+        startDate: tripData.startDate,
+        endDate: tripData.endDate,
+        experience: tripData.experience
+      });
       const createData = {
         ...tripData,
+        ...buildSimulationFirestorePatch({ ...tripData, statusHistory }),
         code,
+        codigoViaje: code,
         statusHistory,
         finishedAt: normalizeStatus(tripData.status) === "Finalizado" ? new Date().toISOString() : "",
-        transport: 0,
-        hotel: 0,
-        food: 0,
-        activitiesCost: 0,
+        transport: suggestedBudget.transport,
+        hotel: suggestedBudget.hotel,
+        food: suggestedBudget.food,
+        activitiesCost: suggestedBudget.activitiesCost,
         notes: "",
         itinerary: [],
         createdBy: currentUser.uid,
+        createdByRole: "admin",
+        assignedBy: currentUser.uid,
+        assignedByEmail: currentUser.email || "",
+        assignedAt: serverTimestamp(),
+        managedBy: currentUser.uid,
+        managedByName: currentManagerLabel(),
+        managedByEmail: currentManagerEmail(),
+        managedAt: serverTimestamp(),
+        managedAction: "Viaje creado",
         createdAt: serverTimestamp()
       };
       const ref = await addDoc(collection(db, "viajes"), createData);
       selectedId = ref.id;
       tripForm.reset();
-      tripForm.tripStatus.innerHTML = statusOptions("Por planear");
+      if (tripForm.origin) tripForm.origin.value = DEFAULT_ORIGIN_AIRPORT;
+      tripForm.tripStatus.innerHTML = statusOptions("Planificado");
       setMessage(tripFormMessage, "Viaje guardado en Firebase. Código público: " + code + (email && !assigned ? " (correo no registrado; queda solo como referencia)" : ""));
     }
 
@@ -652,7 +1368,16 @@ tripForm.addEventListener("submit", async e => {
 
 tripList.addEventListener("click", async e => {
   const b = e.target.closest("button[data-action]");
-  if (!b) return;
+  if (!b) {
+    const row = e.target.closest("tr[data-row-id]");
+    if (row) {
+      selectedId = row.dataset.rowId;
+      renderTrips();
+      renderSelected();
+      document.getElementById("detalle-viaje")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    return;
+  }
 
   try {
     if (b.dataset.action === "select") selectedId = b.dataset.id;
@@ -661,13 +1386,38 @@ tripList.addEventListener("click", async e => {
       const t = selectedTrip();
       if (t) fillTripForm(t);
     }
+    if (["select", "edit", "start-simulation", "reset-simulation", "incident"].includes(b.dataset.action)) {
+      await markTripManaged(b.dataset.id, {
+        select: "Seleccionado para gestion",
+        edit: "Edicion del viaje",
+        "start-simulation": "Simulacion iniciada",
+        "reset-simulation": "Simulacion reiniciada",
+        incident: "Incidencia simulada"
+      }[b.dataset.action]);
+    }
     if (b.dataset.action === "copy") {
       navigator.clipboard && navigator.clipboard.writeText(b.dataset.code);
       b.textContent = "Copiado";
     }
     if (b.dataset.action === "track") location.href = "rastreo-viaje.html?codigo=" + encodeURIComponent(b.dataset.code);
+    if (b.dataset.action === "start-simulation") {
+      selectedId = b.dataset.id;
+      await startTripSimulation(b.dataset.id);
+      return;
+    }
+    if (b.dataset.action === "reset-simulation") {
+      selectedId = b.dataset.id;
+      await resetTripSimulation(b.dataset.id);
+      return;
+    }
+    if (b.dataset.action === "incident") {
+      selectedId = b.dataset.id;
+      await incidentTripSimulation(b.dataset.id);
+      return;
+    }
     if (b.dataset.action === "delete") {
       if (confirm("¿Eliminar este viaje de Firebase?")) {
+        detenerSimulacionLocal(viajes.find(t => t.id === b.dataset.id) || b.dataset.id);
         await deleteDoc(doc(db, "viajes", b.dataset.id));
         if (selectedId === b.dataset.id) selectedId = null;
         if (editingTripId === b.dataset.id) resetTripEdit();
@@ -677,6 +1427,15 @@ tripList.addEventListener("click", async e => {
   } catch (error) {
     console.error("Error en lista de viajes:", error);
     alert("No se pudo completar la acción: " + error.message);
+  }
+});
+
+tripList.addEventListener("keydown", e => {
+  if ((e.key === "Enter" || e.key === " ") && e.target.matches("tr[data-row-id]")) {
+    e.preventDefault();
+    selectedId = e.target.dataset.rowId;
+    renderTrips();
+    renderSelected();
   }
 });
 
@@ -709,21 +1468,55 @@ statusForm.addEventListener("submit", async e => {
   const lastLocation = clean(d.get("editLastLocation")) || t.lastLocation || t.destination;
   const mapQuery = clean(d.get("editMapQuery")) || lastLocation;
   const comment = clean(d.get("statusComment"));
-  const statusHistory = [...(t.statusHistory || [])];
+  const nextProgress = ["Finalizado", "En destino"].includes(nextStatus) ? 100 : Number(t.progreso || 0);
+  const currentLocation = nextProgress === 100 ? (t.route?.[t.route.length - 1] || t.currentLocation) : {
+    ...(t.currentLocation || {}),
+    label: lastLocation,
+    lat: Number(t.currentLocation?.lat) || t.route?.[0]?.lat || 4.711,
+    lng: Number(t.currentLocation?.lng) || t.route?.[0]?.lng || -74.0721
+  };
+  const displayLocation = currentLocation?.label || lastLocation;
+  let statusHistory = [...(t.statusHistory || [])];
 
   if (previousStatus !== nextStatus) {
-    statusHistory.push(makeHistoryEntry(previousStatus, nextStatus, lastLocation, comment));
+    statusHistory = agregarHistorialSiCambio(
+      { ...t, estado: previousStatus, status: previousStatus, statusHistory },
+      nextStatus,
+      currentLocation,
+      nextProgress,
+      comment || "Cambio registrado desde el panel administrativo."
+    );
   }
 
   const updateData = {
+    ...buildSimulationFirestorePatch({
+      ...t,
+      estado: nextStatus,
+      status: nextStatus,
+      currentLocation,
+      progreso: nextProgress,
+      statusHistory
+    }),
     status: nextStatus,
-    lastLocation,
-    mapQuery,
+    estado: nextStatus,
+    progreso: nextProgress,
+    lastLocation: displayLocation,
+    mapQuery: nextProgress === 100 ? `${currentLocation.lat},${currentLocation.lng}` : mapQuery,
+    currentLocation,
     statusHistory,
+    managedBy: currentUser.uid,
+    managedByName: currentManagerLabel(),
+    managedByEmail: currentManagerEmail(),
+    managedAt: serverTimestamp(),
+    managedAction: "Cambio de estado",
     lastUpdate: new Date().toISOString(),
     updatedAt: serverTimestamp()
   };
   if (nextStatus === "Finalizado" && previousStatus !== "Finalizado") updateData.finishedAt = new Date().toISOString();
+  if (nextStatus === "Incidencia") {
+    detenerSimulacionLocal(t);
+    updateData.simulacionActiva = false;
+  }
 
   try {
     await updateDoc(doc(db, "viajes", selectedId), updateData);
@@ -761,7 +1554,16 @@ activityForm.addEventListener("submit", async e => {
     : [...(t.itinerary || []), activity];
 
   try {
-    await updateDoc(doc(db, "viajes", selectedId), { itinerary, lastUpdate: new Date().toISOString(), updatedAt: serverTimestamp() });
+    await updateDoc(doc(db, "viajes", selectedId), {
+      itinerary,
+      managedBy: currentUser.uid,
+      managedByName: currentManagerLabel(),
+      managedByEmail: currentManagerEmail(),
+      managedAt: serverTimestamp(),
+      managedAction: "Edicion de itinerario",
+      lastUpdate: new Date().toISOString(),
+      updatedAt: serverTimestamp()
+    });
     const savedMessage = editingActivityId ? "Actividad actualizada." : "Actividad agregada al itinerario.";
     resetActivityEdit();
     setMessage(activityMessage, savedMessage);
@@ -785,7 +1587,15 @@ activityList.addEventListener("click", async e => {
 
   if (b.dataset.action === "delete-activity") {
     const itinerary = (t.itinerary || []).filter(a => a.id !== b.dataset.id);
-    await updateDoc(doc(db, "viajes", selectedId), { itinerary, updatedAt: serverTimestamp() });
+    await updateDoc(doc(db, "viajes", selectedId), {
+      itinerary,
+      managedBy: currentUser.uid,
+      managedByName: currentManagerLabel(),
+      managedByEmail: currentManagerEmail(),
+      managedAt: serverTimestamp(),
+      managedAction: "Eliminacion de actividad",
+      updatedAt: serverTimestamp()
+    });
     if (editingActivityId === b.dataset.id) resetActivityEdit();
     await refresh();
   }
@@ -800,6 +1610,11 @@ budgetForm.addEventListener("submit", async e => {
     hotel: Number(d.get("hotelBudget")) || 0,
     food: Number(d.get("foodBudget")) || 0,
     activitiesCost: Number(d.get("activitiesBudget")) || 0,
+    managedBy: currentUser.uid,
+    managedByName: currentManagerLabel(),
+    managedByEmail: currentManagerEmail(),
+    managedAt: serverTimestamp(),
+    managedAction: "Edicion de presupuesto",
     lastUpdate: new Date().toISOString(),
     updatedAt: serverTimestamp()
   });
@@ -811,6 +1626,11 @@ notesForm.addEventListener("submit", async e => {
   if (!selectedId) return alert("Selecciona un viaje primero.");
   await updateDoc(doc(db, "viajes", selectedId), {
     notes: clean(new FormData(notesForm).get("personalNotes")),
+    managedBy: currentUser.uid,
+    managedByName: currentManagerLabel(),
+    managedByEmail: currentManagerEmail(),
+    managedAt: serverTimestamp(),
+    managedAction: "Edicion de notas",
     lastUpdate: new Date().toISOString(),
     updatedAt: serverTimestamp()
   });
@@ -843,11 +1663,16 @@ destinationForm.addEventListener("submit", async e => {
 
   try {
     if (editingDestinationId) {
-      await updateDoc(doc(db, "destinosRecomendados", editingDestinationId), data);
+      await updateDoc(doc(db, "destinosRecomendados", editingDestinationId), {
+        ...data,
+        managedBy: currentUser.uid,
+        managedByName: currentManagerLabel(),
+        managedByEmail: currentManagerEmail()
+      });
       resetDestinationEdit();
       setMessage(destinationMessage, "Destino recomendado actualizado.");
     } else {
-      await addDoc(collection(db, "destinosRecomendados"), { ...data, createdAt: serverTimestamp(), createdBy: currentUser.uid });
+      await addDoc(collection(db, "destinosRecomendados"), { ...data, createdAt: serverTimestamp(), createdBy: currentUser.uid, managedBy: currentUser.uid, managedByName: currentManagerLabel(), managedByEmail: currentManagerEmail() });
       resetDestinationEdit();
       setMessage(destinationMessage, "Destino recomendado agregado.");
     }
@@ -879,6 +1704,45 @@ if (tripFilters) {
   tripFilters.addEventListener("input", renderTrips);
   tripFilters.addEventListener("change", renderTrips);
 }
+if (tripForm?.destination) {
+  tripForm.destination.addEventListener("input", () => {
+    const destination = clean(tripForm.destination.value);
+    if (!destination) return;
+    applyTripAutomation({ destination, force: false });
+  });
+}
+function applySelectedCityToTripForm() {
+  const city = tripCity?.value || "";
+  if (!city || !tripCountry?.value) return;
+  const destination = countryCityLabel(tripCountry.value, city);
+  const found = (DESTINATION_CATALOG[tripCountry.value] || []).find(([name]) => name === city);
+  applyTripAutomation({
+    destination,
+    location: found?.[1],
+    experience: found?.[2] || "Cultural",
+    travelers: found?.[3] || 2,
+    force: true
+  });
+}
+if (tripCountry) tripCountry.addEventListener("change", () => {
+  populateCities(tripCountry.value);
+  const firstCity = tripCity.options[1]?.value || "";
+  if (firstCity) {
+    tripCity.value = firstCity;
+    populateTripPlans(tripCountry.value, firstCity);
+    applySelectedCityToTripForm();
+  }
+});
+if (tripCity) tripCity.addEventListener("change", () => {
+  populateTripPlans(tripCountry.value, tripCity.value);
+  applySelectedCityToTripForm();
+});
+if (tripForm?.tripPreset) tripForm.tripPreset.addEventListener("change", () => {
+  applyPreset(tripForm.tripPreset?.value || "");
+});
+if (applyTripPresetBtn) applyTripPresetBtn.addEventListener("click", () => {
+  applyPreset(tripForm.tripPreset?.value || "");
+});
 if (clearFiltersBtn) clearFiltersBtn.addEventListener("click", () => {
   tripFilters.reset();
   renderTrips();
@@ -887,6 +1751,11 @@ if (cancelTripEditBtn) cancelTripEditBtn.addEventListener("click", resetTripEdit
 if (cancelActivityEditBtn) cancelActivityEditBtn.addEventListener("click", resetActivityEdit);
 if (cancelDestinationEditBtn) cancelDestinationEditBtn.addEventListener("click", resetDestinationEdit);
 if (refreshRequestsBtn) refreshRequestsBtn.addEventListener("click", refreshRequests);
+if (activityTemplate) activityTemplate.addEventListener("change", () => applyActivityTemplate(activityTemplate.value));
+if (destinationForm?.recName) destinationForm.recName.addEventListener("change", autoFillRecommendationForm);
+if (startSimulationBtn) startSimulationBtn.addEventListener("click", () => startTripSimulation());
+if (resetSimulationBtn) resetSimulationBtn.addEventListener("click", () => resetTripSimulation());
+if (incidentSimulationBtn) incidentSimulationBtn.addEventListener("click", () => incidentTripSimulation());
 
 if (contactRequestsList) contactRequestsList.addEventListener("click", async e => {
   const b = e.target.closest("button[data-action]");
@@ -944,3 +1813,4 @@ const obs = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) e.target.classList.add("visible");
 }), { threshold: 0.15 });
 document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
+refreshIcons();

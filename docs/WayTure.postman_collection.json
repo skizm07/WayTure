@@ -1,0 +1,140 @@
+{
+  "info": {
+    "name": "WayTure API REST",
+    "description": "Coleccion para probar la API local de WayTure en Postman.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "tripId",
+      "value": "demo-medellin"
+    },
+    {
+      "key": "tripCode",
+      "value": "WT-DEMO"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/health"
+      }
+    },
+    {
+      "name": "Listar viajes",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/viajes"
+      }
+    },
+    {
+      "name": "Listar usuarios locales",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/usuarios"
+      }
+    },
+    {
+      "name": "Crear usuario local",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"uid\": \"usuario-demo\",\n  \"nombre\": \"Usuario Demo\",\n  \"alias\": \"demo\",\n  \"email\": \"demo@wayture.com\",\n  \"rol\": \"usuario\"\n}"
+        },
+        "url": "{{baseUrl}}/api/usuarios"
+      }
+    },
+    {
+      "name": "Crear viaje",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"destination\": \"Cartagena\",\n  \"origin\": \"Aeropuerto Internacional El Dorado, Bogota\",\n  \"travelers\": 2,\n  \"experience\": \"Descanso\",\n  \"userEmail\": \"viajero@wayture.com\",\n  \"startDate\": \"2026-06-10\",\n  \"endDate\": \"2026-06-14\"\n}"
+        },
+        "url": "{{baseUrl}}/api/viajes"
+      }
+    },
+    {
+      "name": "Consultar viaje por ID",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/viajes/{{tripId}}"
+      }
+    },
+    {
+      "name": "Rastreo publico por codigo",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/rastreo/{{tripCode}}"
+      }
+    },
+    {
+      "name": "Actualizar estado",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"estado\": \"En ruta\",\n  \"progreso\": 35,\n  \"observacion\": \"El viajero ya salio del aeropuerto.\"\n}"
+        },
+        "url": "{{baseUrl}}/api/viajes/{{tripId}}/estado"
+      }
+    },
+    {
+      "name": "Actualizar GPS real",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"lat\": 4.7016,\n  \"lng\": -74.1469,\n  \"label\": \"GPS real del dispositivo\",\n  \"accuracy\": 15,\n  \"estado\": \"En ruta\",\n  \"progreso\": 20\n}"
+        },
+        "url": "{{baseUrl}}/api/viajes/{{tripId}}/gps"
+      }
+    },
+    {
+      "name": "Ubicaciones de viajeros",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/viajeros/ubicaciones"
+      }
+    },
+    {
+      "name": "Eliminar viaje",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/api/viajes/{{tripId}}"
+      }
+    }
+  ]
+}

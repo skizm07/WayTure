@@ -43,8 +43,14 @@ function guestView(){
 
 function loggedView(nombre, rol){
   hide(loginLinks); hide(registerLinks); hide(publicAuthLinks);
-  show(logoutButtons); show(userLinks); show(userMenus);
-  rol === "admin" ? show(adminLinks) : hide(adminLinks);
+  show(logoutButtons); show(userMenus);
+  if (rol === "admin") {
+    show(adminLinks);
+    hide(userLinks);
+  } else {
+    hide(adminLinks);
+    show(userLinks);
+  }
   userNames.forEach(box => { box.textContent = nombre; });
   userInitials.forEach(box => { box.textContent = initials(nombre); });
   greetingBoxes.forEach(box => {
